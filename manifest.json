@@ -12,11 +12,16 @@
   "content_scripts": [{
     "matches": ["http://*/*", "https://*/*"],
     "js": [
-      "bower_components/jquery/dist/jquery.min.js"
+      "bower_components/jquery/dist/jquery.min.js",
+      "js/content.js"
     ]
   }],
 
   "permissions": [
     "activeTab"
+  ],
+
+  "web_accessible_resources": [
+    "js/senate.json"
   ]
 }
