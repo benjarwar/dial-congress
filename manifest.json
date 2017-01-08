@@ -9,6 +9,13 @@
     "default_icon": "img/icon-128.png"
   },
 
+  "content_scripts": [{
+    "matches": ["http://*/*", "https://*/*"],
+    "js": [
+      "bower_components/jquery/dist/jquery.min.js"
+    ]
+  }],
+
   "permissions": [
     "activeTab"
   ]

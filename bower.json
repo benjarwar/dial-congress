@@ -1,0 +1,20 @@
+{
+  "name": "dial-congress",
+  "homepage": "https://github.com/benjarwar/dial-congress",
+  "authors": [
+    "BJ Warshaw <benjarwar@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~3.1.1"
+  }
+}
