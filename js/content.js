@@ -13,8 +13,7 @@ $(document).ready(function() {
       $body.highlightRegex(regExp, {
         className: className,
         attrs: {
-          'data-phone': senator.phone,
-          'title': senator.phone
+          'title': senator.party + '/' + senator.state + ': ' + senator.phone
         }
       });
     });
@@ -25,7 +24,9 @@ $(document).ready(function() {
 
     $critters.each(function(i, critter) {
       var $critter = $(critter);
-      $critter.tooltipster();
+      $critter.tooltipster({
+        interactive: true
+      });
     });
   }
 
