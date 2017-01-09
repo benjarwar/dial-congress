@@ -4,9 +4,12 @@ $(document).ready(function() {
 
   var scan = function() {
     $.each(senateData, function(i, senator) {
-      var firstLastRegEx = new RegExp(senator.firstName + ' ' + senator.lastName);
+      var firstLast = senator.firstName + '\\s+' + senator.lastName;
+      var lastFirst = senator.lastName + ',\\s*' + senator.firstName;
+      var withTitle = '(?:Senator\\s+|Sen.\\s+|Congressman\\s+|Congresswoman\\s+)(' + firstLast + '|' + senator.lastName + ')';
+      var regExp = new RegExp(firstLast + '|' + lastFirst + '|' + withTitle, 'ig');
 
-      $body.highlightRegex(firstLastRegEx, {
+      $body.highlightRegex(regExp, {
         className: 'dial-congress',
         attrs: {
           'data-phone': senator.phone
