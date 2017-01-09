@@ -11,6 +11,7 @@
 
   "content_scripts": [{
     "matches": ["http://*/*", "https://*/*"],
+    "css": ["css/dial-congress.css"],
     "js": [
       "bower_components/jquery/dist/jquery.min.js",
       "bower_components/jQuery.highlightRegex/highlightRegex.min.js",
