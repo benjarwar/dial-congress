@@ -1,9 +1,702 @@
 [
   {
+    "party": "R",
+    "firstName": "Dan",
+    "lastName": "Sullivan",
+    "state": "AK",
+    "phone": "(202) 224-3004"
+  },
+  {
+    "party": "R",
+    "firstName": "Lisa",
+    "lastName": "Murkowski",
+    "state": "AK",
+    "phone": "(202) 224-6665"
+  },
+  {
+    "party": "R",
+    "firstName": "Jefferson",
+    "lastName": "Sessions",
+    "state": "AL",
+    "phone": "(202) 224-4124"
+  },
+  {
+    "party": "R",
+    "firstName": "Richard",
+    "lastName": "Shelby",
+    "state": "AL",
+    "phone": "(202) 224-5744"
+  },
+  {
+    "party": "R",
+    "firstName": "Tom",
+    "lastName": "Cotton",
+    "state": "AR",
+    "phone": "(202) 224-2353"
+  },
+  {
+    "party": "R",
+    "firstName": "John",
+    "lastName": "Boozman",
+    "state": "AR",
+    "phone": "(202) 224-4843"
+  },
+  {
+    "party": "R",
+    "firstName": "Jeff",
+    "lastName": "Flake",
+    "state": "AZ",
+    "phone": "(202) 224-4521"
+  },
+  {
+    "party": "R",
+    "firstName": "John",
+    "lastName": "McCain",
+    "state": "AZ",
+    "phone": "(202) 224-2235"
+  },
+  {
+    "party": "D",
+    "firstName": "Dianne",
+    "lastName": "Feinstein",
+    "state": "CA",
+    "phone": "(202) 224-3841"
+  },
+  {
+    "party": "D",
+    "firstName": "Kamala",
+    "lastName": "Harris",
+    "state": "CA",
+    "phone": "(202) 224-3553"
+  },
+  {
+    "party": "R",
+    "firstName": "Cory",
+    "lastName": "Gardner",
+    "state": "CO",
+    "phone": "(202) 224-5941"
+  },
+  {
+    "party": "D",
+    "firstName": "Michael",
+    "lastName": "Bennet",
+    "state": "CO",
+    "phone": "(202) 224-5852"
+  },
+  {
+    "party": "D",
+    "firstName": "Christopher",
+    "lastName": "Murphy",
+    "state": "CT",
+    "phone": "(202) 224-4041"
+  },
+  {
+    "party": "D",
+    "firstName": "Richard",
+    "lastName": "Blumenthal",
+    "state": "CT",
+    "phone": "(202) 224-2823"
+  },
+  {
+    "party": "D",
+    "firstName": "Thomas",
+    "lastName": "Carper",
+    "state": "DE",
+    "phone": "(202) 224-2441"
+  },
+  {
+    "party": "D",
+    "firstName": "Chris",
+    "lastName": "Coons",
+    "state": "DE",
+    "phone": "(202) 224-5042"
+  },
+  {
+    "party": "D",
+    "firstName": "Bill",
+    "lastName": "Nelson",
+    "state": "FL",
+    "phone": "(202) 224-5274"
+  },
+  {
+    "party": "R",
+    "firstName": "Marco",
+    "lastName": "Rubio",
+    "state": "FL",
+    "phone": "(202) 224-3041"
+  },
+  {
+    "party": "R",
+    "firstName": "David",
+    "lastName": "Perdue",
+    "state": "GA",
+    "phone": "(202) 224-3521"
+  },
+  {
+    "party": "R",
+    "firstName": "John",
+    "lastName": "Isakson",
+    "state": "GA",
+    "phone": "(202) 224-3643"
+  },
+  {
+    "party": "D",
+    "firstName": "Mazie",
+    "lastName": "Hirono",
+    "state": "HI",
+    "phone": "(202) 224-6361"
+  },
+  {
+    "party": "D",
+    "firstName": "Brian",
+    "lastName": "Schatz",
+    "state": "HI",
+    "phone": "(202) 224-3934"
+  },
+  {
+    "party": "R",
+    "firstName": "Joni",
+    "lastName": "Ernst",
+    "state": "IA",
+    "phone": "(202) 224-3254"
+  },
+  {
+    "party": "R",
+    "firstName": "Charles",
+    "lastName": "Grassley",
+    "state": "IA",
+    "phone": "(202) 224-3744"
+  },
+  {
+    "party": "R",
+    "firstName": "James",
+    "lastName": "Risch",
+    "state": "ID",
+    "phone": "(202) 224-2752"
+  },
+  {
+    "party": "R",
+    "firstName": "Michael",
+    "lastName": "Crapo",
+    "state": "ID",
+    "phone": "(202) 224-6142"
+  },
+  {
+    "party": "D",
+    "firstName": "Richard",
+    "lastName": "Durbin",
+    "state": "IL",
+    "phone": "(202) 224-2152"
+  },
+  {
+    "party": "D",
+    "firstName": "Tammy",
+    "lastName": "Duckworth",
+    "state": "IL",
+    "phone": "(202) 224-2854"
+  },
+  {
+    "party": "D",
+    "firstName": "Joe",
+    "lastName": "Donnelly",
+    "state": "IN",
+    "phone": "(202) 224-4814"
+  },
+  {
+    "party": "R",
+    "firstName": "Todd",
+    "lastName": "Young",
+    "state": "IN",
+    "phone": "(202) 224-5623"
+  },
+  {
+    "party": "R",
+    "firstName": "Jerry",
+    "lastName": "Moran",
+    "state": "KS",
+    "phone": "(202) 224-6521"
+  },
+  {
+    "party": "R",
+    "firstName": "Pat",
+    "lastName": "Roberts",
+    "state": "KS",
+    "phone": "(202) 224-4774"
+  },
+  {
+    "party": "R",
+    "firstName": "Rand",
+    "lastName": "Paul",
+    "state": "KY",
+    "phone": "(202) 224-4343"
+  },
+  {
+    "party": "R",
+    "firstName": "Mitch",
+    "lastName": "McConnell",
+    "state": "KY",
+    "phone": "(202) 224-2541"
+  },
+  {
+    "party": "R",
+    "firstName": "Bill",
+    "lastName": "Cassidy",
+    "state": "LA",
+    "phone": "(202) 224-5824"
+  },
+  {
+    "party": "R",
+    "firstName": "John",
+    "lastName": "Kennedy",
+    "state": "LA",
+    "phone": "(202) 224-4623"
+  },
+  {
+    "party": "D",
+    "firstName": "Elizabeth",
+    "lastName": "Warren",
+    "state": "MA",
+    "phone": "(202) 224-4543"
+  },
+  {
+    "party": "D",
+    "firstName": "Edward",
+    "lastName": "Markey",
+    "state": "MA",
+    "phone": "(202) 224-2742"
+  },
+  {
+    "party": "D",
+    "firstName": "Benjamin",
+    "lastName": "Cardin",
+    "state": "MD",
+    "phone": "(202) 224-4524"
+  },
+  {
+    "party": "D",
+    "firstName": "Chris",
+    "lastName": "Van",
+    "state": "MD",
+    "phone": "(202) 224-4654"
+  },
+  {
+    "party": "I",
+    "firstName": "Angus",
+    "lastName": "King",
+    "state": "ME",
+    "phone": "(202) 224-5344"
+  },
+  {
+    "party": "R",
+    "firstName": "Susan",
+    "lastName": "Collins",
+    "state": "ME",
+    "phone": "(202) 224-2523"
+  },
+  {
+    "party": "D",
+    "firstName": "Debbie",
+    "lastName": "Stabenow",
+    "state": "MI",
+    "phone": "(202) 224-4822"
+  },
+  {
+    "party": "D",
+    "firstName": "Gary",
+    "lastName": "Peters",
+    "state": "MI",
+    "phone": "(202) 224-6221"
+  },
+  {
+    "party": "D",
+    "firstName": "Amy",
+    "lastName": "Klobuchar",
+    "state": "MN",
+    "phone": "(202) 224-3244"
+  },
+  {
+    "party": "D",
+    "firstName": "Alan",
+    "lastName": "Franken",
+    "state": "MN",
+    "phone": "(202) 224-5641"
+  },
+  {
+    "party": "R",
+    "firstName": "Roy",
+    "lastName": "Blunt",
+    "state": "MO",
+    "phone": "(202) 224-5721"
+  },
+  {
+    "party": "D",
+    "firstName": "Claire",
+    "lastName": "McCaskill",
+    "state": "MO",
+    "phone": "(202) 224-6154"
+  },
+  {
+    "party": "R",
+    "firstName": "Roger",
+    "lastName": "Wicker",
+    "state": "MS",
+    "phone": "(202) 224-6253"
+  },
+  {
+    "party": "R",
+    "firstName": "Thad",
+    "lastName": "Cochran",
+    "state": "MS",
+    "phone": "(202) 224-5054"
+  },
+  {
+    "party": "D",
+    "firstName": "Jon",
+    "lastName": "Tester",
+    "state": "MT",
+    "phone": "(202) 224-2644"
+  },
+  {
+    "party": "R",
+    "firstName": "Steve",
+    "lastName": "Daines",
+    "state": "MT",
+    "phone": "(202) 224-2651"
+  },
+  {
+    "party": "R",
+    "firstName": "Richard",
+    "lastName": "Burr",
+    "state": "NC",
+    "phone": "(202) 224-3154"
+  },
+  {
+    "party": "R",
+    "firstName": "Thom",
+    "lastName": "Tillis",
+    "state": "NC",
+    "phone": "(202) 224-6342"
+  },
+  {
+    "party": "R",
+    "firstName": "John",
+    "lastName": "Hoeven",
+    "state": "ND",
+    "phone": "(202) 224-2551"
+  },
+  {
+    "party": "D",
+    "firstName": "Heidi",
+    "lastName": "Heitkamp",
+    "state": "ND",
+    "phone": "(202) 224-2043"
+  },
+  {
+    "party": "R",
+    "firstName": "Deb",
+    "lastName": "Fischer",
+    "state": "NE",
+    "phone": "(202) 224-6551"
+  },
+  {
+    "party": "R",
+    "firstName": "Benjamin",
+    "lastName": "Sasse",
+    "state": "NE",
+    "phone": "(202) 224-4224"
+  },
+  {
+    "party": "D",
+    "firstName": "Jeanne",
+    "lastName": "Shaheen",
+    "state": "NH",
+    "phone": "(202) 224-2841"
+  },
+  {
+    "party": "D",
+    "firstName": "Maggie",
+    "lastName": "Hassan",
+    "state": "NH",
+    "phone": "(202) 224-3324"
+  },
+  {
+    "party": "D",
+    "firstName": "Robert",
+    "lastName": "Menendez",
+    "state": "NJ",
+    "phone": "(202) 224-4744"
+  },
+  {
+    "party": "D",
+    "firstName": "Cory",
+    "lastName": "Booker",
+    "state": "NJ",
+    "phone": "(202) 224-3224"
+  },
+  {
+    "party": "D",
+    "firstName": "Martin",
+    "lastName": "Heinrich",
+    "state": "NM",
+    "phone": "(202) 224-5521"
+  },
+  {
+    "party": "D",
+    "firstName": "Tom",
+    "lastName": "Udall",
+    "state": "NM",
+    "phone": "(202) 224-6621"
+  },
+  {
+    "party": "R",
+    "firstName": "Dean",
+    "lastName": "Heller",
+    "state": "NV",
+    "phone": "(202) 224-6244"
+  },
+  {
+    "party": "D",
+    "firstName": "Catherine",
+    "lastName": "Cortez",
+    "state": "NV",
+    "phone": "(202) 224-3542"
+  },
+  {
+    "party": "D",
+    "firstName": "Charles",
+    "lastName": "Schumer",
+    "state": "NY",
+    "phone": "(202) 224-6542"
+  },
+  {
+    "party": "D",
+    "firstName": "Kirsten",
+    "lastName": "Gillibrand",
+    "state": "NY",
+    "phone": "(202) 224-4451"
+  },
+  {
+    "party": "R",
+    "firstName": "Robert",
+    "lastName": "Portman",
+    "state": "OH",
+    "phone": "(202) 224-3353"
+  },
+  {
+    "party": "D",
+    "firstName": "Sherrod",
+    "lastName": "Brown",
+    "state": "OH",
+    "phone": "(202) 224-2315"
+  },
+  {
+    "party": "R",
+    "firstName": "James",
+    "lastName": "Lankford",
+    "state": "OK",
+    "phone": "(202) 224-5754"
+  },
+  {
+    "party": "R",
+    "firstName": "James",
+    "lastName": "Inhofe",
+    "state": "OK",
+    "phone": "(202) 224-4721"
+  },
+  {
+    "party": "D",
+    "firstName": "Ron",
+    "lastName": "Wyden",
+    "state": "OR",
+    "phone": "(202) 224-5244"
+  },
+  {
+    "party": "D",
+    "firstName": "Jeff",
+    "lastName": "Merkley",
+    "state": "OR",
+    "phone": "(202) 224-3753"
+  },
+  {
+    "party": "R",
+    "firstName": "Patrick",
+    "lastName": "Toomey",
+    "state": "PA",
+    "phone": "(202) 224-4254"
+  },
+  {
+    "party": "D",
+    "firstName": "Robert",
+    "lastName": "Casey",
+    "state": "PA",
+    "phone": "(202) 224-6324"
+  },
+  {
+    "party": "D",
+    "firstName": "Sheldon",
+    "lastName": "Whitehouse",
+    "state": "RI",
+    "phone": "(202) 224-2921"
+  },
+  {
+    "party": "D",
+    "firstName": "Jack",
+    "lastName": "Reed",
+    "state": "RI",
+    "phone": "(202) 224-4642"
+  },
+  {
+    "party": "R",
+    "firstName": "Tim",
+    "lastName": "Scott",
+    "state": "SC",
+    "phone": "(202) 224-6121"
+  },
+  {
+    "party": "R",
+    "firstName": "Lindsey",
+    "lastName": "Graham",
+    "state": "SC",
+    "phone": "(202) 224-5972"
+  },
+  {
+    "party": "R",
+    "firstName": "John",
+    "lastName": "Thune",
+    "state": "SD",
+    "phone": "(202) 224-2321"
+  },
+  {
+    "party": "R",
+    "firstName": "Mike",
+    "lastName": "Rounds",
+    "state": "SD",
+    "phone": "(202) 224-5842"
+  },
+  {
+    "party": "R",
+    "firstName": "Bob",
+    "lastName": "Corker",
+    "state": "TN",
+    "phone": "(202) 224-3344"
+  },
+  {
+    "party": "R",
     "firstName": "Lamar",
     "lastName": "Alexander",
+    "state": "TN",
+    "phone": "(202) 224-4944"
+  },
+  {
     "party": "R",
-    "phone": "(202) 224-4944",
-    "state": "TN"
+    "firstName": "Ted",
+    "lastName": "Cruz",
+    "state": "TX",
+    "phone": "(202) 224-5922"
+  },
+  {
+    "party": "R",
+    "firstName": "John",
+    "lastName": "Cornyn",
+    "state": "TX",
+    "phone": "(202) 224-2934"
+  },
+  {
+    "party": "R",
+    "firstName": "Mike",
+    "lastName": "Lee",
+    "state": "UT",
+    "phone": "(202) 224-5444"
+  },
+  {
+    "party": "R",
+    "firstName": "Orrin",
+    "lastName": "Hatch",
+    "state": "UT",
+    "phone": "(202) 224-5251"
+  },
+  {
+    "party": "D",
+    "firstName": "Timothy",
+    "lastName": "Kaine",
+    "state": "VA",
+    "phone": "(202) 224-4024"
+  },
+  {
+    "party": "D",
+    "firstName": "Mark",
+    "lastName": "Warner",
+    "state": "VA",
+    "phone": "(202) 224-2023"
+  },
+  {
+    "party": "D",
+    "firstName": "Patrick",
+    "lastName": "Leahy",
+    "state": "VT",
+    "phone": "(202) 224-4242"
+  },
+  {
+    "party": "I",
+    "firstName": "Bernard",
+    "lastName": "Sanders",
+    "state": "VT",
+    "phone": "(202) 224-5141"
+  },
+  {
+    "party": "D",
+    "firstName": "Patty",
+    "lastName": "Murray",
+    "state": "WA",
+    "phone": "(202) 224-2621"
+  },
+  {
+    "party": "D",
+    "firstName": "Maria",
+    "lastName": "Cantwell",
+    "state": "WA",
+    "phone": "(202) 224-3441"
+  },
+  {
+    "party": "R",
+    "firstName": "Ron",
+    "lastName": "Johnson",
+    "state": "WI",
+    "phone": "(202) 224-5323"
+  },
+  {
+    "party": "D",
+    "firstName": "Tammy",
+    "lastName": "Baldwin",
+    "state": "WI",
+    "phone": "(202) 224-5653"
+  },
+  {
+    "party": "D",
+    "firstName": "Joe",
+    "lastName": "Manchin",
+    "state": "WV",
+    "phone": "(202) 224-3954"
+  },
+  {
+    "party": "R",
+    "firstName": "Shelley",
+    "lastName": "Capito",
+    "state": "WV",
+    "phone": "(202) 224-6472"
+  },
+  {
+    "party": "R",
+    "firstName": "John",
+    "lastName": "Barrasso",
+    "state": "WY",
+    "phone": "(202) 224-6441"
+  },
+  {
+    "party": "R",
+    "firstName": "Michael",
+    "lastName": "Enzi",
+    "state": "WY",
+    "phone": "(202) 224-3424"
   }
 ]

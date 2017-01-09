@@ -5,6 +5,7 @@ $(document).ready(function() {
 
   var scan = function() {
     $.each(senateData, function(i, senator) {
+      console.log('looking for ' + senator.firstName + ' ' + senator.lastName);
       var firstLast = senator.firstName + '\\s+' + senator.lastName;
       var lastFirst = senator.lastName + ',\\s*' + senator.firstName;
       var withTitle = '(?:Senator\\s+|Sen.\\s+|Congressman\\s+|Congresswoman\\s+)(' + firstLast + '|' + senator.lastName + ')';
