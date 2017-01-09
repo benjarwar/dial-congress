@@ -1,5 +1,6 @@
 $(document).ready(function() {
   var $body = $('body');
+  var className = 'dial-congress';
   var senateData;
 
   var scan = function() {
@@ -10,11 +11,21 @@ $(document).ready(function() {
       var regExp = new RegExp(firstLast + '|' + lastFirst + '|' + withTitle, 'ig');
 
       $body.highlightRegex(regExp, {
-        className: 'dial-congress',
+        className: className,
         attrs: {
-          'data-phone': senator.phone
+          'data-phone': senator.phone,
+          'title': senator.phone
         }
       });
+    });
+  }
+
+  var createTooltips = function() {
+    var $critters = $('.' + className);
+
+    $critters.each(function(i, critter) {
+      var $critter = $(critter);
+      $critter.tooltipster();
     });
   }
 
@@ -24,5 +35,6 @@ $(document).ready(function() {
     })
   ).then(function() {
     scan();
+    createTooltips();
   })
 });
