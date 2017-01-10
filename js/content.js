@@ -13,10 +13,30 @@ $(document).ready(function() {
 
     function scanForSenator() {
       var senator = senateData[i];
-      var firstLastWithOptMiddle = senator.firstName + ' (\'|")?(?:\\w*).?(\'|")?\\s?' + senator.lastName;
+      var title = '(Senator|Sen.|Congressman|Congresswoman)\\s*';
+      var wildCardMiddle = '\\s*?(\'|")?(?:\\w*).?(\'|")?\\s*?';
+      var upToTwoWildCardMiddles = '\\s' + wildCardMiddle + wildCardMiddle;
+      var firstLastWithOptMiddle = senator.firstName + upToTwoWildCardMiddles + senator.lastName;
       var lastFirst = senator.lastName + ',\\s*' + senator.firstName;
-      var withTitle = '(?:Senator\\s+|Sen.\\s+|Congressman\\s+|Congresswoman\\s+)(' + firstLastWithOptMiddle + '|' + senator.lastName + ')';
-      var regExp = new RegExp(firstLastWithOptMiddle + '|' + lastFirst + '|' + withTitle, 'ig');
+      var withTitle = title + '(' + firstLastWithOptMiddle + '|' + senator.lastName + ')';
+      var nicknames = '';
+
+      function getNicknameString (nickname, lastName) {
+        return '|(' + title + ')?' + nickname + upToTwoWildCardMiddles + lastName;
+      }
+
+      if (senator.nicknames) {
+        if (Array.isArray(senator.nicknames)) {
+          for (var j = 0; j < senator.nicknames.length; j++) {
+            nicknames += getNicknameString(senator.nicknames[j], senator.lastName);
+          }
+        } else if (typeof senator.nicknames === 'string') {
+          nicknames += getNicknameString(senator.nicknames[j], senator.lastName);
+        }
+      }
+
+      var regExpString = firstLastWithOptMiddle + '|' + lastFirst + '|' + withTitle + nicknames;
+      var regExp = new RegExp(regExpString, 'ig');
 
       console.log('looking for ' + senator.firstName + ' ' + senator.lastName);
 

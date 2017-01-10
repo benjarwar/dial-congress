@@ -1,8 +1,11 @@
 [
   {
     "party": "R",
-    "firstName": "Dan",
+    "firstName": "Daniel",
     "lastName": "Sullivan",
+    "nicknames": [
+      "Dan"
+    ],
     "state": "AK",
     "phone": "(202) 224-3004"
   },
@@ -17,6 +20,10 @@
     "party": "R",
     "firstName": "Jefferson",
     "lastName": "Sessions",
+    "nicknames": [
+      "Jeff",
+      "Jeffrey"
+    ],
     "state": "AL",
     "phone": "(202) 224-4124"
   },
@@ -24,13 +31,19 @@
     "party": "R",
     "firstName": "Richard",
     "lastName": "Shelby",
+    "nicknames": [
+      "Dick"
+    ],
     "state": "AL",
     "phone": "(202) 224-5744"
   },
   {
     "party": "R",
-    "firstName": "Tom",
+    "firstName": "Thomas",
     "lastName": "Cotton",
+    "nicknames": [
+      "Tom"
+    ],
     "state": "AR",
     "phone": "(202) 224-2353"
   },
@@ -43,8 +56,11 @@
   },
   {
     "party": "R",
-    "firstName": "Jeff",
+    "firstName": "Jeffry",
     "lastName": "Flake",
+    "nicknames": [
+      "Jeff"
+    ],
     "state": "AZ",
     "phone": "(202) 224-4521"
   },
@@ -87,6 +103,9 @@
     "party": "D",
     "firstName": "Christopher",
     "lastName": "Murphy",
+    "nicknames": [
+      "Chris"
+    ],
     "state": "CT",
     "phone": "(202) 224-4041"
   },
@@ -94,6 +113,9 @@
     "party": "D",
     "firstName": "Richard",
     "lastName": "Blumenthal",
+    "nicknames": [
+      "Dick"
+    ],
     "state": "CT",
     "phone": "(202) 224-2823"
   },
@@ -101,20 +123,30 @@
     "party": "D",
     "firstName": "Thomas",
     "lastName": "Carper",
+    "nicknames": [
+      "Tom"
+    ],
     "state": "DE",
     "phone": "(202) 224-2441"
   },
   {
     "party": "D",
-    "firstName": "Chris",
+    "firstName": "Christopher",
     "lastName": "Coons",
+    "nicknames": [
+      "Chris"
+    ],
     "state": "DE",
     "phone": "(202) 224-5042"
   },
   {
     "party": "D",
-    "firstName": "Bill",
+    "firstName": "Clarence",
     "lastName": "Nelson",
+    "nicknames": [
+      "William",
+      "Bill"
+    ],
     "state": "FL",
     "phone": "(202) 224-5274"
   },
@@ -129,6 +161,9 @@
     "party": "R",
     "firstName": "David",
     "lastName": "Perdue",
+    "nicknames": [
+      "Dave"
+    ],
     "state": "GA",
     "phone": "(202) 224-3521"
   },
@@ -136,6 +171,9 @@
     "party": "R",
     "firstName": "John",
     "lastName": "Isakson",
+    "nicknames": [
+      "Johnny"
+    ],
     "state": "GA",
     "phone": "(202) 224-3643"
   },
@@ -164,6 +202,10 @@
     "party": "R",
     "firstName": "Charles",
     "lastName": "Grassley",
+    "nicknames": [
+      "Charlie",
+      "Chuck"
+    ],
     "state": "IA",
     "phone": "(202) 224-3744"
   },
@@ -171,6 +213,9 @@
     "party": "R",
     "firstName": "James",
     "lastName": "Risch",
+    "nicknames": [
+      "Jim"
+    ],
     "state": "ID",
     "phone": "(202) 224-2752"
   },
@@ -178,6 +223,9 @@
     "party": "R",
     "firstName": "Michael",
     "lastName": "Crapo",
+    "nicknames": [
+      "Mike"
+    ],
     "state": "ID",
     "phone": "(202) 224-6142"
   },
@@ -185,20 +233,29 @@
     "party": "D",
     "firstName": "Richard",
     "lastName": "Durbin",
+    "nicknames": [
+      "Dick"
+    ],
     "state": "IL",
     "phone": "(202) 224-2152"
   },
   {
     "party": "D",
-    "firstName": "Tammy",
+    "firstName": "Ladda",
     "lastName": "Duckworth",
+    "nicknames": [
+      "Tammy"
+    ],
     "state": "IL",
     "phone": "(202) 224-2854"
   },
   {
     "party": "D",
-    "firstName": "Joe",
+    "firstName": "Joseph",
     "lastName": "Donnelly",
+    "nicknames": [
+      "Joe"
+    ],
     "state": "IN",
     "phone": "(202) 224-4814"
   },
@@ -211,36 +268,52 @@
   },
   {
     "party": "R",
-    "firstName": "Jerry",
+    "firstName": "Gerald",
     "lastName": "Moran",
+    "nicknames": [
+      "Jerry"
+    ],
     "state": "KS",
     "phone": "(202) 224-6521"
   },
   {
     "party": "R",
-    "firstName": "Pat",
+    "firstName": "Charles",
     "lastName": "Roberts",
+    "nicknames": [
+      "Patrick",
+      "Pat"
+    ],
     "state": "KS",
     "phone": "(202) 224-4774"
   },
   {
     "party": "R",
-    "firstName": "Rand",
+    "firstName": "Randal",
     "lastName": "Paul",
+    "nicknames": [
+      "Rand"
+    ],
     "state": "KY",
     "phone": "(202) 224-4343"
   },
   {
     "party": "R",
-    "firstName": "Mitch",
+    "firstName": "Addison",
     "lastName": "McConnell",
+    "nicknames": [
+      "Mitch"
+    ],
     "state": "KY",
     "phone": "(202) 224-2541"
   },
   {
     "party": "R",
-    "firstName": "Bill",
+    "firstName": "William",
     "lastName": "Cassidy",
+    "nicknames": [
+      "Bill"
+    ],
     "state": "LA",
     "phone": "(202) 224-5824"
   },
@@ -262,6 +335,9 @@
     "party": "D",
     "firstName": "Edward",
     "lastName": "Markey",
+    "nicknames": [
+      "Ed"
+    ],
     "state": "MA",
     "phone": "(202) 224-2742"
   },
@@ -269,13 +345,19 @@
     "party": "D",
     "firstName": "Benjamin",
     "lastName": "Cardin",
+    "nicknames": [
+      "Ben"
+    ],
     "state": "MD",
     "phone": "(202) 224-4524"
   },
   {
     "party": "D",
-    "firstName": "Chris",
-    "lastName": "Van",
+    "firstName": "Christopher",
+    "lastName": "Van Hollen",
+    "nicknames": [
+      "Chris"
+    ],
     "state": "MD",
     "phone": "(202) 224-4654"
   },
@@ -295,8 +377,11 @@
   },
   {
     "party": "D",
-    "firstName": "Debbie",
+    "firstName": "Deborah",
     "lastName": "Stabenow",
+    "nicknames": [
+      "Debbie"
+    ],
     "state": "MI",
     "phone": "(202) 224-4822"
   },
@@ -318,6 +403,9 @@
     "party": "D",
     "firstName": "Alan",
     "lastName": "Franken",
+    "nicknames": [
+      "Al"
+    ],
     "state": "MN",
     "phone": "(202) 224-5641"
   },
@@ -358,8 +446,11 @@
   },
   {
     "party": "R",
-    "firstName": "Steve",
+    "firstName": "Steven",
     "lastName": "Daines",
+    "nicknames": [
+      "Steve"
+    ],
     "state": "MT",
     "phone": "(202) 224-2651"
   },
@@ -367,13 +458,19 @@
     "party": "R",
     "firstName": "Richard",
     "lastName": "Burr",
+    "nicknames": [
+      "Dick"
+    ],
     "state": "NC",
     "phone": "(202) 224-3154"
   },
   {
     "party": "R",
-    "firstName": "Thom",
+    "firstName": "Thomas",
     "lastName": "Tillis",
+    "nicknames": [
+      "Thom"
+    ],
     "state": "NC",
     "phone": "(202) 224-6342"
   },
@@ -386,15 +483,21 @@
   },
   {
     "party": "D",
-    "firstName": "Heidi",
+    "firstName": "Mary",
     "lastName": "Heitkamp",
+    "nicknames": [
+      "Heidi"
+    ],
     "state": "ND",
     "phone": "(202) 224-2043"
   },
   {
     "party": "R",
-    "firstName": "Deb",
+    "firstName": "Debra",
     "lastName": "Fischer",
+    "nicknames": [
+      "Deb"
+    ],
     "state": "NE",
     "phone": "(202) 224-6551"
   },
@@ -402,20 +505,29 @@
     "party": "R",
     "firstName": "Benjamin",
     "lastName": "Sasse",
+    "nicknames": [
+      "Ben"
+    ],
     "state": "NE",
     "phone": "(202) 224-4224"
   },
   {
     "party": "D",
-    "firstName": "Jeanne",
+    "firstName": "Cynthia",
     "lastName": "Shaheen",
+    "nicknames": [
+      "Jeanne"
+    ],
     "state": "NH",
     "phone": "(202) 224-2841"
   },
   {
     "party": "D",
-    "firstName": "Maggie",
+    "firstName": "Margaret",
     "lastName": "Hassan",
+    "nicknames": [
+      "Maggie"
+    ],
     "state": "NH",
     "phone": "(202) 224-3324"
   },
@@ -423,6 +535,9 @@
     "party": "D",
     "firstName": "Robert",
     "lastName": "Menendez",
+    "nicknames": [
+      "Bob"
+    ],
     "state": "NJ",
     "phone": "(202) 224-4744"
   },
@@ -442,8 +557,11 @@
   },
   {
     "party": "D",
-    "firstName": "Tom",
+    "firstName": "Thomas",
     "lastName": "Udall",
+    "nicknames": [
+      "Tom"
+    ],
     "state": "NM",
     "phone": "(202) 224-6621"
   },
@@ -457,7 +575,7 @@
   {
     "party": "D",
     "firstName": "Catherine",
-    "lastName": "Cortez",
+    "lastName": "Cortez Masto",
     "state": "NV",
     "phone": "(202) 224-3542"
   },
@@ -465,6 +583,9 @@
     "party": "D",
     "firstName": "Charles",
     "lastName": "Schumer",
+    "nicknames": [
+      "Chuck"
+    ],
     "state": "NY",
     "phone": "(202) 224-6542"
   },
@@ -479,6 +600,9 @@
     "party": "R",
     "firstName": "Robert",
     "lastName": "Portman",
+    "nicknames": [
+      "Rob"
+    ],
     "state": "OH",
     "phone": "(202) 224-3353"
   },
@@ -493,6 +617,9 @@
     "party": "R",
     "firstName": "James",
     "lastName": "Lankford",
+    "nicknames": [
+      "Jim"
+    ],
     "state": "OK",
     "phone": "(202) 224-5754"
   },
@@ -500,20 +627,29 @@
     "party": "R",
     "firstName": "James",
     "lastName": "Inhofe",
+    "nicknames": [
+      "Jim"
+    ],
     "state": "OK",
     "phone": "(202) 224-4721"
   },
   {
     "party": "D",
-    "firstName": "Ron",
+    "firstName": "Ronald",
     "lastName": "Wyden",
+    "nicknames": [
+      "Ron"
+    ],
     "state": "OR",
     "phone": "(202) 224-5244"
   },
   {
     "party": "D",
-    "firstName": "Jeff",
+    "firstName": "Jeffrey",
     "lastName": "Merkley",
+    "nicknames": [
+      "Jeff"
+    ],
     "state": "OR",
     "phone": "(202) 224-3753"
   },
@@ -521,6 +657,9 @@
     "party": "R",
     "firstName": "Patrick",
     "lastName": "Toomey",
+    "nicknames": [
+      "Pat"
+    ],
     "state": "PA",
     "phone": "(202) 224-4254"
   },
@@ -528,6 +667,9 @@
     "party": "D",
     "firstName": "Robert",
     "lastName": "Casey",
+    "nicknames": [
+      "Bob"
+    ],
     "state": "PA",
     "phone": "(202) 224-6324"
   },
@@ -542,13 +684,19 @@
     "party": "D",
     "firstName": "Jack",
     "lastName": "Reed",
+    "nicknames": [
+      "John"
+    ],
     "state": "RI",
     "phone": "(202) 224-4642"
   },
   {
     "party": "R",
-    "firstName": "Tim",
+    "firstName": "Timothy",
     "lastName": "Scott",
+    "nicknames": [
+      "Tim"
+    ],
     "state": "SC",
     "phone": "(202) 224-6121"
   },
@@ -568,29 +716,41 @@
   },
   {
     "party": "R",
-    "firstName": "Mike",
+    "firstName": "Marion",
     "lastName": "Rounds",
+    "nicknames": [
+      "Mike"
+    ],
     "state": "SD",
     "phone": "(202) 224-5842"
   },
   {
     "party": "R",
-    "firstName": "Bob",
+    "firstName": "Robert",
     "lastName": "Corker",
+    "nicknames": [
+      "Bob"
+    ],
     "state": "TN",
     "phone": "(202) 224-3344"
   },
   {
     "party": "R",
-    "firstName": "Lamar",
+    "firstName": "Andrew",
     "lastName": "Alexander",
+    "nicknames": [
+      "Lamar"
+    ],
     "state": "TN",
     "phone": "(202) 224-4944"
   },
   {
     "party": "R",
-    "firstName": "Ted",
+    "firstName": "Rafael",
     "lastName": "Cruz",
+    "nicknames": [
+      "Ted"
+    ],
     "state": "TX",
     "phone": "(202) 224-5922"
   },
@@ -603,8 +763,11 @@
   },
   {
     "party": "R",
-    "firstName": "Mike",
+    "firstName": "Michael",
     "lastName": "Lee",
+    "nicknames": [
+      "Mike"
+    ],
     "state": "UT",
     "phone": "(202) 224-5444"
   },
@@ -619,6 +782,9 @@
     "party": "D",
     "firstName": "Timothy",
     "lastName": "Kaine",
+    "nicknames": [
+      "Tim"
+    ],
     "state": "VA",
     "phone": "(202) 224-4024"
   },
@@ -633,6 +799,9 @@
     "party": "D",
     "firstName": "Patrick",
     "lastName": "Leahy",
+    "nicknames": [
+      "Pat"
+    ],
     "state": "VT",
     "phone": "(202) 224-4242"
   },
@@ -640,13 +809,19 @@
     "party": "I",
     "firstName": "Bernard",
     "lastName": "Sanders",
+    "nicknames": [
+      "Bernie"
+    ],
     "state": "VT",
     "phone": "(202) 224-5141"
   },
   {
     "party": "D",
-    "firstName": "Patty",
+    "firstName": "Patricia",
     "lastName": "Murray",
+    "nicknames": [
+      "Patty"
+    ],
     "state": "WA",
     "phone": "(202) 224-2621"
   },
@@ -659,8 +834,11 @@
   },
   {
     "party": "R",
-    "firstName": "Ron",
+    "firstName": "Ronald",
     "lastName": "Johnson",
+    "nicknames": [
+      "Ron"
+    ],
     "state": "WI",
     "phone": "(202) 224-5323"
   },
@@ -673,8 +851,11 @@
   },
   {
     "party": "D",
-    "firstName": "Joe",
+    "firstName": "Joseph",
     "lastName": "Manchin",
+    "nicknames": [
+      "Joe"
+    ],
     "state": "WV",
     "phone": "(202) 224-3954"
   },
@@ -696,6 +877,9 @@
     "party": "R",
     "firstName": "Michael",
     "lastName": "Enzi",
+    "nicknames": [
+      "Mike"
+    ],
     "state": "WY",
     "phone": "(202) 224-3424"
   }
