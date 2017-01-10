@@ -13,10 +13,10 @@ $(document).ready(function() {
 
     function scanForSenator() {
       var senator = senateData[i];
-      var firstLast = senator.firstName + '\\s+' + senator.lastName;
+      var firstLastWithOptMiddle = senator.firstName + ' (\'|")?(?:\\w*).?(\'|")?\\s?' + senator.lastName;
       var lastFirst = senator.lastName + ',\\s*' + senator.firstName;
-      var withTitle = '(?:Senator\\s+|Sen.\\s+|Congressman\\s+|Congresswoman\\s+)(' + firstLast + '|' + senator.lastName + ')';
-      var regExp = new RegExp(firstLast + '|' + lastFirst + '|' + withTitle, 'ig');
+      var withTitle = '(?:Senator\\s+|Sen.\\s+|Congressman\\s+|Congresswoman\\s+)(' + firstLastWithOptMiddle + '|' + senator.lastName + ')';
+      var regExp = new RegExp(firstLastWithOptMiddle + '|' + lastFirst + '|' + withTitle, 'ig');
 
       console.log('looking for ' + senator.firstName + ' ' + senator.lastName);
 
