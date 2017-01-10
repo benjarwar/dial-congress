@@ -1,4 +1,5 @@
 .dial-congress {
+  background: #ffffce;
+  color: #222233;
   cursor: pointer;
-  text-decoration: underline;
 }
