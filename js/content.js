@@ -14,15 +14,16 @@ $(document).ready(function() {
     function scanForSenator() {
       var senator = senateData[i];
       var title = '(Senator|Sen.|Congressman|Congresswoman)\\s*';
+      var optionalTitle = '(' + title + ')?';
       var wildCardMiddle = '\\s*?(\'|")?(?:\\w*).?(\'|")?\\s*?';
       var upToTwoWildCardMiddles = '\\s' + wildCardMiddle + wildCardMiddle;
-      var firstLastWithOptMiddle = senator.firstName + upToTwoWildCardMiddles + senator.lastName;
+      var firstLast = optionalTitle + senator.firstName + upToTwoWildCardMiddles + senator.lastName;
+      var titleLast = title + senator.lastName;
       var lastFirst = senator.lastName + ',\\s*' + senator.firstName;
-      var withTitle = title + '(' + firstLastWithOptMiddle + '|' + senator.lastName + ')';
       var nicknames = '';
 
       function getNicknameString (nickname, lastName) {
-        return '|(' + title + ')?' + nickname + upToTwoWildCardMiddles + lastName;
+        return '|' + optionalTitle + nickname + upToTwoWildCardMiddles + lastName + '|' + senator.lastName + ',\\s*' + nickname;
       }
 
       if (senator.nicknames) {
@@ -35,7 +36,7 @@ $(document).ready(function() {
         }
       }
 
-      var regExpString = firstLastWithOptMiddle + '|' + lastFirst + '|' + withTitle + nicknames;
+      var regExpString = firstLast + '|' + lastFirst + '|' + titleLast + nicknames;
       var regExp = new RegExp(regExpString, 'ig');
 
       console.log('looking for ' + senator.firstName + ' ' + senator.lastName);
