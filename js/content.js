@@ -27,7 +27,8 @@ $(document).ready(function() {
           el.setAttribute('title', senator.party + '/' + senator.state + ': ' + senator.phone);
 
           $(el).tooltipster({
-            interactive: true
+            interactive: true,
+            theme: ['tooltipster-noir', 'tooltipster-noir-customized']
           });
         }
       });

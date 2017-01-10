@@ -3,3 +3,7 @@
   color: #222233;
   cursor: pointer;
 }
+
+.tooltipster-sidetip.tooltipster-noir.tooltipster-noir-customized .tooltipster-content {
+  font-family: Verdana, Arial, sans-serif;
+}

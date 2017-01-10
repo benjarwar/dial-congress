@@ -13,6 +13,7 @@
     "matches": ["http://*/*", "https://*/*"],
     "css": [
       "bower_components/tooltipster/dist/css/tooltipster.bundle.min.css",
+      "bower_components/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min.css",
       "css/dial-congress.css"
     ],
     "js": [
