@@ -4,20 +4,31 @@ $(document).ready(function() {
   var senateData;
 
   var scan = function() {
-    $.each(senateData, function(i, senator) {
-      console.log('looking for ' + senator.firstName + ' ' + senator.lastName);
+    console.log('dial-congress scanning...');
+
+    var t0 = performance.now();
+    var context = document.body;
+    var instance = new Mark(context);
+
+    for (var i = 0; i < senateData.length; i++) {
+      var senator = senateData[i];
       var firstLast = senator.firstName + '\\s+' + senator.lastName;
       var lastFirst = senator.lastName + ',\\s*' + senator.firstName;
       var withTitle = '(?:Senator\\s+|Sen.\\s+|Congressman\\s+|Congresswoman\\s+)(' + firstLast + '|' + senator.lastName + ')';
       var regExp = new RegExp(firstLast + '|' + lastFirst + '|' + withTitle, 'ig');
 
-      $body.highlightRegex(regExp, {
+      console.log('looking for ' + senator.firstName + ' ' + senator.lastName);
+
+      instance.markRegExp(regExp, {
+        element: 'span',
         className: className,
-        attrs: {
-          'title': senator.party + '/' + senator.state + ': ' + senator.phone
+        each: function(el) {
+          el.setAttribute('title', senator.party + '/' + senator.state + ': ' + senator.phone);
         }
       });
-    });
+    }
+
+    console.log('dial-congress total scan time: ' + (performance.now() - t0));
   }
 
   var createTooltips = function() {

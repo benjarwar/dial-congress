@@ -17,7 +17,7 @@
     ],
     "js": [
       "bower_components/jquery/dist/jquery.min.js",
-      "bower_components/jQuery.highlightRegex/highlightRegex.min.js",
+      "bower_components/mark.js/dist/mark.min.js",
       "bower_components/tooltipster/dist/js/tooltipster.bundle.min.js",
       "js/content.js"
     ]
