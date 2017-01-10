@@ -9,8 +9,9 @@ $(document).ready(function() {
     var t0 = performance.now();
     var context = document.body;
     var instance = new Mark(context);
+    var i = 0;
 
-    for (var i = 0; i < senateData.length; i++) {
+    function scanForSenator() {
       var senator = senateData[i];
       var firstLast = senator.firstName + '\\s+' + senator.lastName;
       var lastFirst = senator.lastName + ',\\s*' + senator.firstName;
@@ -24,22 +25,22 @@ $(document).ready(function() {
         className: className,
         each: function(el) {
           el.setAttribute('title', senator.party + '/' + senator.state + ': ' + senator.phone);
+
+          $(el).tooltipster({
+            interactive: true
+          });
         }
       });
+
+      if (i < senateData.length - 1) {
+        i++;
+        setTimeout(scanForSenator, 5);
+      } else {
+        console.log('dial-congress total scan time: ' + (performance.now() - t0));
+      }
     }
 
-    console.log('dial-congress total scan time: ' + (performance.now() - t0));
-  }
-
-  var createTooltips = function() {
-    var $critters = $('.' + className);
-
-    $critters.each(function(i, critter) {
-      var $critter = $(critter);
-      $critter.tooltipster({
-        interactive: true
-      });
-    });
+    scanForSenator();
   }
 
   $.when(
@@ -48,6 +49,5 @@ $(document).ready(function() {
     })
   ).then(function() {
     scan();
-    createTooltips();
   })
 });
