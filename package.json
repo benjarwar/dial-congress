@@ -1,0 +1,24 @@
+{
+  "name": "dial-congress",
+  "version": "0.1.1",
+  "description": "Chrome Extension for displaying phone numbers of members of U.S. Congress",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benjarwar/dial-congress.git"
+  },
+  "author": "BJ Warshaw",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/benjarwar/dial-congress/issues"
+  },
+  "homepage": "https://github.com/benjarwar/dial-congress"
+}
