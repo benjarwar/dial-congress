@@ -46,9 +46,24 @@ function scanForSenator(i) {
 }
 
 function buildTooltip(el, senator) {
-  el.setAttribute('title', senator.party + '/' + senator.state + ': ' + senator.phone);
+  var $el = $(el);
 
-  $(el).tooltipster({
+  track({
+    eventName: 'tooltip-built',
+    congressman: senator.firstName + ' ' + senator.lastName,
+    text: $el.text()
+  });
+
+  $el.attr('title', senator.party + '/' + senator.state + ': ' + senator.phone);
+
+  $el.tooltipster({
+    functionReady: function() {
+      track({
+        eventName: 'tooltip-hover',
+        congressman: senator.firstName + ' ' + senator.lastName,
+        text: $el.text()
+      });
+    },
     interactive: true,
     theme: ['tooltipster-noir', 'tooltipster-noir-customized']
   });
@@ -63,6 +78,12 @@ function scan() {
   }
 }
 
+function track(data) {
+  chrome.runtime.sendMessage(data, function(response) {
+    // console.log('message received', response);
+  });
+}
+
 $(document).ready(function() {
   $.when(
     $.get(chrome.extension.getURL('js/senate.json'), function(data) {
@@ -71,5 +92,5 @@ $(document).ready(function() {
   ).then(function() {
     mark = new Mark(document.body);
     scan();
-  })
+  });
 });
