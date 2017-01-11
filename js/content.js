@@ -1,5 +1,4 @@
 $(document).ready(function() {
-  var $body = $('body');
   var className = 'dial-congress';
   var senateData;
 
