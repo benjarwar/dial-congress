@@ -13,7 +13,7 @@ $(document).ready(function() {
 
     function scanForSenator() {
       var senator = senateData[i];
-      var title = '(Senator|Sen.|Congressman|Congresswoman)\\s*';
+      var title = '(Senator|((?!([A-Z0-9])).|^)Sen.|Congressman|Congresswoman)\\s*';
       var optionalTitle = '(' + title + ')?';
       var wildCardMiddle = '\\s*?(\'|")?(?:\\w*).?(\'|")?\\s*?';
       var upToTwoWildCardMiddles = '\\s' + wildCardMiddle + wildCardMiddle;
