@@ -1,21 +1,20 @@
-var i = 0;
 var mark;
 var senateData;
+var perfStart = performance.now();
 
-function getRegExp(senator) {
-  var title = '(Senator|((?!([A-Z0-9])).|^)Sen.|Congressman|Congresswoman)\\s*';
-  var optionalTitle = '(' + title + ')?';
+function getRegExpString(senator) {
+  var title = '(Senator|Sen\\.|Congressman|Congresswoman)';
   var optionalQuote = '(\'|")?';
   var wildCardMiddle = optionalQuote + '(\\w*)(\\.)?' + optionalQuote;
   var upToTwoWildCardMiddles = '\\s*' + wildCardMiddle + '\\s*' + wildCardMiddle + '\\s*';
-  var firstLast = optionalTitle + '\\b' + senator.firstName + '\\b' + upToTwoWildCardMiddles + '\\b' + senator.lastName + '\\b';
-  var lastFirst = '\\b' + senator.lastName + ',\\s*' + senator.firstName + '\\b';
-  var titleLast = title + '\\b' + senator.lastName + '\\b';
+  var firstLast = '\\b' + senator.firstName + '\\b' + upToTwoWildCardMiddles + '\\b' + senator.lastName + '\\b';
+  var lastFirst = '\\b' + senator.lastName + ',\\b' + senator.firstName + '\\b';
+  var titleLast = '\\b' + title + '\\s*' + senator.lastName + '\\b';
   var nicknames = '';
   var regExpString = '';
 
   function getNicknameString (nickname, lastName) {
-    return '|' + optionalTitle + '\\b' + nickname + '\\b' + upToTwoWildCardMiddles + '\\b' + lastName + '\\b|\\b' + lastName + '\\b,\\b' + nickname + '\\b';
+    return '|\\b' + nickname + '\\b' + upToTwoWildCardMiddles + '\\b' + lastName + '\\b|\\b' + lastName + '\\b,\\b' + nickname + '\\b';
   }
 
   if (senator.nicknames) {
@@ -28,27 +27,57 @@ function getRegExp(senator) {
     }
   }
 
-  regExpString += firstLast + '|' + lastFirst + '|' + titleLast + nicknames;
+  regExpString += title + '?' + '(' + firstLast + nicknames + ')|' + titleLast + '|' + lastFirst;
 
-  return new RegExp(regExpString, 'ig');
+  return regExpString;
 }
 
-function scanForSenator(i) {
-  var senator = senateData[i];
-  var regExp = getRegExp(senator);
+function scan() {
+  var allSenatorsRegExpString = '';
 
-  mark.markRegExp(regExp, {
+  for (var i = 0; i < senateData.length; i++) {
+    var divider = i < (senateData.length - 1) ? '|' : '';
+    var senatorRegEx = getRegExpString(senateData[i]);
+    allSenatorsRegExpString += '(' + senatorRegEx + ')' + divider;
+  }
+
+  var allSenatorsRegExp = new RegExp(allSenatorsRegExpString, 'ig');
+
+  mark.markRegExp(allSenatorsRegExp, {
     element: 'span',
     className: 'dial-congress',
-    each: function(el) {
-      buildTooltip(el, senator);
+    done: function(x) {
+      var perfEnd = performance.now();
+      var perfTime = Math.round(perfEnd - perfStart) / 1000;
+      console.log('Dial Congress scan of complete: ' + perfTime + ' seconds');
+      console.log('Congress critters found: ' + x);
     }
   });
+
+  bindHoverEvents();
 }
 
-function buildTooltip(el, senator) {
-  var $el = $(el);
+function bindHoverEvents() {
+  $marks = $('.dial-congress');
+  $marks.on('mouseenter', matchSenatorToMark);
+}
 
+function matchSenatorToMark(e) {
+  var $el = $(e.target);
+  var text = $el.text();
+
+  for(var i = 0; i < senateData.length; i++) {
+    var regExp = new RegExp(getRegExpString(senateData[i]), 'ig');
+
+    if (text.match(regExp)) {
+      buildTooltip($el, senateData[i]);
+      $el.off('mouseenter', matchSenatorToMark);
+      break;
+    }
+  }
+}
+
+function buildTooltip($el, senator) {
   track({
     eventName: 'tooltip-built',
     congressman: senator.firstName + ' ' + senator.lastName,
@@ -68,15 +97,8 @@ function buildTooltip(el, senator) {
     interactive: true,
     theme: ['tooltipster-noir', 'tooltipster-noir-customized']
   });
-}
 
-function scan() {
-  scanForSenator(i);
-
-  if (i < senateData.length - 1) {
-    i++;
-    setTimeout(scan, 5);
-  }
+  $el.tooltipster('open');
 }
 
 function track(data) {
