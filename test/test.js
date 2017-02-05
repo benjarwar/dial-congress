@@ -12,6 +12,10 @@ var $ = function(context) {
   this.ready = function() {}
 };
 
+var performance = {
+  now: function() {}
+};
+
 contentJavascript = fs.readFileSync(path.resolve(__dirname, '../js/content.js'),'utf8');
 eval(contentJavascript);
 
@@ -25,7 +29,7 @@ describe('getRegExpString', function() {
     ]
   };
 
-  var re = getRegExp(senator);
+  var re = new RegExp(getRegExpString(senator), 'ig');
 
   it('matches first, middle, and last name permutations', function() {
     expect('Bernard Sanders'.match(re).length).to.equal(1);
