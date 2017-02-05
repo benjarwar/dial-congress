@@ -1,8 +1,8 @@
-var i = 0;
 var mark;
 var senateData;
+var perfStart = performance.now();
 
-function getRegExp(senator) {
+function getRegExpString(senator) {
   var title = '(Senator|((?!([A-Z0-9])).|^)Sen.|Congressman|Congresswoman)\\s*';
   var optionalTitle = '(' + title + ')?';
   var optionalQuote = '(\'|")?';
@@ -30,25 +30,55 @@ function getRegExp(senator) {
 
   regExpString += firstLast + '|' + lastFirst + '|' + titleLast + nicknames;
 
-  return new RegExp(regExpString, 'ig');
+  return regExpString;
 }
 
-function scanForSenator(i) {
-  var senator = senateData[i];
-  var regExp = getRegExp(senator);
+function scan() {
+  var allSenatorsRegExpString = '';
 
-  mark.markRegExp(regExp, {
+  for (var i = 0; i < senateData.length; i++) {
+    var divider = i < (senateData.length - 1) ? '|' : '';
+    var senatorRegEx = getRegExpString(senateData[i]);
+    allSenatorsRegExpString += '(' + senatorRegEx + ')' + divider;
+  }
+
+  var allSenatorsRegExp = new RegExp(allSenatorsRegExpString, 'ig');
+
+  mark.markRegExp(allSenatorsRegExp, {
     element: 'span',
     className: 'dial-congress',
-    each: function(el) {
-      buildTooltip(el, senator);
+    done: function(x) {
+      var perfEnd = performance.now();
+      var perfTime = Math.round(perfEnd - perfStart) / 1000;
+      console.log('Dial Congress scan of complete: ' + perfTime + ' seconds');
+      console.log('Congress critters found: ' + x);
     }
   });
+
+  bindHoverEvents();
 }
 
-function buildTooltip(el, senator) {
-  var $el = $(el);
+function bindHoverEvents() {
+  $marks = $('.dial-congress');
+  $marks.on('mouseenter', matchSenatorToMark);
+}
 
+function matchSenatorToMark(e) {
+  var $el = $(e.target);
+  var text = $el.text();
+
+  for(var i = 0; i < senateData.length; i++) {
+    var regExp = new RegExp(getRegExpString(senateData[i]), 'ig');
+
+    if (text.match(regExp)) {
+      buildTooltip($el, senateData[i]);
+      $el.off('mouseenter', matchSenatorToMark);
+      break;
+    }
+  }
+}
+
+function buildTooltip($el, senator) {
   track({
     eventName: 'tooltip-built',
     congressman: senator.firstName + ' ' + senator.lastName,
@@ -68,15 +98,8 @@ function buildTooltip(el, senator) {
     interactive: true,
     theme: ['tooltipster-noir', 'tooltipster-noir-customized']
   });
-}
 
-function scan() {
-  scanForSenator(i);
-
-  if (i < senateData.length - 1) {
-    i++;
-    setTimeout(scan, 5);
-  }
+  $el.tooltipster('open');
 }
 
 function track(data) {
