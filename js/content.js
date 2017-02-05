@@ -15,7 +15,7 @@ function getRegExp(senator) {
   var regExpString = '';
 
   function getNicknameString (nickname, lastName) {
-    return '|' + optionalTitle + nickname + upToTwoWildCardMiddles + lastName + '|' + senator.lastName + ',\\s*' + nickname;
+    return '|' + optionalTitle + nickname + upToTwoWildCardMiddles + lastName + '|' + lastName + ',\\s*' + nickname;
   }
 
   if (senator.nicknames) {
