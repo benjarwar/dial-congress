@@ -6,8 +6,8 @@ function getRegExp(senator) {
   var title = '(Senator|((?!([A-Z0-9])).|^)Sen.|Congressman|Congresswoman)\\s*';
   var optionalTitle = '(' + title + ')?';
   var optionalQuote = '(\'|")?';
-  var wildCardMiddle = '\\s*' + optionalQuote + '(\\w*)(\\.)?' + optionalQuote + '\\s*';
-  var upToTwoWildCardMiddles = wildCardMiddle + wildCardMiddle;
+  var wildCardMiddle = optionalQuote + '(\\w*)(\\.)?' + optionalQuote;
+  var upToTwoWildCardMiddles = '\\s*' + wildCardMiddle + '\\s*' + wildCardMiddle + '\\s*';
   var firstLast = optionalTitle + senator.firstName + upToTwoWildCardMiddles + senator.lastName;
   var lastFirst = senator.lastName + ',\\s*' + senator.firstName;
   var titleLast = title + senator.lastName;
