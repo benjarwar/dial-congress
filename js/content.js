@@ -3,19 +3,18 @@ var senateData;
 var perfStart = performance.now();
 
 function getRegExpString(senator) {
-  var title = '(Senator|((?!([A-Z0-9])).|^)Sen.|Congressman|Congresswoman)\\s*';
-  var optionalTitle = '(' + title + ')?';
+  var title = '(Senator|Sen\\.|Congressman|Congresswoman)';
   var optionalQuote = '(\'|")?';
   var wildCardMiddle = optionalQuote + '(\\w*)(\\.)?' + optionalQuote;
   var upToTwoWildCardMiddles = '\\s*' + wildCardMiddle + '\\s*' + wildCardMiddle + '\\s*';
-  var firstLast = optionalTitle + '\\b' + senator.firstName + '\\b' + upToTwoWildCardMiddles + '\\b' + senator.lastName + '\\b';
-  var lastFirst = '\\b' + senator.lastName + ',\\s*' + senator.firstName + '\\b';
-  var titleLast = title + '\\b' + senator.lastName + '\\b';
+  var firstLast = '\\b' + senator.firstName + '\\b' + upToTwoWildCardMiddles + '\\b' + senator.lastName + '\\b';
+  var lastFirst = '\\b' + senator.lastName + ',\\b' + senator.firstName + '\\b';
+  var titleLast = '\\b' + title + '\\s*' + senator.lastName + '\\b';
   var nicknames = '';
   var regExpString = '';
 
   function getNicknameString (nickname, lastName) {
-    return '|' + optionalTitle + '\\b' + nickname + '\\b' + upToTwoWildCardMiddles + '\\b' + lastName + '\\b|\\b' + lastName + '\\b,\\b' + nickname + '\\b';
+    return '|\\b' + nickname + '\\b' + upToTwoWildCardMiddles + '\\b' + lastName + '\\b|\\b' + lastName + '\\b,\\b' + nickname + '\\b';
   }
 
   if (senator.nicknames) {
@@ -28,7 +27,7 @@ function getRegExpString(senator) {
     }
   }
 
-  regExpString += firstLast + '|' + lastFirst + '|' + titleLast + nicknames;
+  regExpString += title + '?' + '(' + firstLast + nicknames + ')|' + titleLast + '|' + lastFirst;
 
   return regExpString;
 }
