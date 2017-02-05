@@ -125,4 +125,19 @@ describe('getRegExpString', function() {
   it('does not match abbreviated "sen." at end of previous sentence', function() {
     expect('He wore the nicest lederhosen. Sanders is a nice guy.'.match(re)).to.be.null;
   });
+
+  it('enforces spaces between wildcard middle names', function() {
+    expect('Bernard Not-Sanders'.match(re)).to.be.null;
+  });
+
+  it('enforces word boundaries around names', function() {
+    expect('Notbernard Sanders'.match(re)).to.be.null;
+    expect('Notbernie Sanders'.match(re)).to.be.null;
+    expect('Bernardy Sanders'.match(re)).to.be.null;
+    expect('Bernied Sanders'.match(re)).to.be.null;
+    expect('Bernard Sanderses'.match(re)).to.be.null;
+    expect('Bernie Sandersing'.match(re)).to.be.null;
+    expect('Bernard Uhsanders'.match(re)).to.be.null;
+    expect('Bernie Shasanders'.match(re)).to.be.null;
+  });
 });
