@@ -3,7 +3,7 @@
 
   "name": "Dial Congress",
   "description": "Displays the phone number of a member of the U.S. Congress when hovering over their name.",
-  "version": "0.1.3",
+  "version": "0.1.4",
 
   "browser_action": {
     "default_icon": {
@@ -13,7 +13,10 @@
   },
 
   "background": {
-    "scripts": ["js/analytics.js"]
+    "scripts": [
+      "js/analytics.js",
+      "js/update.js"
+    ]
   },
 
   "content_scripts": [{
