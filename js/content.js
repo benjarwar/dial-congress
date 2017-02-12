@@ -1,6 +1,6 @@
 var mark;
 var senateData;
-var perfStart = performance.now();
+var perfStart;
 
 function getRegExpString(senator) {
   var title = '(Senator|Sen\\.|Congressman|Congresswoman)';
@@ -32,24 +32,39 @@ function getRegExpString(senator) {
   return regExpString;
 }
 
-function scan() {
-  var allSenatorsRegExpString = '';
+function getLastNamesRegExp() {
+  var lastNamesRegExpString = '';
 
   for (var i = 0; i < senateData.length; i++) {
-    var divider = i < (senateData.length - 1) ? '|' : '';
-    var senatorRegEx = getRegExpString(senateData[i]);
-    allSenatorsRegExpString += '(' + senatorRegEx + ')' + divider;
+    var divider = lastNamesRegExpString.length == 0 ? '' : '|';
+    lastNamesRegExpString += divider + '\\b' + senateData[i].lastName + '\\b';
   }
 
-  var allSenatorsRegExp = new RegExp(allSenatorsRegExpString, 'ig');
+  return new RegExp(lastNamesRegExpString, 'ig');
+}
 
-  mark.markRegExp(allSenatorsRegExp, {
+function scan() {
+  var lastNamesRegExp = getLastNamesRegExp();
+  var foundLastNames = dedupeArray(document.body.innerText.match(lastNamesRegExp));
+  var foundLastNamesRegExpString = '';
+
+  for (var i = 0; i < senateData.length; i++) {
+    if (foundLastNames.indexOf(senateData[i].lastName) > -1) {
+      var divider = foundLastNamesRegExpString.length == 0 ? '' : '|';
+      var senatorRegEx = getRegExpString(senateData[i]);
+      foundLastNamesRegExpString += divider + '(' + senatorRegEx + ')';
+    }
+  }
+
+  var foundLastNamesRegExp = new RegExp(foundLastNamesRegExpString, 'ig');
+
+  mark.markRegExp(foundLastNamesRegExp, {
     element: 'span',
     className: 'dial-congress',
     done: function(x) {
       var perfEnd = performance.now();
       var perfTime = Math.round(perfEnd - perfStart) / 1000;
-      console.log('Dial Congress scan of complete: ' + perfTime + ' seconds');
+      console.log('Dial Congress scan of DOM complete: ' + perfTime + ' seconds');
       console.log('Congress critters found: ' + x);
     }
   });
@@ -107,12 +122,28 @@ function track(data) {
   });
 }
 
+function dedupeArray(a) {
+  var seen = {};
+  var out = [];
+  var len = a.length;
+  var j = 0;
+  for(var i = 0; i < len; i++) {
+    var item = a[i];
+    if(seen[item] !== 1) {
+      seen[item] = 1;
+      out[j++] = item;
+    }
+  }
+  return out;
+}
+
 $(document).ready(function() {
   $.when(
     $.get(chrome.extension.getURL('js/senate.json'), function(data) {
       senateData = JSON.parse(data);
     })
   ).then(function() {
+    perfStart = performance.now();
     mark = new Mark(document.body);
     scan();
   });
