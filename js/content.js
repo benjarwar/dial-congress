@@ -33,43 +33,44 @@ function getRegExpString(senator) {
 }
 
 function getLastNamesRegExp() {
-  var lastNamesRegExpString = '';
+  var lastNamesRegExpArr = [];
 
   for (var i = 0; i < senateData.length; i++) {
-    var divider = lastNamesRegExpString.length == 0 ? '' : '|';
-    lastNamesRegExpString += divider + '\\b' + senateData[i].lastName + '\\b';
+    lastNamesRegExpArr.push('\\b' + senateData[i].lastName + '\\b');
   }
 
-  return new RegExp(lastNamesRegExpString, 'ig');
+  return new RegExp(lastNamesRegExpArr.join('|'), 'ig');
 }
 
 function scan() {
   var lastNamesRegExp = getLastNamesRegExp();
   var foundLastNames = dedupeArray(document.body.innerText.match(lastNamesRegExp));
-  var foundLastNamesRegExpString = '';
+  var foundLastNamesRegExpArr = [];
+  var foundLastNamesRegExp;
 
   for (var i = 0; i < senateData.length; i++) {
     if (foundLastNames.indexOf(senateData[i].lastName) > -1) {
-      var divider = foundLastNamesRegExpString.length == 0 ? '' : '|';
-      var senatorRegEx = getRegExpString(senateData[i]);
-      foundLastNamesRegExpString += divider + '(' + senatorRegEx + ')';
+      var senatorRegEx = '(' + getRegExpString(senateData[i]) + ')';
+      foundLastNamesRegExpArr.push(senatorRegEx);
     }
   }
 
-  var foundLastNamesRegExp = new RegExp(foundLastNamesRegExpString, 'ig');
+  if (foundLastNamesRegExpArr.length) {
+    foundLastNamesRegExp = new RegExp(foundLastNamesRegExpArr.join('|'), 'ig');
 
-  mark.markRegExp(foundLastNamesRegExp, {
-    element: 'span',
-    className: 'dial-congress',
-    done: function(x) {
-      var perfEnd = performance.now();
-      var perfTime = Math.round(perfEnd - perfStart) / 1000;
-      console.log('Dial Congress scan of DOM complete: ' + perfTime + ' seconds');
-      console.log('Congress critters found: ' + x);
-    }
-  });
+    mark.markRegExp(foundLastNamesRegExp, {
+      element: 'span',
+      className: 'dial-congress',
+      done: function(x) {
+        var perfEnd = performance.now();
+        var perfTime = Math.round(perfEnd - perfStart) / 1000;
+        console.log('Dial Congress scan of DOM complete: ' + perfTime + ' seconds');
+        console.log('Congress critters found: ' + x);
+      }
+    });
 
-  bindHoverEvents();
+    bindHoverEvents();
+  }
 }
 
 function bindHoverEvents() {
