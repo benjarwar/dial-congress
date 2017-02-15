@@ -132,7 +132,8 @@ var observer = new MutationObserver(function(mutations) {
 var observerConfig = {
 	attributes: true,
 	childList: true,
-	characterData: true
+	characterData: true,
+  subtree: true
 };
 
 // Node, config
