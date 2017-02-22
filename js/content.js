@@ -41,44 +41,56 @@ function getLastNamesRegExp() {
   return new RegExp(lastNamesRegExpArr.join('|'), 'ig');
 }
 
-function scan(markContext) {
-  var lastNamesRegExp = getLastNamesRegExp();
-  var lastNames = document.body.innerText.match(lastNamesRegExp);
+function scan(node) {
+  if (node.innerText) {
+    var lastNamesRegExp = getLastNamesRegExp();
+    var lastNames = node.innerText.match(lastNamesRegExp);
 
-  if (lastNames) {
-    var foundLastNames = _.uniq(lastNames);
-    var foundLastNamesRegExpArr = [];
-    var foundLastNamesRegExp;
+    if (lastNames) {
+      var foundLastNames = _.uniq(lastNames);
+      var foundLastNamesRegExpArr = [];
+      var foundLastNamesRegExp;
+      var markContext;
 
-    for (var i = 0; i < senateData.length; i++) {
-      if (foundLastNames.indexOf(senateData[i].lastName) > -1) {
-        var senatorRegEx = '(' + getRegExpString(senateData[i]) + ')';
-        foundLastNamesRegExpArr.push(senatorRegEx);
-      }
-    }
-
-    if (foundLastNamesRegExpArr.length) {
-      foundLastNamesRegExp = new RegExp(foundLastNamesRegExpArr.join('|'), 'ig');
-
-      markContext.markRegExp(foundLastNamesRegExp, {
-        element: 'span',
-        className: 'dial-congress',
-        done: function(x) {
-          var perfEnd = performance.now();
-          var perfTime = Math.round(perfEnd - perfStart) / 1000;
-          console.log('Dial Congress scan of DOM complete: ' + perfTime + ' seconds');
-          console.log('Congress critters found: ' + x);
+      for (var i = 0; i < senateData.length; i++) {
+        if (foundLastNames.indexOf(senateData[i].lastName) > -1) {
+          var senatorRegEx = '(' + getRegExpString(senateData[i]) + ')';
+          foundLastNamesRegExpArr.push(senatorRegEx);
         }
-      });
+      }
 
-      bindHoverEvents();
+      if (foundLastNamesRegExpArr.length) {
+        foundLastNamesRegExp = new RegExp(foundLastNamesRegExpArr.join('|'), 'ig');
+        markContext = new Mark(node);
+
+        markContext.markRegExp(foundLastNamesRegExp, {
+          element: 'span',
+          className: 'dial-congress',
+          done: function(x) {
+            var perfEnd = performance.now();
+            var perfTime = Math.round(perfEnd - perfStart) / 1000;
+            console.log('Dial Congress scan of DOM complete: ' + perfTime + ' seconds');
+            console.log('Congress critters found: ' + x);
+          }
+        });
+
+        bindHoverEvents();
+      }
     }
   }
 }
 
 function bindHoverEvents() {
   $marks = $('.dial-congress');
-  $marks.on('mouseenter', matchSenatorToMark);
+
+  $marks.each(function(i, mark) {
+    var $mark = $(mark);
+
+    if (!$mark.hasClass('dial-congress-mouseenter')) {
+      $mark.addClass('dial-congress-mouseenter');
+      $mark.on('mouseenter', matchSenatorToMark);
+    }
+  });
 }
 
 function matchSenatorToMark(e) {
@@ -124,21 +136,34 @@ function watchForDOMChanges() {
   var observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
       if (mutation.addedNodes.length) {
+        // check nodes that have been added to the DOM
         mutation.addedNodes.forEach(function(node) {
-          var $node = $(node);
+          if (node.nodeType == 1) {
+            // node is an Element
+            var $node = $(node);
 
-          if (!$node.hasClass('tooltipster-base') && !$node.is(':empty')) {
-            var nodeContext = new Mark(node);
-
+            // make sure it's not a tooltipster and that it has content
+            if (!$node.closest('.tooltipster-base').length && !$node.is(':empty')) {
+              perfStart = performance.now();
+              scan(node);
+            }
+          } else if (node.nodeType == 3 && node.parentNode) {
+            // node is Text, send parentNode to scan()
             perfStart = performance.now();
-            scan(nodeContext);
+            scan(node.parentNode);
           }
         })
+      } else if (mutation.target) {
+        // check nodes that have had their attributes or characterData changed
+        perfStart = performance.now();
+        scan(mutation.target);
       }
     });
   });
 
   var observerConfig = {
+    attributes: true,
+    characterData: true,
     childList: true,
     subtree: true
   };
@@ -159,12 +184,8 @@ $(document).ready(function() {
       senateData = JSON.parse(data);
     })
   ).then(function() {
-    var bodyMarkContext = new Mark(document.body);
-
     perfStart = performance.now();
-    scan(bodyMarkContext);
-
+    scan(document.body);
     watchForDOMChanges();
   });
-
 });
