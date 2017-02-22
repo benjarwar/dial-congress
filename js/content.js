@@ -1,6 +1,6 @@
 var mark;
 var senateData;
-var perfStart = performance.now();
+var perfStart;
 
 function getRegExpString(senator) {
   var title = '(Senator|Sen\\.|Congressman|Congresswoman)';
@@ -32,29 +32,45 @@ function getRegExpString(senator) {
   return regExpString;
 }
 
-function scan() {
-  var allSenatorsRegExpString = '';
+function getLastNamesRegExp() {
+  var lastNamesRegExpArr = [];
 
   for (var i = 0; i < senateData.length; i++) {
-    var divider = i < (senateData.length - 1) ? '|' : '';
-    var senatorRegEx = getRegExpString(senateData[i]);
-    allSenatorsRegExpString += '(' + senatorRegEx + ')' + divider;
+    lastNamesRegExpArr.push('\\b' + senateData[i].lastName + '\\b');
   }
 
-  var allSenatorsRegExp = new RegExp(allSenatorsRegExpString, 'ig');
+  return new RegExp(lastNamesRegExpArr.join('|'), 'ig');
+}
 
-  mark.markRegExp(allSenatorsRegExp, {
-    element: 'span',
-    className: 'dial-congress',
-    done: function(x) {
-      var perfEnd = performance.now();
-      var perfTime = Math.round(perfEnd - perfStart) / 1000;
-      console.log('Dial Congress scan of complete: ' + perfTime + ' seconds');
-      console.log('Congress critters found: ' + x);
+function scan() {
+  var lastNamesRegExp = getLastNamesRegExp();
+  var foundLastNames = dedupeArray(document.body.innerText.match(lastNamesRegExp));
+  var foundLastNamesRegExpArr = [];
+  var foundLastNamesRegExp;
+
+  for (var i = 0; i < senateData.length; i++) {
+    if (foundLastNames.indexOf(senateData[i].lastName) > -1) {
+      var senatorRegEx = '(' + getRegExpString(senateData[i]) + ')';
+      foundLastNamesRegExpArr.push(senatorRegEx);
     }
-  });
+  }
 
-  bindHoverEvents();
+  if (foundLastNamesRegExpArr.length) {
+    foundLastNamesRegExp = new RegExp(foundLastNamesRegExpArr.join('|'), 'ig');
+
+    mark.markRegExp(foundLastNamesRegExp, {
+      element: 'span',
+      className: 'dial-congress',
+      done: function(x) {
+        var perfEnd = performance.now();
+        var perfTime = Math.round(perfEnd - perfStart) / 1000;
+        console.log('Dial Congress scan of DOM complete: ' + perfTime + ' seconds');
+        console.log('Congress critters found: ' + x);
+      }
+    });
+
+    bindHoverEvents();
+  }
 }
 
 function bindHoverEvents() {
@@ -107,12 +123,28 @@ function track(data) {
   });
 }
 
+function dedupeArray(a) {
+  var seen = {};
+  var out = [];
+  var len = a.length;
+  var j = 0;
+  for(var i = 0; i < len; i++) {
+    var item = a[i];
+    if(seen[item] !== 1) {
+      seen[item] = 1;
+      out[j++] = item;
+    }
+  }
+  return out;
+}
+
 $(document).ready(function() {
   $.when(
     $.get(chrome.extension.getURL('js/senate.json'), function(data) {
       senateData = JSON.parse(data);
     })
   ).then(function() {
+    perfStart = performance.now();
     mark = new Mark(document.body);
     scan();
   });
