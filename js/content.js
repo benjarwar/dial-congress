@@ -121,6 +121,35 @@ function buildTooltip($el, senator) {
   $el.tooltipster('open');
 }
 
+function watchForDOMChanges() {
+  // don't scan more than once every 2 seconds
+  var debouncedScan = _.debounce(scan, 2000, true);
+
+  // Fire on mutations
+  // thx: https://davidwalsh.name/mutationobserver-api
+  var observer = new MutationObserver(function(mutations) {
+    // TODO: We could just scan added nodes from childList...
+
+    console.log(mutations);
+
+    perfStart = performance.now();
+    debouncedScan();
+  });
+
+  // Notify me of everything!
+  var observerConfig = {
+    attributes: true,
+    childList: true,
+    characterData: true,
+    subtree: true
+  };
+
+  // Node, config
+  // In this case we'll listen to all changes to body and child nodes
+  var targetNode = document.body;
+  observer.observe(targetNode, observerConfig);
+}
+
 function track(data) {
   chrome.runtime.sendMessage(data, function(response) {
     console.log('message received', response);
@@ -135,33 +164,10 @@ $(document).ready(function() {
   ).then(function() {
     mark = new Mark(document.body);
 
-    // don't scan more than once every 2 seconds
-    var debouncedScan = _.debounce(scan, 2000, true);
-
-    // Fire once to start
     perfStart = performance.now();
-    debouncedScan();
+    scan();
 
-    // Fire on mutations
-    // thx: https://davidwalsh.name/mutationobserver-api
-    var observer = new MutationObserver(function(mutations) {
-      // TODO: We could just scan added nodes from childList...
-      perfStart = performance.now();
-      debouncedScan();
-    });
-
-    // Notify me of everything!
-    var observerConfig = {
-    	attributes: true,
-    	childList: true,
-    	characterData: true,
-      subtree: true
-    };
-
-    // Node, config
-    // In this case we'll listen to all changes to body and child nodes
-    var targetNode = document.body;
-    observer.observe(targetNode, observerConfig);
+    watchForDOMChanges();
   });
 
 });
