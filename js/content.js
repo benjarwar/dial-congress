@@ -44,32 +44,36 @@ function getLastNamesRegExp() {
 
 function scan() {
   var lastNamesRegExp = getLastNamesRegExp();
-  var foundLastNames = dedupeArray(document.body.innerText.match(lastNamesRegExp));
-  var foundLastNamesRegExpArr = [];
-  var foundLastNamesRegExp;
+  var lastNames = document.body.innerText.match(lastNamesRegExp);
 
-  for (var i = 0; i < senateData.length; i++) {
-    if (foundLastNames.indexOf(senateData[i].lastName) > -1) {
-      var senatorRegEx = '(' + getRegExpString(senateData[i]) + ')';
-      foundLastNamesRegExpArr.push(senatorRegEx);
-    }
-  }
+  if (lastNames) {
+    var foundLastNames = _.uniq(lastNames);
+    var foundLastNamesRegExpArr = [];
+    var foundLastNamesRegExp;
 
-  if (foundLastNamesRegExpArr.length) {
-    foundLastNamesRegExp = new RegExp(foundLastNamesRegExpArr.join('|'), 'ig');
-
-    mark.markRegExp(foundLastNamesRegExp, {
-      element: 'span',
-      className: 'dial-congress',
-      done: function(x) {
-        var perfEnd = performance.now();
-        var perfTime = Math.round(perfEnd - perfStart) / 1000;
-        console.log('Dial Congress scan of DOM complete: ' + perfTime + ' seconds');
-        console.log('Congress critters found: ' + x);
+    for (var i = 0; i < senateData.length; i++) {
+      if (foundLastNames.indexOf(senateData[i].lastName) > -1) {
+        var senatorRegEx = '(' + getRegExpString(senateData[i]) + ')';
+        foundLastNamesRegExpArr.push(senatorRegEx);
       }
-    });
+    }
 
-    bindHoverEvents();
+    if (foundLastNamesRegExpArr.length) {
+      foundLastNamesRegExp = new RegExp(foundLastNamesRegExpArr.join('|'), 'ig');
+
+      mark.markRegExp(foundLastNamesRegExp, {
+        element: 'span',
+        className: 'dial-congress',
+        done: function(x) {
+          var perfEnd = performance.now();
+          var perfTime = Math.round(perfEnd - perfStart) / 1000;
+          console.log('Dial Congress scan of DOM complete: ' + perfTime + ' seconds');
+          console.log('Congress critters found: ' + x);
+        }
+      });
+
+      bindHoverEvents();
+    }
   }
 }
 
@@ -121,21 +125,6 @@ function track(data) {
   chrome.runtime.sendMessage(data, function(response) {
     console.log('message received', response);
   });
-}
-
-function dedupeArray(a) {
-  var seen = {};
-  var out = [];
-  var len = a.length;
-  var j = 0;
-  for(var i = 0; i < len; i++) {
-    var item = a[i];
-    if(seen[item] !== 1) {
-      seen[item] = 1;
-      out[j++] = item;
-    }
-  }
-  return out;
 }
 
 $(document).ready(function() {
