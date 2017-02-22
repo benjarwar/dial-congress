@@ -1,4 +1,3 @@
-var mark;
 var senateData;
 var perfStart;
 
@@ -42,7 +41,7 @@ function getLastNamesRegExp() {
   return new RegExp(lastNamesRegExpArr.join('|'), 'ig');
 }
 
-function scan() {
+function scan(markContext) {
   var lastNamesRegExp = getLastNamesRegExp();
   var lastNames = document.body.innerText.match(lastNamesRegExp);
 
@@ -61,7 +60,7 @@ function scan() {
     if (foundLastNamesRegExpArr.length) {
       foundLastNamesRegExp = new RegExp(foundLastNamesRegExpArr.join('|'), 'ig');
 
-      mark.markRegExp(foundLastNamesRegExp, {
+      markContext.markRegExp(foundLastNamesRegExp, {
         element: 'span',
         className: 'dial-congress',
         done: function(x) {
@@ -123,17 +122,26 @@ function buildTooltip($el, senator) {
 
 function watchForDOMChanges() {
   // don't scan more than once every 2 seconds
-  var debouncedScan = _.debounce(scan, 2000, true);
+  // var debouncedScan = _.debounce(scan, 2000, true);
 
   // Fire on mutations
   // thx: https://davidwalsh.name/mutationobserver-api
   var observer = new MutationObserver(function(mutations) {
     // TODO: We could just scan added nodes from childList...
 
-    console.log(mutations);
+    mutations.forEach(function(mutation) {
+      if (mutation.addedNodes.length) {
+        mutation.addedNodes.forEach(function(node) {
+          var nodeContext = new Mark(node);
 
-    perfStart = performance.now();
-    debouncedScan();
+          perfStart = performance.now();
+          scan(nodeContext);
+        })
+      }
+    });
+
+    // perfStart = performance.now();
+    // debouncedScan();
   });
 
   // Notify me of everything!
@@ -152,7 +160,7 @@ function watchForDOMChanges() {
 
 function track(data) {
   chrome.runtime.sendMessage(data, function(response) {
-    console.log('message received', response);
+    // console.log('message received', response);
   });
 }
 
@@ -162,10 +170,10 @@ $(document).ready(function() {
       senateData = JSON.parse(data);
     })
   ).then(function() {
-    mark = new Mark(document.body);
+    var bodyMarkContext = new Mark(document.body);
 
     perfStart = performance.now();
-    scan();
+    scan(bodyMarkContext);
 
     watchForDOMChanges();
   });
