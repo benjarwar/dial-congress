@@ -144,19 +144,20 @@ $(document).ready(function() {
       senateData = JSON.parse(data);
     })
   ).then(function() {
-    perfStart = performance.now();
     mark = new Mark(document.body);
 
     // don't scan more than once every 2 seconds
     var debouncedScan = _.debounce(scan, 2000, true);
 
     // Fire once to start
+    perfStart = performance.now();
     debouncedScan();
 
     // Fire on mutations
     // thx: https://davidwalsh.name/mutationobserver-api
     var observer = new MutationObserver(function(mutations) {
       // TODO: We could just scan added nodes from childList...
+      perfStart = performance.now();
       debouncedScan();
     });
 
@@ -172,7 +173,6 @@ $(document).ready(function() {
     // In this case we'll listen to all changes to body and child nodes
     var targetNode = document.body;
     observer.observe(targetNode, observerConfig);
-
   });
 
 });
