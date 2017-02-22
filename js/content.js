@@ -121,39 +121,28 @@ function buildTooltip($el, senator) {
 }
 
 function watchForDOMChanges() {
-  // don't scan more than once every 2 seconds
-  // var debouncedScan = _.debounce(scan, 2000, true);
-
-  // Fire on mutations
-  // thx: https://davidwalsh.name/mutationobserver-api
   var observer = new MutationObserver(function(mutations) {
-    // TODO: We could just scan added nodes from childList...
-
     mutations.forEach(function(mutation) {
       if (mutation.addedNodes.length) {
         mutation.addedNodes.forEach(function(node) {
-          var nodeContext = new Mark(node);
+          var $node = $(node);
 
-          perfStart = performance.now();
-          scan(nodeContext);
+          if (!$node.hasClass('tooltipster-base') && !$node.is(':empty')) {
+            var nodeContext = new Mark(node);
+
+            perfStart = performance.now();
+            scan(nodeContext);
+          }
         })
       }
     });
-
-    // perfStart = performance.now();
-    // debouncedScan();
   });
 
-  // Notify me of everything!
   var observerConfig = {
-    attributes: true,
     childList: true,
-    characterData: true,
     subtree: true
   };
 
-  // Node, config
-  // In this case we'll listen to all changes to body and child nodes
   var targetNode = document.body;
   observer.observe(targetNode, observerConfig);
 }
