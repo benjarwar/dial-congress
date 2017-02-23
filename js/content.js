@@ -1,4 +1,3 @@
-var mark;
 var senateData;
 var perfStart;
 
@@ -42,40 +41,56 @@ function getLastNamesRegExp() {
   return new RegExp(lastNamesRegExpArr.join('|'), 'ig');
 }
 
-function scan() {
-  var lastNamesRegExp = getLastNamesRegExp();
-  var foundLastNames = dedupeArray(document.body.innerText.match(lastNamesRegExp));
-  var foundLastNamesRegExpArr = [];
-  var foundLastNamesRegExp;
+function scan(node) {
+  if (node.innerText) {
+    var lastNamesRegExp = getLastNamesRegExp();
+    var lastNames = node.innerText.match(lastNamesRegExp);
 
-  for (var i = 0; i < senateData.length; i++) {
-    if (foundLastNames.indexOf(senateData[i].lastName) > -1) {
-      var senatorRegEx = '(' + getRegExpString(senateData[i]) + ')';
-      foundLastNamesRegExpArr.push(senatorRegEx);
-    }
-  }
+    if (lastNames) {
+      var foundLastNames = _.uniq(lastNames);
+      var foundLastNamesRegExpArr = [];
+      var foundLastNamesRegExp;
+      var markContext;
 
-  if (foundLastNamesRegExpArr.length) {
-    foundLastNamesRegExp = new RegExp(foundLastNamesRegExpArr.join('|'), 'ig');
-
-    mark.markRegExp(foundLastNamesRegExp, {
-      element: 'span',
-      className: 'dial-congress',
-      done: function(x) {
-        var perfEnd = performance.now();
-        var perfTime = Math.round(perfEnd - perfStart) / 1000;
-        console.log('Dial Congress scan of DOM complete: ' + perfTime + ' seconds');
-        console.log('Congress critters found: ' + x);
+      for (var i = 0; i < senateData.length; i++) {
+        if (foundLastNames.indexOf(senateData[i].lastName) > -1) {
+          var senatorRegEx = '(' + getRegExpString(senateData[i]) + ')';
+          foundLastNamesRegExpArr.push(senatorRegEx);
+        }
       }
-    });
 
-    bindHoverEvents();
+      if (foundLastNamesRegExpArr.length) {
+        foundLastNamesRegExp = new RegExp(foundLastNamesRegExpArr.join('|'), 'ig');
+        markContext = new Mark(node);
+
+        markContext.markRegExp(foundLastNamesRegExp, {
+          element: 'span',
+          className: 'dial-congress',
+          done: function(x) {
+            var perfEnd = performance.now();
+            var perfTime = Math.round(perfEnd - perfStart) / 1000;
+            console.log('Dial Congress scan of DOM complete: ' + perfTime + ' seconds');
+            console.log('Congress critters found: ' + x);
+          }
+        });
+
+        bindHoverEvents();
+      }
+    }
   }
 }
 
 function bindHoverEvents() {
   $marks = $('.dial-congress');
-  $marks.on('mouseenter', matchSenatorToMark);
+
+  $marks.each(function(i, mark) {
+    var $mark = $(mark);
+
+    if (!$mark.hasClass('dial-congress-mouseenter')) {
+      $mark.addClass('dial-congress-mouseenter');
+      $mark.on('mouseenter', matchSenatorToMark);
+    }
+  });
 }
 
 function matchSenatorToMark(e) {
@@ -117,25 +132,65 @@ function buildTooltip($el, senator) {
   $el.tooltipster('open');
 }
 
+function checkIfTooltipster($node) {
+  return $node.hasClass('tooltipster-base') || $node.hasClass('tooltipster-ruler');
+}
+
+function watchForDOMChanges() {
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.addedNodes.length) {
+        // check nodes that have been added to the DOM
+        mutation.addedNodes.forEach(function(node) {
+          if (node.nodeType == 1) {
+            // node is an Element
+            var $node = $(node);
+
+            // make sure it's not a tooltipster and that it has content
+            if (!checkIfTooltipster($node) && !$node.is(':empty')) {
+              perfStart = performance.now();
+              scan(node);
+            }
+          } else if (node.nodeType == 3 && node.parentNode) {
+            // node is Text, send parentNode to scan()
+            perfStart = performance.now();
+            scan(node.parentNode);
+          }
+        })
+      } else if (mutation.target) {
+        // check nodes that have had their attributes or characterData changed
+        var tooltipsterRemoved = false;
+
+        // check if tooltipster has been removed
+        mutation.removedNodes.forEach(function(node) {
+          if (!tooltipsterRemoved && checkIfTooltipster($(node))) {
+            tooltipsterRemoved = true;
+          }
+        });
+
+        if (!tooltipsterRemoved) {
+          perfStart = performance.now();
+          scan(mutation.target);
+        }
+      }
+    });
+  });
+
+  var observerConfig = {
+    attributes: true,
+    characterData: true,
+    childList: true,
+    subtree: true
+  };
+
+  var targetNode = document.body;
+  observer.observe(targetNode, observerConfig);
+}
+
 function track(data) {
   chrome.runtime.sendMessage(data, function(response) {
     // console.log('message received', response);
   });
-}
-
-function dedupeArray(a) {
-  var seen = {};
-  var out = [];
-  var len = a.length;
-  var j = 0;
-  for(var i = 0; i < len; i++) {
-    var item = a[i];
-    if(seen[item] !== 1) {
-      seen[item] = 1;
-      out[j++] = item;
-    }
-  }
-  return out;
 }
 
 $(document).ready(function() {
@@ -145,7 +200,7 @@ $(document).ready(function() {
     })
   ).then(function() {
     perfStart = performance.now();
-    mark = new Mark(document.body);
-    scan();
+    scan(document.body);
+    watchForDOMChanges();
   });
 });
