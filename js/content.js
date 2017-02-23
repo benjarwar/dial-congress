@@ -3,14 +3,19 @@ var houseData;
 var congressData;
 var perfStart;
 
-function getRegExpString(senator) {
+function getRegExpString(critter) {
   var title = '(Senator|Sen\\.|Congressman|Congresswoman)';
+
+  if (critter.house === 'house') {
+    title = '(Representative|Rep\\.|Congressman|Congresswoman)';
+  }
+
   var optionalQuote = '(\'|")?';
   var wildCardMiddle = optionalQuote + '(\\w*)(\\.)?' + optionalQuote;
   var upToTwoWildCardMiddles = '\\s*' + wildCardMiddle + '\\s*' + wildCardMiddle + '\\s*';
-  var firstLast = '\\b' + senator.firstName + '\\b' + upToTwoWildCardMiddles + '\\b' + senator.lastName + '\\b';
-  var lastFirst = '\\b' + senator.lastName + ',\\b' + senator.firstName + '\\b';
-  var titleLast = '\\b' + title + '\\s*' + senator.lastName + '\\b';
+  var firstLast = '\\b' + critter.firstName + '\\b' + upToTwoWildCardMiddles + '\\b' + critter.lastName + '\\b';
+  var lastFirst = '\\b' + critter.lastName + ',\\b' + critter.firstName + '\\b';
+  var titleLast = '\\b' + title + '\\s*' + critter.lastName + '\\b';
   var nicknames = '';
   var regExpString = '';
 
@@ -18,13 +23,13 @@ function getRegExpString(senator) {
     return '|\\b' + nickname + '\\b' + upToTwoWildCardMiddles + '\\b' + lastName + '\\b|\\b' + lastName + '\\b,\\b' + nickname + '\\b';
   }
 
-  if (senator.nicknames) {
-    if (Array.isArray(senator.nicknames)) {
-      for (var i = 0; i < senator.nicknames.length; i++) {
-        nicknames += getNicknameString(senator.nicknames[i], senator.lastName);
+  if (critter.nicknames) {
+    if (Array.isArray(critter.nicknames)) {
+      for (var i = 0; i < critter.nicknames.length; i++) {
+        nicknames += getNicknameString(critter.nicknames[i], critter.lastName);
       }
-    } else if (typeof senator.nicknames === 'string') {
-      nicknames += getNicknameString(senator.nicknames[i], senator.lastName);
+    } else if (typeof critter.nicknames === 'string') {
+      nicknames += getNicknameString(critter.nicknames[i], critter.lastName);
     }
   }
 
@@ -36,8 +41,8 @@ function getRegExpString(senator) {
 function getLastNamesRegExp() {
   var lastNamesRegExpArr = [];
 
-  for (var i = 0; i < senateData.length; i++) {
-    lastNamesRegExpArr.push('\\b' + senateData[i].lastName + '\\b');
+  for (var i = 0; i < congressData.length; i++) {
+    lastNamesRegExpArr.push('\\b' + congressData[i].lastName + '\\b');
   }
 
   return new RegExp(lastNamesRegExpArr.join('|'), 'ig');
@@ -54,9 +59,9 @@ function scan(node) {
       var foundLastNamesRegExp;
       var markContext;
 
-      for (var i = 0; i < senateData.length; i++) {
-        if (foundLastNames.indexOf(senateData[i].lastName) > -1) {
-          var senatorRegEx = '(' + getRegExpString(senateData[i]) + ')';
+      for (var i = 0; i < congressData.length; i++) {
+        if (foundLastNames.indexOf(congressData[i].lastName) > -1) {
+          var senatorRegEx = '(' + getRegExpString(congressData[i]) + ')';
           foundLastNamesRegExpArr.push(senatorRegEx);
         }
       }
@@ -99,11 +104,11 @@ function matchSenatorToMark(e) {
   var $el = $(e.target);
   var text = $el.text();
 
-  for(var i = 0; i < senateData.length; i++) {
-    var regExp = new RegExp(getRegExpString(senateData[i]), 'ig');
+  for(var i = 0; i < congressData.length; i++) {
+    var regExp = new RegExp(getRegExpString(congressData[i]), 'ig');
 
     if (text.match(regExp)) {
-      buildTooltip($el, senateData[i]);
+      buildTooltip($el, congressData[i]);
       $el.off('mouseenter', matchSenatorToMark);
       break;
     }
@@ -186,7 +191,7 @@ function watchForDOMChanges() {
   };
 
   var targetNode = document.body;
-  observer.observe(targetNode, observerConfig);
+  // observer.observe(targetNode, observerConfig);
 }
 
 function track(data) {
