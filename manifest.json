@@ -48,6 +48,7 @@
   ],
 
   "web_accessible_resources": [
+    "js/house.json",
     "js/senate.json"
   ]
 }

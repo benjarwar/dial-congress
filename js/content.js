@@ -1,4 +1,6 @@
 var senateData;
+var houseData;
+var congressData;
 var perfStart;
 
 function getRegExpString(senator) {
@@ -197,8 +199,19 @@ $(document).ready(function() {
   $.when(
     $.get(chrome.extension.getURL('js/senate.json'), function(data) {
       senateData = JSON.parse(data);
+      senateData.forEach(function(senator) {
+        senator.house = 'senate';
+      });
+    }),
+
+    $.get(chrome.extension.getURL('js/house.json'), function(data) {
+      houseData = JSON.parse(data);
+      houseData.forEach(function(rep) {
+        rep.house = 'house';
+      });
     })
   ).then(function() {
+    congressData = _.union(senateData, houseData);
     perfStart = performance.now();
     scan(document.body);
     watchForDOMChanges();
