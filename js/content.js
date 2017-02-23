@@ -132,6 +132,10 @@ function buildTooltip($el, senator) {
   $el.tooltipster('open');
 }
 
+function checkIfTooltipster($node) {
+  return $node.hasClass('tooltipster-base') || $node.hasClass('tooltipster-ruler');
+}
+
 function watchForDOMChanges() {
   var observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
@@ -143,7 +147,7 @@ function watchForDOMChanges() {
             var $node = $(node);
 
             // make sure it's not a tooltipster and that it has content
-            if (!$node.closest('.tooltipster-base').length && !$node.is(':empty')) {
+            if (!checkIfTooltipster($node) && !$node.is(':empty')) {
               perfStart = performance.now();
               scan(node);
             }
@@ -155,8 +159,19 @@ function watchForDOMChanges() {
         })
       } else if (mutation.target) {
         // check nodes that have had their attributes or characterData changed
-        perfStart = performance.now();
-        scan(mutation.target);
+        var tooltipsterRemoved = false;
+
+        // check if tooltipster has been removed
+        mutation.removedNodes.forEach(function(node) {
+          if (!tooltipsterRemoved && checkIfTooltipster($(node))) {
+            tooltipsterRemoved = true;
+          }
+        });
+
+        if (!tooltipsterRemoved) {
+          perfStart = performance.now();
+          scan(mutation.target);
+        }
       }
     });
   });
