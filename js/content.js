@@ -144,7 +144,7 @@ function buildTooltip($el, senator) {
 }
 
 function checkIfTooltipster(node) {
-  return node.classList.contains('tooltipster-base') || node.classList.contains('tooltipster-ruler');
+  return node.classList.contains('tooltipster-base') || node.classList.contains('tooltipster-ruler') || node.classList.contains('tooltipstered');
 }
 
 function watchForDOMChanges() {
@@ -156,7 +156,7 @@ function watchForDOMChanges() {
           if (node.nodeType == 1) {
             // node is an Element
             // make sure it's not a tooltipster and that it has content
-            if (!checkIfTooltipster(node) && !!node.innerHTML) {
+            if (!checkIfTooltipster(node) && !!node.innerText) {
               scan(node);
             }
           } else if (node.nodeType == 3 && node.parentNode) {
@@ -177,7 +177,7 @@ function watchForDOMChanges() {
             }
           }
 
-          if (!tooltipsterRemoved) {
+          if (!tooltipsterRemoved && !checkIfTooltipster(mutation.target)) {
             scan(mutation.target);
           }
         }
