@@ -42,7 +42,13 @@ function getLastNamesRegExp() {
 }
 
 function scan(node) {
-  if (node.innerText) {
+  var $node = $(node);
+
+  perfStart = performance.now();
+
+  if ($node.text() && !$node.hasClass('dial-congress-scanned')) {
+    $node.addClass('dial-congress-scanned');
+
     var lastNamesRegExp = getLastNamesRegExp();
     var lastNames = node.innerText.match(lastNamesRegExp);
 
@@ -148,29 +154,28 @@ function watchForDOMChanges() {
 
             // make sure it's not a tooltipster and that it has content
             if (!checkIfTooltipster($node) && !$node.is(':empty')) {
-              perfStart = performance.now();
               scan(node);
             }
           } else if (node.nodeType == 3 && node.parentNode) {
             // node is Text, send parentNode to scan()
-            perfStart = performance.now();
             scan(node.parentNode);
           }
         })
-      } else if (mutation.target) {
-        // check nodes that have had their attributes or characterData changed
-        var tooltipsterRemoved = false;
+      } else if (mutation.target && !!mutation.target.innerText) {
+        if ($(mutation.target).is(':visible')) {
+          // check nodes that have had their attributes or characterData changed
+          var tooltipsterRemoved = false;
 
-        // check if tooltipster has been removed
-        mutation.removedNodes.forEach(function(node) {
-          if (!tooltipsterRemoved && checkIfTooltipster($(node))) {
-            tooltipsterRemoved = true;
+          // check if tooltipster has been removed
+          mutation.removedNodes.forEach(function(node) {
+            if (!tooltipsterRemoved && checkIfTooltipster($(node))) {
+              tooltipsterRemoved = true;
+            }
+          });
+
+          if (!tooltipsterRemoved) {
+            scan(mutation.target);
           }
-        });
-
-        if (!tooltipsterRemoved) {
-          perfStart = performance.now();
-          scan(mutation.target);
         }
       }
     });
