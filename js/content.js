@@ -196,7 +196,7 @@ function watchForDOMChanges() {
   };
 
   var targetNode = document.body;
-  // observer.observe(targetNode, observerConfig);
+  observer.observe(targetNode, observerConfig);
 }
 
 function track(data) {
