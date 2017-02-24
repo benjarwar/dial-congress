@@ -14,13 +14,13 @@ function getRegExpString(critter) {
   var wildCardMiddle = optionalQuote + '(\\w*)(\\.)?' + optionalQuote;
   var upToTwoWildCardMiddles = '\\s*' + wildCardMiddle + '\\s*' + wildCardMiddle + '\\s*';
   var firstLast = '\\b' + critter.firstName + '\\b' + upToTwoWildCardMiddles + '\\b' + critter.lastName + '\\b';
-  var lastFirst = '\\b' + critter.lastName + ',\\b' + critter.firstName + '\\b';
+  var lastFirst = '\\b' + critter.lastName + ',\\s*' + critter.firstName + '\\b';
   var titleLast = '\\b' + title + '\\s*' + critter.lastName + '\\b';
   var nicknames = '';
   var regExpString = '';
 
   function getNicknameString (nickname, lastName) {
-    return '|\\b' + nickname + '\\b' + upToTwoWildCardMiddles + '\\b' + lastName + '\\b|\\b' + lastName + '\\b,\\b' + nickname + '\\b';
+    return '|\\b' + nickname + '\\b' + upToTwoWildCardMiddles + '\\b' + lastName + '\\b|\\b' + lastName + ',\\s*' + nickname + '\\b';
   }
 
   if (critter.nicknames) {
