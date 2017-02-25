@@ -1,7 +1,10 @@
 var senateData;
 var houseData;
 var congressData;
-var perfStart;
+var lastNameChunkSize = 20;
+var foundLastNamesQueue = [];
+var pollInterval;
+var pollCount = 0;
 
 function getRegExpString(critter) {
   var title = '(Senator|Sen\\.|Congressman|Congresswoman)';
@@ -49,45 +52,72 @@ function getLastNamesRegExp() {
 }
 
 function scan(node) {
-  perfStart = performance.now();
+  var nodeIsDialCongressRelated = checkIfDialCongress(node) || checkIfTooltipster(node);
+  if (!!node.innerText && !nodeIsDialCongressRelated) {
+    var perfStart = performance.now();
 
-  if (node.innerText && !node.classList.contains('dial-congress-scanned')) {
     node.classList.add('dial-congress-scanned');
 
     var lastNamesRegExp = getLastNamesRegExp();
     var lastNames = node.innerText.match(lastNamesRegExp);
 
     if (lastNames) {
-      var foundLastNames = _.uniq(lastNames);
-      var foundLastNamesRegExpArr = [];
-      var foundLastNamesRegExp;
-      var markContext;
-
-      for (var i = 0; i < congressData.length; i++) {
-        if (foundLastNames.indexOf(congressData[i].lastName) > -1) {
-          var senatorRegEx = '(' + getRegExpString(congressData[i]) + ')';
-          foundLastNamesRegExpArr.push(senatorRegEx);
-        }
-      }
-
-      if (foundLastNamesRegExpArr.length) {
-        foundLastNamesRegExp = new RegExp(foundLastNamesRegExpArr.join('|'), 'ig');
-        markContext = new Mark(node);
-
-        markContext.markRegExp(foundLastNamesRegExp, {
-          element: 'span',
-          className: 'dial-congress',
-          done: function(x) {
-            var perfEnd = performance.now();
-            var perfTime = Math.round(perfEnd - perfStart) / 1000;
-            console.log('Dial Congress scan of DOM complete: ' + perfTime + ' seconds');
-            console.log('Congress critters found: ' + x);
-          }
-        });
-
-        bindHoverEvents();
-      }
+      chunk(_.uniq(lastNames), node);
     }
+
+    var perfEnd = performance.now();
+    var perfTime = Math.round(perfEnd - perfStart) / 1000;
+    console.log('Dial Congress last names scan of ' + node + ': ' + perfTime + ' seconds');
+  }
+}
+
+function chunk(lastNames, node) {
+  var chunkedLastNames = _.chunk(lastNames, lastNameChunkSize);
+
+  chunkedLastNames.forEach(function(chunk) {
+    foundLastNamesQueue.push({
+      node: node,
+      lastNames: chunk
+    });
+  });
+}
+
+function checkLastNamesQueue() {
+  if (!!foundLastNamesQueue.length) {
+    markPermutations(foundLastNamesQueue[0].lastNames, foundLastNamesQueue[0].node);
+    foundLastNamesQueue.shift();
+  }
+}
+
+function markPermutations(lastNames, node) {
+  var lastNamesRegExpArr = [];
+  var lastNamesRegExp;
+  var markContext;
+  var perfStart = performance.now();
+
+  for (var i = 0; i < congressData.length; i++) {
+    if (lastNames.indexOf(congressData[i].lastName) > -1) {
+      var senatorRegEx = '(' + getRegExpString(congressData[i]) + ')';
+      lastNamesRegExpArr.push(senatorRegEx);
+    }
+  }
+
+  if (lastNamesRegExpArr.length) {
+    lastNamesRegExp = new RegExp(lastNamesRegExpArr.join('|'), 'ig');
+    markContext = new Mark(node);
+
+    markContext.markRegExp(lastNamesRegExp, {
+      element: 'span',
+      className: 'dial-congress',
+      done: function(x) {
+        var perfEnd = performance.now();
+        var perfTime = Math.round(perfEnd - perfStart) / 1000;
+        console.log('Dial Congress marked chunk in: ' + perfTime + ' seconds');
+        console.log('Congress critters found: ' + x);
+      }
+    });
+
+    bindHoverEvents();
   }
 }
 
@@ -144,7 +174,14 @@ function buildTooltip($el, senator) {
 }
 
 function checkIfTooltipster(node) {
-  return node.classList.contains('tooltipster-base') || node.classList.contains('tooltipster-ruler') || node.classList.contains('tooltipstered');
+  return node.classList.contains('tooltipster-base') ||
+         node.classList.contains('tooltipster-ruler') ||
+         node.classList.contains('tooltipstered');
+}
+
+function checkIfDialCongress(node) {
+  return node.classList.contains('dial-congress') ||
+         node.classList.contains('dial-congress-scanned');
 }
 
 function watchForDOMChanges() {
@@ -155,12 +192,12 @@ function watchForDOMChanges() {
         mutation.addedNodes.forEach(function(node) {
           if (node.nodeType == 1) {
             // node is an Element
-            // make sure it's not a tooltipster and that it has content
-            if (!checkIfTooltipster(node) && !!node.innerText) {
-              scan(node);
-            }
-          } else if (node.nodeType == 3 && node.parentNode) {
-            // node is Text, send parentNode to scan()
+            scan(node);
+          } else if (node.nodeType == 3
+                  && node.parentNode
+                  && !checkIfDialCongress(node.previousElementSibling)) {
+            // node is Text. If not already wrapped by a Dial Congress span,
+            // send its parentNode to scan().
             scan(node.parentNode);
           }
         })
@@ -169,7 +206,7 @@ function watchForDOMChanges() {
           // check nodes that have had their attributes or characterData changed
           var tooltipsterRemoved = false;
 
-          // check if tooltipster has been removed
+          // check if tooltipster has been removed, which triggered the mutation
           for(var i = 0; i < mutation.removedNodes.length; i++) {
             if (checkIfTooltipster(mutation.removedNodes[i])) {
               tooltipsterRemoved = true;
@@ -177,7 +214,7 @@ function watchForDOMChanges() {
             }
           }
 
-          if (!tooltipsterRemoved && !checkIfTooltipster(mutation.target)) {
+          if (!tooltipsterRemoved) {
             scan(mutation.target);
           }
         }
@@ -218,9 +255,16 @@ $(document).ready(function() {
       });
     })
   ).then(function() {
+    // combine senate and house data.
     congressData = _.union(senateData, houseData);
-    perfStart = performance.now();
+
+    // kick off initial scan of the entire DOM.
     scan(document.body);
+
+    // keep an eye out for changes to the DOM.
     watchForDOMChanges();
+
+    // poll the queue of found last names for marking.
+    pollInterval = setInterval(checkLastNamesQueue, 500);
   });
 });

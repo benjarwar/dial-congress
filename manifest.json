@@ -30,7 +30,7 @@
       "bower_components/jquery/dist/jquery.min.js",
       "bower_components/mark.js/dist/mark.min.js",
       "bower_components/tooltipster/dist/js/tooltipster.bundle.min.js",
-      "bower_components/underscore/underscore-min.js",
+      "bower_components/lodash/lodash.js",
       "js/content.js"
     ]
   }],
