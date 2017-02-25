@@ -173,13 +173,25 @@ function buildTooltip($el, senator) {
   $el.tooltipster('open');
 }
 
+function checkIfNode(node) {
+  return !!node && !!node.classList;
+}
+
 function checkIfTooltipster(node) {
+  if (!checkIfNode(node)) {
+    return false;
+  }
+
   return node.classList.contains('tooltipster-base') ||
          node.classList.contains('tooltipster-ruler') ||
          node.classList.contains('tooltipstered');
 }
 
 function checkIfDialCongress(node) {
+  if (!checkIfNode(node)) {
+    return false;
+  }
+
   return node.classList.contains('dial-congress') ||
          node.classList.contains('dial-congress-scanned');
 }
