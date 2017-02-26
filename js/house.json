@@ -410,8 +410,12 @@
   },
   {
     "lastName": "Butterfield",
-    "firstName": "George ",
-    "nicknames": "G.K., G. K.",
+    "firstName": "George",
+    "nicknames": [
+      "George Kenneth",
+      "G.K.",
+      "G.\\sK.\\s"
+    ],
     "party": "D",
     "phone": "(202) 225-3101",
     "state": "NC"
@@ -1408,7 +1412,8 @@
     "lastName": "Guthrie",
     "firstName": "Steven",
     "nicknames": [
-      "Brett"
+      "Brett",
+      "S. Brett"
     ],
     "party": "R",
     "phone": "(202) 225-3501",
@@ -2144,6 +2149,13 @@
     "state": "NM"
   },
   {
+    "lastName": "Lujan",
+    "firstName": "Ben",
+    "party": "D",
+    "phone": "(202) 225-6190",
+    "state": "NM"
+  },
+  {
     "lastName": "Lujan Grisham",
     "firstName": "Michelle",
     "party": "D",
@@ -2654,7 +2666,7 @@
   },
   {
     "lastName": "Peterson",
-    "firstName": "Collin C.",
+    "firstName": "Collin",
     "party": "D",
     "phone": "(202) 225-2165",
     "state": "MN"
@@ -2985,7 +2997,10 @@
   {
     "lastName": "Ruppersberger",
     "firstName": "Charles",
-    "nicknames": "Dutch, C. A. Dutch",
+    "nicknames": [
+      "Dutch",
+      "C. A. Dutch"
+    ],
     "party": "D",
     "phone": "(202) 225-3061",
     "state": "MD"
