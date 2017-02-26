@@ -57,7 +57,7 @@ function getLastNamesRegExp() {
   var lastNamesRegExpArr = [];
 
   for (var i = 0; i < congressData.length; i++) {
-    lastNamesRegExpArr.push('(\\b' + congressData[i].lastName + '\\b)');
+    lastNamesRegExpArr.push(congressData[i].lastName);
   }
 
   // Sort by longer names first, to catch the "Blunt" issue. The last name
