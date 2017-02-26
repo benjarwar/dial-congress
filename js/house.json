@@ -468,6 +468,13 @@
     "state": "IN"
   },
   {
+    "lastName": "Carson",
+    "firstName": "Andre",
+    "party": "D",
+    "phone": "(202) 225-4011",
+    "state": "IN"
+  },
+  {
     "lastName": "Carter",
     "firstName": "Earl",
     "nicknames": [
@@ -709,6 +716,13 @@
       "Jose",
       "Lou"
     ],
+    "party": "D",
+    "phone": "(202) 225-2965",
+    "state": "CA"
+  },
+  {
+    "lastName": "Correa",
+    "firstName": "J. Luis",
     "party": "D",
     "phone": "(202) 225-2965",
     "state": "CA"
@@ -1095,6 +1109,7 @@
     "lastName": "Ferguson",
     "firstName": "Anderson",
     "nicknames": [
+      "A. Drew",
       "Drew"
     ],
     "party": "R",
@@ -1401,6 +1416,13 @@
   },
   {
     "lastName": "Gutiérrez",
+    "firstName": "Luis",
+    "party": "D",
+    "phone": "(202) 225-8203",
+    "state": "IL"
+  },
+  {
+    "lastName": "Gutierrez",
     "firstName": "Luis",
     "party": "D",
     "phone": "(202) 225-8203",
@@ -1881,6 +1903,13 @@
   {
     "lastName": "Labrador",
     "firstName": "Raúl",
+    "party": "R",
+    "phone": "(202) 225-6611",
+    "state": "ID"
+  },
+  {
+    "lastName": "Labrador",
+    "firstName": "Raul",
     "party": "R",
     "phone": "(202) 225-6611",
     "state": "ID"
