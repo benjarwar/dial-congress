@@ -47,7 +47,6 @@ function getRegExpString(critter) {
   return regExpString;
 }
 
-
 /**
  * Builds a regex of all congressperson's last names, to provide an initial
  * searching mechanism that is less processor intensive than searching for all
@@ -58,8 +57,15 @@ function getLastNamesRegExp() {
   var lastNamesRegExpArr = [];
 
   for (var i = 0; i < congressData.length; i++) {
-    lastNamesRegExpArr.push('\\b' + congressData[i].lastName + '\\b');
+    lastNamesRegExpArr.push('(\\b' + congressData[i].lastName + '\\b)');
   }
+
+  // Sort by longer names first, to catch the "Blunt" issue. The last name
+  // "Blunt Rochester" was not properly matched, because there's also a last
+  // name of "Blunt" that appeared earlier in the array.
+  lastNamesRegExpArr.sort(function(a, b) {
+    return b.length - a.length;
+  });
 
   return new RegExp(lastNamesRegExpArr.join('|'), 'ig');
 }

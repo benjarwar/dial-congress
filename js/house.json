@@ -704,10 +704,10 @@
   },
   {
     "lastName": "Correa",
-    "firstName": "Jose",
+    "firstName": "Luis",
     "nicknames": [
-      "Lou",
-      "Luis"
+      "Jose",
+      "Lou"
     ],
     "party": "D",
     "phone": "(202) 225-2965",
@@ -1276,7 +1276,10 @@
   },
   {
     "lastName": "Gosar",
-    "firstName": "Paul A.",
+    "firstName": "Paul",
+    "nicknames": [
+      "Paul A"
+    ],
     "party": "R",
     "phone": "(202) 225-2315",
     "state": "AZ"
@@ -1365,6 +1368,9 @@
   {
     "lastName": "Grijalva",
     "firstName": "Raúl",
+    "nicknames": [
+      "Raul"
+    ],
     "party": "D",
     "phone": "(202) 225-2435",
     "state": "AZ"
