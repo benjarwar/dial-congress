@@ -672,6 +672,7 @@
     "lastName": "Conaway",
     "firstName": "Kenneth",
     "nicknames": [
+      "K. Michael",
       "Mike",
       "Michael"
     ],
@@ -1007,7 +1008,10 @@
   },
   {
     "lastName": "Duffy",
-    "firstName": "Sean P.",
+    "firstName": "Sean",
+    "nicknames": [
+      "Sean P."
+    ],
     "party": "R",
     "phone": "(202) 225-3365",
     "state": "WI"
@@ -1200,7 +1204,10 @@
   },
   {
     "lastName": "Fudge",
-    "firstName": "Marcia L.",
+    "firstName": "Marcia",
+    "nicknames": [
+      "Marcia L."
+    ],
     "party": "D",
     "phone": "(202) 225-7032",
     "state": "OH"
@@ -1257,6 +1264,16 @@
     "state": "VA"
   },
   {
+    "lastName": "Garrett",
+    "firstName": "Thomas",
+    "nicknames": [
+      "Tom"
+    ],
+    "party": "R",
+    "phone": "(202) 225-4711",
+    "state": "VA"
+  },
+  {
     "lastName": "Gibbs",
     "firstName": "Robert",
     "nicknames": [
@@ -1284,7 +1301,21 @@
     "state": "TX"
   },
   {
+    "lastName": "Gonzalez",
+    "firstName": "Vicente",
+    "party": "D",
+    "phone": "(202) 225-2531",
+    "state": "TX"
+  },
+  {
     "lastName": "González-Colón",
+    "firstName": "Jenniffer",
+    "party": "R",
+    "phone": "(202) 225-2615",
+    "state": "TX"
+  },
+  {
+    "lastName": "Gonzalez-Colon",
     "firstName": "Jenniffer",
     "party": "R",
     "phone": "(202) 225-2615",
@@ -1705,6 +1736,13 @@
     "party": "R",
     "phone": "(202) 225-4201",
     "state": "TX"
+  },
+  {
+    "lastName": "Jones",
+    "firstName": "Walter",
+    "party": "R",
+    "phone": "(202) 225-3415",
+    "state": "NC"
   },
   {
     "lastName": "Jones Jr.",
@@ -2276,6 +2314,7 @@
     "lastName": "McEachin",
     "firstName": "Aston",
     "nicknames": [
+      "A. Donald",
       "Donald"
     ],
     "party": "D",
@@ -3162,6 +3201,8 @@
     "lastName": "Sensenbrenner",
     "firstName": "Frank",
     "nicknames": [
+      "F. James",
+      "James",
       "Jim"
     ],
     "party": "R",
@@ -3171,6 +3212,9 @@
   {
     "lastName": "Serrano",
     "firstName": "José",
+    "nicknames": [
+      "Jose"
+    ],
     "party": "D",
     "phone": "(202) 225-4361",
     "state": "NY"
