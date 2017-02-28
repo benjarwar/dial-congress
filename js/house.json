@@ -3447,7 +3447,10 @@
   {
     "lastName": "Thompson",
     "firstName": "Glenn",
-    "nicknames": "G. T., G.T.",
+    "nicknames": [
+      "G. T.",
+      "G.T."
+    ],
     "party": "R",
     "phone": "(202) 225-5121",
     "state": "PA"

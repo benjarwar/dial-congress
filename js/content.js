@@ -4,6 +4,7 @@ var congressData;
 var lastNameChunkSize = 20;
 var foundLastNamesQueue = [];
 var pollInterval;
+var innerTextMin = 0;
 
 
 /**
@@ -78,7 +79,9 @@ function getLastNamesRegExp() {
 function scan(node) {
   var nodeIsDialCongressRelated = checkIfDialCongress(node) || checkIfTooltipster(node);
 
-  if (!!node.innerText && !nodeIsDialCongressRelated) {
+  // Only scan nodes with inner text longer than the minimum, and if they're not
+  // Dial Congress related.
+  if (!!node.innerText && node.innerText.length >= innerTextMin && !nodeIsDialCongressRelated) {
     var perfStart = performance.now();
 
     node.classList.add('dial-congress-scanned');
@@ -342,6 +345,40 @@ function watchForDOMChanges() {
 
 
 /**
+ * Determine the shortest length of matchable text from different permutations
+ * of the congress data.
+ */
+function setInnerTextMin() {
+  congressData.forEach(function(critter) {
+    // First and last name plus one space.
+    var firstLastLength = critter.firstName.length + critter.lastName.length + 1;
+
+    // Shortest title ("Sen." or "Rep.") plus last name plus one space.
+    var titleLastLength = critter.lastName.length + 4;
+    var nicknameLengths = [];
+
+    if (critter.nicknames) {
+      critter.nicknames.forEach(function(nickname) {
+        // Nickname plus last name plus one space.
+        nicknameLengths.push(nickname.length + critter.lastName.length + 1);
+      });
+    }
+
+    // Combine the lengths candidates.
+    var lengths = _.union([firstLastLength], [titleLastLength], nicknameLengths);
+
+    // Determine shortest length for this critter.
+    var min = Math.min.apply(null, lengths);
+
+    // If shorter than current innerTextMin, set it.
+    if (!innerTextMin || innerTextMin > min) {
+      innerTextMin = min;
+    }
+  });
+}
+
+
+/**
  * Sends tracking data through the Chrome runtime, consumed in analytics.js.
  * @param {Object} data - Analytics data.
  */
@@ -375,6 +412,9 @@ $(document).ready(function() {
   ).then(function() {
     // Combine Senate and House data.
     congressData = _.union(senateData, houseData);
+
+    // Set the
+    setInnerTextMin();
 
     // Kick off initial scan of the entire DOM.
     scan(document.body);
