@@ -123,9 +123,26 @@ function chunk(lastNames, node) {
  */
 function checkLastNamesQueue() {
   if (!!foundLastNamesQueue.length) {
+    // Remove queued nodes that have since been removed from the DOM.
+    cleanQueue();
+
+    // Mark all permutations in the oldest node, according to last names found.
     markPermutations(foundLastNamesQueue[0].lastNames, foundLastNamesQueue[0].node);
+
+    // Remove oldest from queue.
     foundLastNamesQueue.shift();
   }
+}
+
+
+/**
+ * Removes any queued nodes that are no longer found in the DOM.
+ */
+function cleanQueue() {
+  _.remove(foundLastNamesQueue, function (queuedItem) {
+    // Returns true for removal if node is no longer in the body.
+    return !document.body.contains(queuedItem.node);
+  });
 }
 
 
