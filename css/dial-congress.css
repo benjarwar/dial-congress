@@ -4,6 +4,13 @@
   cursor: pointer;
 }
 
+.dial-congress-tooltipster-eyebrow {
+  color: #666;
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
 .tooltipster-sidetip.tooltipster-noir.tooltipster-noir-customized .tooltipster-content {
   font-family: Verdana, Arial, sans-serif;
 }

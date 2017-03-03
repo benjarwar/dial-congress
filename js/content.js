@@ -1,4 +1,4 @@
-var debug = false;
+var debug = true;
 var senateData;
 var houseData;
 var congressData;
@@ -250,9 +250,15 @@ function buildTooltip($el, critter) {
     text: $el.text()
   });
 
-  $el.attr('title', critter.party + '/' + critter.state + ': ' + critter.phone);
+  $el.attr('title', '{ "house": "' + critter.house + '", "critterData": "' + critter.party + '/' + critter.state + ': ' + critter.phone + '"}');
 
   $el.tooltipster({
+    functionFormat: function(instance, helper, content) {
+      var content = instance.content();
+      var parsedContent = JSON.parse(content);
+
+      return getTooltipContent(parsedContent.critterData, parsedContent.house);
+    },
     functionReady: function() {
       track({
         eventName: 'tooltip-hover',
@@ -265,6 +271,17 @@ function buildTooltip($el, critter) {
   });
 
   $el.tooltipster('open');
+}
+
+
+function getTooltipContent(critterData, house) {
+  var contentString = '<div class="dial-congress-tooltipster-content">';
+  contentString += '<span class="dial-congress-tooltipster-eyebrow">';
+  contentString += house + '</span>';
+  contentString += '<span class="dial-congress-tooltipster-critter">';
+  contentString += critterData + '</span></div>';
+
+  return $(contentString)[0];
 }
 
 
