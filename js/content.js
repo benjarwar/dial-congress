@@ -1,3 +1,4 @@
+var debug = false;
 var senateData;
 var houseData;
 var congressData;
@@ -97,7 +98,7 @@ function scan(node) {
 
     var perfEnd = performance.now();
     var perfTime = Math.round(perfEnd - perfStart) / 1000;
-    console.log('Dial Congress last names scan of ' + node + ': ' + perfTime + ' seconds');
+    logger('Dial Congress last names scan of ' + node + ': ' + perfTime + ' seconds');
   }
 }
 
@@ -181,8 +182,8 @@ function markPermutations(lastNames, node) {
       done: function(x) {
         var perfEnd = performance.now();
         var perfTime = Math.round(perfEnd - perfStart) / 1000;
-        console.log('Dial Congress marked chunk in: ' + perfTime + ' seconds');
-        console.log('Congress critters found: ' + x);
+        logger('Dial Congress marked chunk in: ' + perfTime + ' seconds');
+        logger('Congress critters found: ' + x);
       }
     });
 
@@ -418,12 +419,23 @@ function poll(timestamp) {
 
 
 /**
+ * Adds a conditional logic hook to only log if debug is true.
+ * @param {string} message The message to log.
+ */
+function logger(message) {
+  if (debug) {
+    console.log(message);
+  }
+}
+
+
+/**
  * Sends tracking data through the Chrome runtime, consumed in analytics.js.
  * @param {Object} data - Analytics data.
  */
 function track(data) {
   chrome.runtime.sendMessage(data, function(response) {
-    // console.log('message received', response);
+    // logger('message received', response);
   });
 }
 
