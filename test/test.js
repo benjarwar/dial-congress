@@ -38,6 +38,11 @@ describe('getRegExpString', function() {
     expect('Bernard B. Sanders'.match(re).length).to.equal(1);
   });
 
+  it('matches "last name, first name" format', function() {
+    expect('Sanders, Bernard'.match(re).length).to.equal(1);
+    expect('Sanders, Bernie'.match(re).length).to.equal(1);
+  });
+
   it('matches varius nickname permutations', function() {
     expect('Bernie Sanders'.match(re).length).to.equal(1);
     expect('Bernie Birdie Sanders'.match(re).length).to.equal(1);
