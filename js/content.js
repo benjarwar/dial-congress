@@ -1,4 +1,4 @@
-var debug = true;
+var debug = false;
 var senateData;
 var houseData;
 var congressData;
