@@ -3,8 +3,10 @@ var houseData;
 var congressData;
 var lastNameChunkSize = 20;
 var foundLastNamesQueue = [];
-var pollInterval;
 var innerTextMin = 0;
+var pollInterval = 250;
+var pollCount = -1;
+var pollStart = null;
 
 
 /**
@@ -122,10 +124,10 @@ function chunk(lastNames, node) {
  * the oldest to be fully marked according to all name permutations.
  */
 function checkLastNamesQueue() {
-  if (!!foundLastNamesQueue.length) {
-    // Remove queued nodes that have since been removed from the DOM.
-    cleanQueue();
+  // Remove queued nodes that have since been removed from the DOM.
+  cleanQueue();
 
+  if (!!foundLastNamesQueue.length) {
     // Mark all permutations in the oldest node, according to last names found.
     markPermutations(foundLastNamesQueue[0].lastNames, foundLastNamesQueue[0].node);
 
@@ -396,6 +398,26 @@ function setInnerTextMin() {
 
 
 /**
+ * Throttles requestAnimationFrame for periodic checking of the lastNamesQueue.
+ * @param {number} timestamp Timestamp for the animation frame.
+ */
+function poll(timestamp) {
+  if (pollStart === null) {
+    pollStart = timestamp;
+  }
+
+  var segment = Math.floor((timestamp - pollStart) / pollInterval);
+
+  if (segment > pollCount) {
+    pollCount = segment;
+    checkLastNamesQueue();
+  }
+
+  requestAnimationFrame(poll);
+}
+
+
+/**
  * Sends tracking data through the Chrome runtime, consumed in analytics.js.
  * @param {Object} data - Analytics data.
  */
@@ -439,7 +461,7 @@ $(document).ready(function() {
     // Keep an eye out for changes to the DOM.
     watchForDOMChanges();
 
-    // Poll the queue of found last names for marking.
-    pollInterval = setInterval(checkLastNamesQueue, 500);
+    // Use a throttled requestAnimationFrame to check the last names queue.
+    requestAnimationFrame(poll);
   });
 });
