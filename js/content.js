@@ -1,4 +1,4 @@
-var debug = false;
+var debug = true;
 var senateData;
 var houseData;
 var congressData;
@@ -250,9 +250,17 @@ function buildTooltip($el, critter) {
     text: $el.text()
   });
 
-  $el.attr('title', critter.party + '/' + critter.state + ': ' + critter.phone);
+  // Tooltipster will not instantiate without a title attribute. Set the value
+  // to the critter data.
+  $el.attr('title', JSON.stringify(critter));
 
+  // Instantiate the tooltip.
   $el.tooltipster({
+    functionFormat: function(instance, helper, content) {
+      // Get and parse the critter data.
+      var critter = JSON.parse(instance.content());
+      return getTooltipContent(critter);
+    },
     functionReady: function() {
       track({
         eventName: 'tooltip-hover',
@@ -265,6 +273,38 @@ function buildTooltip($el, critter) {
   });
 
   $el.tooltipster('open');
+}
+
+
+/**
+ * Builds the tooltipster content from critter data.
+ * @param {Object} critter - Contains data on a congressperson.
+ * @return {Object} A jQuery element instance containing the tooltip content.
+ */
+function getTooltipContent(critter) {
+  var partyClass = 'dial-congress-tooltipster-party-ind';
+
+  switch (critter.party) {
+    case 'D':
+      partyClass = 'dial-congress-tooltipster-party-dem';
+      break;
+    case 'R':
+      partyClass = 'dial-congress-tooltipster-party-rep';
+      break;
+  }
+
+  var contentString = '<div class="dial-congress-tooltipster-content">';
+  contentString += '<div class="dial-congress-tooltipster-head">';
+  contentString += '<span class="dial-congress-tooltipster-affiliation">';
+  contentString += '<span class="' + partyClass + '">' + critter.party;
+  contentString += '</span><span class="dial-congress-tooltipster-divider">';
+  contentString += ' / </span>' + critter.state + '</span>';
+  contentString += '<span class="dial-congress-tooltipster-house">';
+  contentString += critter.house + '</span></div>';
+  contentString += '<div class="dial-congress-tooltipster-body">';
+  contentString += critter.phone + '</div></div>';
+
+  return $(contentString);
 }
 
 
