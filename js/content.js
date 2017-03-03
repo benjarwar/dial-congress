@@ -250,14 +250,16 @@ function buildTooltip($el, critter) {
     text: $el.text()
   });
 
-  $el.attr('title', '{ "house": "' + critter.house + '", "critterData": "' + critter.party + '/' + critter.state + ': ' + critter.phone + '"}');
+  // Tooltipster will not instantiate without a title attribute. Set the value
+  // to the critter data.
+  $el.attr('title', JSON.stringify(critter));
 
+  // Instantiate the tooltip.
   $el.tooltipster({
     functionFormat: function(instance, helper, content) {
-      var content = instance.content();
-      var parsedContent = JSON.parse(content);
-
-      return getTooltipContent(parsedContent.critterData, parsedContent.house);
+      // Get and parse the critter data.
+      var critter = JSON.parse(instance.content());
+      return getTooltipContent(critter);
     },
     functionReady: function() {
       track({
@@ -274,14 +276,35 @@ function buildTooltip($el, critter) {
 }
 
 
-function getTooltipContent(critterData, house) {
-  var contentString = '<div class="dial-congress-tooltipster-content">';
-  contentString += '<span class="dial-congress-tooltipster-eyebrow">';
-  contentString += house + '</span>';
-  contentString += '<span class="dial-congress-tooltipster-critter">';
-  contentString += critterData + '</span></div>';
+/**
+ * Builds the tooltipster content from critter data.
+ * @param {Object} critter - Contains data on a congressperson.
+ * @return {Object} A jQuery element instance containing the tooltip content.
+ */
+function getTooltipContent(critter) {
+  var partyClass = 'dial-congress-tooltipster-party-ind';
 
-  return $(contentString)[0];
+  switch (critter.party) {
+    case 'D':
+      partyClass = 'dial-congress-tooltipster-party-dem';
+      break;
+    case 'R':
+      partyClass = 'dial-congress-tooltipster-party-rep';
+      break;
+  }
+
+  var contentString = '<div class="dial-congress-tooltipster-content">';
+  contentString += '<div class="dial-congress-tooltipster-head">';
+  contentString += '<span class="dial-congress-tooltipster-affiliation">';
+  contentString += '<span class="' + partyClass + '">' + critter.party;
+  contentString += '</span><span class="dial-congress-tooltipster-divider">';
+  contentString += ' / </span>' + critter.state + '</span>';
+  contentString += '<span class="dial-congress-tooltipster-house">';
+  contentString += critter.house + '</span></div>';
+  contentString += '<div class="dial-congress-tooltipster-body">';
+  contentString += critter.phone + '</div></div>';
+
+  return $(contentString);
 }
 
 

@@ -4,11 +4,48 @@
   cursor: pointer;
 }
 
-.dial-congress-tooltipster-eyebrow {
+.dial-congress-tooltipster-head:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.dial-congress-tooltipster-head {
   color: #666;
-  display: block;
   font-size: 11px;
+  padding: 2px 2px 0;
   text-transform: uppercase;
+}
+
+.dial-congress-tooltipster-affiliation,
+.dial-congress-tooltipster-house {
+  display: block;
+}
+
+.dial-congress-tooltipster-house {
+  float: left;
+}
+
+.dial-congress-tooltipster-affiliation {
+  float: right;
+}
+
+.dial-congress-tooltipster-party-dem {
+  color: #3366ff;
+}
+
+.dial-congress-tooltipster-party-rep {
+  color: #ff4e41;
+}
+
+.dial-congress-tooltipster-divider {
+  color: #ccc;
+}
+
+.dial-congress-tooltipster-body {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 2px 0 5px;
 }
 
 .tooltipster-sidetip.tooltipster-noir.tooltipster-noir-customized .tooltipster-content {
