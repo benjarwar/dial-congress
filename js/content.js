@@ -1,5 +1,5 @@
 var debug = false;
-var active;
+var isActive;
 var senateData;
 var houseData;
 var congressData;
@@ -453,11 +453,8 @@ function poll(timestamp) {
     // We've hit a new segment.
     pollCount = segment;
 
-    // Set the extension active state.
-    setActiveState();
-
-    // If active, process any queued last names.
-    if (active) {
+    // If extension is active, process any queued last names.
+    if (isActive) {
       checkLastNamesQueue();
     }
   }
@@ -490,35 +487,58 @@ function track(data) {
 
 
 /**
- * Sends a runtime message requesting the extension's active state. State is
- * managed and returned in toggle.js.
+ * Sets the local active state for this tab/instance of the extension. Overall
+ * state is managed in the background script toggle.js.
+ * @param {boolean} active Whether or not the extension is active.
  */
-function setActiveState() {
+function setActiveState(active) {
+  if (active) {
+    // If state has changed to active, set internal active state to true.
+    isActive = true;
+
+    // Remove previously set scanned class from the body, to ensure that
+    // any DOM elements added while extension was inactive are scanned.
+    document.body.classList.remove('dial-congress-scanned');
+
+    // Scan the DOM.
+    scan(document.body);
+
+    // Watch for DOM changes.
+    observer.observe(document.body, observerConfig);
+  } else {
+    // If state has changed to inactive, set internal active state to false.
+    isActive = false;
+
+    // Stop watching for DOM changes.
+    observer.disconnect();
+
+    // Remove all previously set Marks. Tooltipsters are bound to Marks, so
+    // this also removes mouseenter listeners.
+    var bodyContext = new Mark(document.body);
+    bodyContext.unmark();
+  }
+}
+
+
+/**
+ * Get the extension active state from the toggle.js background script.
+ */
+function getActiveState() {
   chrome.runtime.sendMessage({ eventName: 'get-active-state' }, function(response) {
-    if (!active && response) {
-      // If state has changed to active, set internal active state to true.
-      active = true;
+    setActiveState(response);
+  });
+}
 
-      // Remove previously set scanned class from the body, to ensure that
-      // any DOM elements added while extension was inactive are scanned.
-      document.body.classList.remove('dial-congress-scanned');
 
-      // Scan the DOM.
-      scan(document.body);
-
-      // Watch for DOM changes.
-      observer.observe(document.body, observerConfig);
-    } else if (active && !response) {
-      // If state has changed to inactive, set internal active state to false.
-      active = false;
-
-      // Stop watching for DOM changes.
-      observer.disconnect();
-
-      // Remove all previously set Marks. Tooltipsters are bound to Marks, so
-      // this also removes mouseenter listeners.
-      var bodyContext = new Mark(document.body);
-      bodyContext.unmark();
+/**
+ * Initialize chrome runtime listeners.
+ */
+function initListeners() {
+  chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    switch(request.eventName) {
+      case 'active-state':
+        setActiveState(request.active);
+        break;
     }
   });
 }
@@ -561,9 +581,11 @@ function init() {
   // Initialize an observer to keep an eye out for changes to the DOM.
   observer = new MutationObserver(handleDOMMutations);
 
-  // Set initial extension active state, which in turn runs an initial scan if
-  // the extension is active.
-  setActiveState();
+  // Initialize chrome runtime listeners.
+  initListeners();
+
+  // Get initial extension active state.
+  getActiveState();
 
   // Use a throttled requestAnimationFrame to check the last names queue and
   // the active state of the extension.

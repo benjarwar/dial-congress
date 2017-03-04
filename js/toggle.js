@@ -24,6 +24,18 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 chrome.browserAction.onClicked.addListener(function (e) {
   active = !active;
 
+  // Send message with active state to all tabs.
+  chrome.tabs.query({}, function(tabs) {
+    var data = {
+      eventName: 'active-state',
+      active: active
+    };
+
+    for (var i=0; i < tabs.length; i++) {
+      chrome.tabs.sendMessage(tabs[i].id, data);
+    }
+  });
+
   // Set the taskbar icon.
   var iconData = active ? icons.active : icons.inactive;
   chrome.browserAction.setIcon({ path: iconData });
