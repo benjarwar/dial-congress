@@ -1,4 +1,5 @@
 var debug = false;
+var active;
 var senateData;
 var houseData;
 var congressData;
@@ -8,6 +9,14 @@ var innerTextMin = 0;
 var pollInterval = 250;
 var pollCount = -1;
 var pollStart = null;
+
+var observer;
+var observerConfig = {
+  attributes: true,
+  characterData: true,
+  childList: true,
+  subtree: true
+};
 
 
 /**
@@ -351,56 +360,45 @@ function checkIfDialCongress(node) {
 
 
 /**
- * Watches DOM for changes. Sends mutated nodes for scanning when applicable.
+ * Handles observed mutations to the DOM.
+ * @param {Array<Object>} mutations The mutations registered by the observer.
  */
-function watchForDOMChanges() {
-  var observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      if (mutation.addedNodes.length) {
-        // Check nodes that have been added to the DOM.
-        mutation.addedNodes.forEach(function(node) {
-          if (node.nodeType == 1) {
-            // Node is an Element. Scan it.
-            scan(node);
-          } else if (node.nodeType == 3
-                  && node.parentNode
-                  && !checkIfDialCongress(node.previousElementSibling)) {
-            // Node is Text. If not already wrapped by a Dial Congress span,
-            // scan its parentNode.
-            scan(node.parentNode);
-          }
-        })
-      } else if (mutation.target && !!mutation.target.innerText) {
-        if ($(mutation.target).is(':visible')) {
-          // Check nodes that had their attributes or characterData changed.
-          var tooltipsterRemoved = false;
+function handleDOMMutations(mutations) {
+  mutations.forEach(function(mutation) {
+    if (mutation.addedNodes.length) {
+      // Check nodes that have been added to the DOM.
+      mutation.addedNodes.forEach(function(node) {
+        if (node.nodeType == 1) {
+          // Node is an Element. Scan it.
+          scan(node);
+        } else if (node.nodeType == 3
+                && node.parentNode
+                && !checkIfDialCongress(node.previousElementSibling)) {
+          // Node is Text. If not already wrapped by a Dial Congress span,
+          // scan its parentNode.
+          scan(node.parentNode);
+        }
+      })
+    } else if (mutation.target && !!mutation.target.innerText) {
+      if ($(mutation.target).is(':visible')) {
+        // Check nodes that had their attributes or characterData changed.
+        var tooltipsterRemoved = false;
 
-          // Check if a tooltipster was been removed. We don't want to scan if
-          // the mutation was triggered by us.
-          for(var i = 0; i < mutation.removedNodes.length; i++) {
-            if (checkIfTooltipster(mutation.removedNodes[i])) {
-              tooltipsterRemoved = true;
-              break;
-            }
-          }
-
-          if (!tooltipsterRemoved) {
-            scan(mutation.target);
+        // Check if a tooltipster was been removed. We don't want to scan if
+        // the mutation was triggered by us.
+        for(var i = 0; i < mutation.removedNodes.length; i++) {
+          if (checkIfTooltipster(mutation.removedNodes[i])) {
+            tooltipsterRemoved = true;
+            break;
           }
         }
+
+        if (!tooltipsterRemoved) {
+          scan(mutation.target);
+        }
       }
-    });
+    }
   });
-
-  var observerConfig = {
-    attributes: true,
-    characterData: true,
-    childList: true,
-    subtree: true
-  };
-
-  var targetNode = document.body;
-  observer.observe(targetNode, observerConfig);
 }
 
 
@@ -447,13 +445,24 @@ function poll(timestamp) {
     pollStart = timestamp;
   }
 
+  // Set the segment, the number of times that the pollInterval has been
+  // exceeded since the start of polling.
   var segment = Math.floor((timestamp - pollStart) / pollInterval);
 
   if (segment > pollCount) {
+    // We've hit a new segment.
     pollCount = segment;
-    checkLastNamesQueue();
+
+    // Set the extension active state.
+    setActiveState();
+
+    // If active, process any queued last names.
+    if (active) {
+      checkLastNamesQueue();
+    }
   }
 
+  // Recursively poll.
   requestAnimationFrame(poll);
 }
 
@@ -481,11 +490,46 @@ function track(data) {
 
 
 /**
- * On DOM ready.
+ * Sends a runtime message requesting the extension's active state. State is
+ * managed and returned in toggle.js.
  */
-$(document).ready(function() {
+function setActiveState() {
+  chrome.runtime.sendMessage({ eventName: 'get-active-state' }, function(response) {
+    if (!active && response) {
+      // If state has changed to active, set internal active state to true.
+      active = true;
+
+      // Remove previously set scanned class from the body, to ensure that
+      // any DOM elements added while extension was inactive are scanned.
+      document.body.classList.remove('dial-congress-scanned');
+
+      // Scan the DOM.
+      scan(document.body);
+
+      // Watch for DOM changes.
+      observer.observe(document.body, observerConfig);
+    } else if (active && !response) {
+      // If state has changed to inactive, set internal active state to false.
+      active = false;
+
+      // Stop watching for DOM changes.
+      observer.disconnect();
+
+      // Remove all previously set Marks. Tooltipsters are bound to Marks, so
+      // this also removes mouseenter listeners.
+      var bodyContext = new Mark(document.body);
+      bodyContext.unmark();
+    }
+  });
+}
+
+
+/**
+ * Gets the Senate and House JSON data.
+ */
+function getData() {
   $.when(
-    // Gather Senate data.
+    // Gather and parse Senate data.
     $.get(chrome.extension.getURL('js/senate.json'), function(data) {
       senateData = JSON.parse(data);
       senateData.forEach(function(senator) {
@@ -493,27 +537,41 @@ $(document).ready(function() {
       });
     }),
 
-    // Gather House of Representatives data.
+    // Gather and parse House of Representatives data.
     $.get(chrome.extension.getURL('js/house.json'), function(data) {
       houseData = JSON.parse(data);
       houseData.forEach(function(rep) {
         rep.house = 'house';
       });
     })
-  ).then(function() {
-    // Combine Senate and House data.
-    congressData = _.union(senateData, houseData);
+  ).then(init);
+}
 
-    // Set the
-    setInnerTextMin();
 
-    // Kick off initial scan of the entire DOM.
-    scan(document.body);
+/**
+ * Initialize Dial Congress.
+ */
+function init() {
+  // Combine Senate and House data.
+  congressData = _.union(senateData, houseData);
 
-    // Keep an eye out for changes to the DOM.
-    watchForDOMChanges();
+  // Set the
+  setInnerTextMin();
 
-    // Use a throttled requestAnimationFrame to check the last names queue.
-    requestAnimationFrame(poll);
-  });
-});
+  // Initialize an observer to keep an eye out for changes to the DOM.
+  observer = new MutationObserver(handleDOMMutations);
+
+  // Set initial extension active state, which in turn runs an initial scan if
+  // the extension is active.
+  setActiveState();
+
+  // Use a throttled requestAnimationFrame to check the last names queue and
+  // the active state of the extension.
+  requestAnimationFrame(poll);
+}
+
+
+/**
+ * On DOM ready.
+ */
+$(document).ready(getData);
