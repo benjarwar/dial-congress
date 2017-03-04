@@ -1,9 +1,17 @@
 var active = true;
+var processing = true;
+var processingInterval;
+var processingFrame = 0;
+
 
 var icons = {
   active: {
     '19': 'img/icon-19.png',
     '38': 'img/icon-38.png'
+  },
+  processing: {
+    '19': 'img/icon-processing-19.png',
+    '38': 'img/icon-processing-38.png'
   },
   inactive: {
     '19': 'img/icon-inactive-19.png',
@@ -11,14 +19,20 @@ var icons = {
   }
 }
 
+
 // Listen for state request.
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   switch(request.eventName) {
     case 'get-active-state':
       sendResponse(active);
       break;
+    case 'set-processing-state':
+      processing = request.processing;
+      setProcessingIcon();
+      break;
   }
 });
+
 
 // Toggle active state.
 chrome.browserAction.onClicked.addListener(function (e) {
@@ -36,7 +50,76 @@ chrome.browserAction.onClicked.addListener(function (e) {
     }
   });
 
-  // Set the taskbar icon.
-  var iconData = active ? icons.active : icons.inactive;
-  chrome.browserAction.setIcon({ path: iconData });
+  // Set icon.
+  setActiveIcon();
 });
+
+
+/**
+ * Sets the icon to active or inactive state.
+ */
+function setActiveIcon() {
+  // Set icon to active or inactive state.
+  var iconData = active ? icons.active : icons.inactive;
+  setIcon(iconData);
+}
+
+
+/**
+ * Sets the icon to processing or active/inactive state.
+ */
+function setProcessingIcon() {
+  if (processing && !processingInterval) {
+    // If we're in a processing state, start animation the icon.
+    processingInterval = setInterval(processAnimation, 100);
+  } else if (!processing) {
+    // Otherwise, clear the interval.
+    clearProcessingInterval();
+
+    // Set icon to active/inactive state.
+    setActiveIcon();
+  }
+}
+
+
+/**
+ * Animates the icon by alternating between processing and active icons.
+ */
+function processAnimation() {
+  // Only animate if extension is active.
+  if (active) {
+    // Get icon data.
+    var iconData = processingFrame ? icons.processing : icons.active;
+
+    // Set icon data.
+    setIcon(iconData);
+
+    // Reverse frame for next iteration.
+    processingFrame = processingFrame ? 0 : 1;
+  } else {
+    // Otherwise, clear the interval.
+    clearProcessingInterval();
+
+    // And set the icon to inactive state.
+    setActiveIcon();
+  }
+}
+
+
+/**
+ * Clears the processing animation interval.
+ */
+function clearProcessingInterval() {
+  clearInterval(processingInterval);
+  processingInterval = null;
+}
+
+
+/**
+ * Sets the icon paths.
+ * @param {Object} iconData An object containing icon sizes and paths.
+ */
+function setIcon(iconData) {
+  chrome.browserAction.setIcon({ path: iconData });
+}
+

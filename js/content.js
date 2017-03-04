@@ -9,6 +9,7 @@ var innerTextMin = 0;
 var pollInterval = 250;
 var pollCount = -1;
 var pollStart = null;
+var debouncedProcessingStop;
 
 var observer;
 var observerConfig = {
@@ -96,14 +97,23 @@ function scan(node) {
   if (!!node.innerText && node.innerText.length >= innerTextMin && !nodeIsDialCongressRelated) {
     var perfStart = performance.now();
 
+    // Set processing state.
+    setProcessingState(true);
+
+    // Mark node as having been scanned.
     node.classList.add('dial-congress-scanned');
 
+    // Check for last names in the node.
     var lastNamesRegExp = getLastNamesRegExp();
     var lastNames = node.innerText.match(lastNamesRegExp);
 
+    // If last names are found, chunk/queue them for further MarkJS processing.
     if (lastNames) {
       chunk(_.uniq(lastNames), node);
     }
+
+    // Disable processing state.
+    debouncedProcessingStop();
 
     var perfEnd = performance.now();
     var perfTime = Math.round(perfEnd - perfStart) / 1000;
@@ -169,6 +179,8 @@ function markPermutations(lastNames, node) {
   var markContext;
   var perfStart = performance.now();
 
+  setProcessingState(true);
+
   // For each found last name, build a full RegExp to find all permutations.
   for (var i = 0; i < congressData.length; i++) {
     if (lastNames.indexOf(congressData[i].lastName) > -1) {
@@ -177,7 +189,11 @@ function markPermutations(lastNames, node) {
     }
   }
 
+  debouncedProcessingStop();
+
   if (lastNamesRegExpArr.length) {
+    setProcessingState(true);
+
     // Create a single, massive RegExp for all found last names in the node.
     lastNamesRegExp = new RegExp(lastNamesRegExpArr.join('|'), 'ig');
 
@@ -198,6 +214,8 @@ function markPermutations(lastNames, node) {
 
     // Set hover events for future tooltipping.
     bindHoverEvents();
+
+    debouncedProcessingStop();
   }
 }
 
@@ -364,6 +382,8 @@ function checkIfDialCongress(node) {
  * @param {Array<Object>} mutations The mutations registered by the observer.
  */
 function handleDOMMutations(mutations) {
+  setProcessingState(true);
+
   mutations.forEach(function(mutation) {
     if (mutation.addedNodes.length) {
       // Check nodes that have been added to the DOM.
@@ -399,6 +419,8 @@ function handleDOMMutations(mutations) {
       }
     }
   });
+
+  debouncedProcessingStop();
 }
 
 
@@ -516,16 +538,31 @@ function setActiveState(active) {
     // this also removes mouseenter listeners.
     var bodyContext = new Mark(document.body);
     bodyContext.unmark();
+
+    // Clear the queue
+    foundLastNamesQueue = [];
   }
 }
 
 
 /**
- * Get the extension active state from the toggle.js background script.
+ * Gets the extension active state from the toggle.js background script.
  */
 function getActiveState() {
   chrome.runtime.sendMessage({ eventName: 'get-active-state' }, function(response) {
     setActiveState(response);
+  });
+}
+
+
+/**
+ * Sets the processing state of the extension.
+ * @param {Boolean} isProcessing Whether or not the extension is processing.
+ */
+function setProcessingState(isProcessing) {
+  chrome.runtime.sendMessage({
+    eventName: 'set-processing-state',
+    processing: isProcessing
   });
 }
 
@@ -575,8 +612,13 @@ function init() {
   // Combine Senate and House data.
   congressData = _.union(senateData, houseData);
 
-  // Set the
+  // Set the minimum text threshold for scanning a node.
   setInnerTextMin();
+
+  // Create a debouncer for turning off the processing state.
+  debouncedProcessingStop = _.debounce(function() {
+    setProcessingState(false);
+  }, 500);
 
   // Initialize an observer to keep an eye out for changes to the DOM.
   observer = new MutationObserver(handleDOMMutations);
