@@ -66,8 +66,6 @@ function getRegExpString(critter) {
     }
   }
 
-  console.log(lastFirst);
-
   regExpString += title + '?' + '(' + firstLast + nicknames + ')|' + titleLast + '|' + lastFirst;
 
   return regExpString;
