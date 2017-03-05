@@ -1,4 +1,5 @@
 var debug = false;
+var isActive;
 var senateData;
 var houseData;
 var congressData;
@@ -8,6 +9,15 @@ var innerTextMin = 0;
 var pollInterval = 250;
 var pollCount = -1;
 var pollStart = null;
+var debouncedProcessingStop;
+
+var observer;
+var observerConfig = {
+  attributes: true,
+  characterData: true,
+  childList: true,
+  subtree: true
+};
 
 
 /**
@@ -87,14 +97,23 @@ function scan(node) {
   if (!!node.innerText && node.innerText.length >= innerTextMin && !nodeIsDialCongressRelated) {
     var perfStart = performance.now();
 
+    // Set processing state.
+    setProcessingState(true);
+
+    // Mark node as having been scanned.
     node.classList.add('dial-congress-scanned');
 
+    // Check for last names in the node.
     var lastNamesRegExp = getLastNamesRegExp();
     var lastNames = node.innerText.match(lastNamesRegExp);
 
+    // If last names are found, chunk/queue them for further MarkJS processing.
     if (lastNames) {
       chunk(_.uniq(lastNames), node);
     }
+
+    // Disable processing state.
+    debouncedProcessingStop();
 
     var perfEnd = performance.now();
     var perfTime = Math.round(perfEnd - perfStart) / 1000;
@@ -160,6 +179,8 @@ function markPermutations(lastNames, node) {
   var markContext;
   var perfStart = performance.now();
 
+  setProcessingState(true);
+
   // For each found last name, build a full RegExp to find all permutations.
   for (var i = 0; i < congressData.length; i++) {
     if (lastNames.indexOf(congressData[i].lastName) > -1) {
@@ -168,7 +189,11 @@ function markPermutations(lastNames, node) {
     }
   }
 
+  debouncedProcessingStop();
+
   if (lastNamesRegExpArr.length) {
+    setProcessingState(true);
+
     // Create a single, massive RegExp for all found last names in the node.
     lastNamesRegExp = new RegExp(lastNamesRegExpArr.join('|'), 'ig');
 
@@ -189,6 +214,8 @@ function markPermutations(lastNames, node) {
 
     // Set hover events for future tooltipping.
     bindHoverEvents();
+
+    debouncedProcessingStop();
   }
 }
 
@@ -351,56 +378,49 @@ function checkIfDialCongress(node) {
 
 
 /**
- * Watches DOM for changes. Sends mutated nodes for scanning when applicable.
+ * Handles observed mutations to the DOM.
+ * @param {Array<Object>} mutations The mutations registered by the observer.
  */
-function watchForDOMChanges() {
-  var observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      if (mutation.addedNodes.length) {
-        // Check nodes that have been added to the DOM.
-        mutation.addedNodes.forEach(function(node) {
-          if (node.nodeType == 1) {
-            // Node is an Element. Scan it.
-            scan(node);
-          } else if (node.nodeType == 3
-                  && node.parentNode
-                  && !checkIfDialCongress(node.previousElementSibling)) {
-            // Node is Text. If not already wrapped by a Dial Congress span,
-            // scan its parentNode.
-            scan(node.parentNode);
-          }
-        })
-      } else if (mutation.target && !!mutation.target.innerText) {
-        if ($(mutation.target).is(':visible')) {
-          // Check nodes that had their attributes or characterData changed.
-          var tooltipsterRemoved = false;
+function handleDOMMutations(mutations) {
+  setProcessingState(true);
 
-          // Check if a tooltipster was been removed. We don't want to scan if
-          // the mutation was triggered by us.
-          for(var i = 0; i < mutation.removedNodes.length; i++) {
-            if (checkIfTooltipster(mutation.removedNodes[i])) {
-              tooltipsterRemoved = true;
-              break;
-            }
-          }
+  mutations.forEach(function(mutation) {
+    if (mutation.addedNodes.length) {
+      // Check nodes that have been added to the DOM.
+      mutation.addedNodes.forEach(function(node) {
+        if (node.nodeType == 1) {
+          // Node is an Element. Scan it.
+          scan(node);
+        } else if (node.nodeType == 3
+                && node.parentNode
+                && !checkIfDialCongress(node.previousElementSibling)) {
+          // Node is Text. If not already wrapped by a Dial Congress span,
+          // scan its parentNode.
+          scan(node.parentNode);
+        }
+      })
+    } else if (mutation.target && !!mutation.target.innerText) {
+      if ($(mutation.target).is(':visible')) {
+        // Check nodes that had their attributes or characterData changed.
+        var tooltipsterRemoved = false;
 
-          if (!tooltipsterRemoved) {
-            scan(mutation.target);
+        // Check if a tooltipster was been removed. We don't want to scan if
+        // the mutation was triggered by us.
+        for(var i = 0; i < mutation.removedNodes.length; i++) {
+          if (checkIfTooltipster(mutation.removedNodes[i])) {
+            tooltipsterRemoved = true;
+            break;
           }
         }
+
+        if (!tooltipsterRemoved) {
+          scan(mutation.target);
+        }
       }
-    });
+    }
   });
 
-  var observerConfig = {
-    attributes: true,
-    characterData: true,
-    childList: true,
-    subtree: true
-  };
-
-  var targetNode = document.body;
-  observer.observe(targetNode, observerConfig);
+  debouncedProcessingStop();
 }
 
 
@@ -447,13 +467,21 @@ function poll(timestamp) {
     pollStart = timestamp;
   }
 
+  // Set the segment, the number of times that the pollInterval has been
+  // exceeded since the start of polling.
   var segment = Math.floor((timestamp - pollStart) / pollInterval);
 
   if (segment > pollCount) {
+    // We've hit a new segment.
     pollCount = segment;
-    checkLastNamesQueue();
+
+    // If extension is active, process any queued last names.
+    if (isActive) {
+      checkLastNamesQueue();
+    }
   }
 
+  // Recursively poll.
   requestAnimationFrame(poll);
 }
 
@@ -481,11 +509,84 @@ function track(data) {
 
 
 /**
- * On DOM ready.
+ * Sets the local active state for this tab/instance of the extension. Overall
+ * state is managed in the background script toggle.js.
+ * @param {boolean} active Whether or not the extension is active.
  */
-$(document).ready(function() {
+function setActiveState(active) {
+  if (active) {
+    // If state has changed to active, set internal active state to true.
+    isActive = true;
+
+    // Remove previously set scanned class from the body, to ensure that
+    // any DOM elements added while extension was inactive are scanned.
+    document.body.classList.remove('dial-congress-scanned');
+
+    // Scan the DOM.
+    scan(document.body);
+
+    // Watch for DOM changes.
+    observer.observe(document.body, observerConfig);
+  } else {
+    // If state has changed to inactive, set internal active state to false.
+    isActive = false;
+
+    // Stop watching for DOM changes.
+    observer.disconnect();
+
+    // Remove all previously set Marks. Tooltipsters are bound to Marks, so
+    // this also removes mouseenter listeners.
+    var bodyContext = new Mark(document.body);
+    bodyContext.unmark();
+
+    // Clear the queue
+    foundLastNamesQueue = [];
+  }
+}
+
+
+/**
+ * Gets the extension active state from the toggle.js background script.
+ */
+function getActiveState() {
+  chrome.runtime.sendMessage({ eventName: 'get-active-state' }, function(response) {
+    setActiveState(response);
+  });
+}
+
+
+/**
+ * Sets the processing state of the extension.
+ * @param {Boolean} isProcessing Whether or not the extension is processing.
+ */
+function setProcessingState(isProcessing) {
+  chrome.runtime.sendMessage({
+    eventName: 'set-processing-state',
+    processing: isProcessing
+  });
+}
+
+
+/**
+ * Initialize chrome runtime listeners.
+ */
+function initListeners() {
+  chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    switch(request.eventName) {
+      case 'active-state':
+        setActiveState(request.active);
+        break;
+    }
+  });
+}
+
+
+/**
+ * Gets the Senate and House JSON data.
+ */
+function getData() {
   $.when(
-    // Gather Senate data.
+    // Gather and parse Senate data.
     $.get(chrome.extension.getURL('js/senate.json'), function(data) {
       senateData = JSON.parse(data);
       senateData.forEach(function(senator) {
@@ -493,27 +594,48 @@ $(document).ready(function() {
       });
     }),
 
-    // Gather House of Representatives data.
+    // Gather and parse House of Representatives data.
     $.get(chrome.extension.getURL('js/house.json'), function(data) {
       houseData = JSON.parse(data);
       houseData.forEach(function(rep) {
         rep.house = 'house';
       });
     })
-  ).then(function() {
-    // Combine Senate and House data.
-    congressData = _.union(senateData, houseData);
+  ).then(init);
+}
 
-    // Set the
-    setInnerTextMin();
 
-    // Kick off initial scan of the entire DOM.
-    scan(document.body);
+/**
+ * Initialize Dial Congress.
+ */
+function init() {
+  // Combine Senate and House data.
+  congressData = _.union(senateData, houseData);
 
-    // Keep an eye out for changes to the DOM.
-    watchForDOMChanges();
+  // Set the minimum text threshold for scanning a node.
+  setInnerTextMin();
 
-    // Use a throttled requestAnimationFrame to check the last names queue.
-    requestAnimationFrame(poll);
-  });
-});
+  // Create a debouncer for turning off the processing state.
+  debouncedProcessingStop = _.debounce(function() {
+    setProcessingState(false);
+  }, 500);
+
+  // Initialize an observer to keep an eye out for changes to the DOM.
+  observer = new MutationObserver(handleDOMMutations);
+
+  // Initialize chrome runtime listeners.
+  initListeners();
+
+  // Get initial extension active state.
+  getActiveState();
+
+  // Use a throttled requestAnimationFrame to check the last names queue and
+  // the active state of the extension.
+  requestAnimationFrame(poll);
+}
+
+
+/**
+ * On DOM ready.
+ */
+$(document).ready(getData);

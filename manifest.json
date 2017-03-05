@@ -15,6 +15,7 @@
   "background": {
     "scripts": [
       "js/analytics.js",
+      "js/toggle.js",
       "js/update.js"
     ]
   },
