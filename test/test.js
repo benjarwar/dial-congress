@@ -20,7 +20,7 @@ contentJavascript = fs.readFileSync(path.resolve(__dirname, '../js/content.js'),
 eval(contentJavascript);
 
 describe('getRegExpString', function() {
-  var senator =   {
+  var mockCritter = {
     'firstName': 'Bernard',
     'lastName': 'Sanders',
     'nicknames': [
@@ -29,7 +29,17 @@ describe('getRegExpString', function() {
     ]
   };
 
-  var re = new RegExp(getRegExpString(senator), 'ig');
+  var re = new RegExp(getRegExpString(mockCritter), 'ig');
+
+  var abbreviationName = {
+    'firstName': 'Sanford',
+    'lastName': 'Bishop Jr',
+    'nicknames': [
+      'G.K'
+    ]
+  };
+
+  var abbreviationRe = new RegExp(getRegExpString(abbreviationName), 'ig');
 
   it('matches first, middle, and last name permutations', function() {
     expect('Bernard Sanders'.match(re).length).to.equal(1);
@@ -154,5 +164,10 @@ describe('getRegExpString', function() {
     expect('Bernie Sandersing'.match(re)).to.be.null;
     expect('Bernard Uhsanders'.match(re)).to.be.null;
     expect('Bernie Shasanders'.match(re)).to.be.null;
+  });
+
+  it('captures names with abbreviations', function() {
+    expect('Sanford Bishop Jr.'.match(abbreviationRe).length).to.equal(1);
+    expect('G.K. Bishop Jr'.match(abbreviationRe).length).to.equal(1);
   });
 });

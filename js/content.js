@@ -33,28 +33,40 @@ function getRegExpString(critter) {
     title = '(Representative|Rep\\.|Congressman|Congresswoman)';
   }
 
+  var firstName = critter.firstName.replace(' ', '\\s*');
+  var lastName = critter.lastName.replace(' ', '\\s*');
+
+  if (critter.junior) {
+    lastName += '\\s*(Jr|Jr\\.)?';
+  }
+
+  var wordEndBoundary = '(\\.|\\b)';
   var optionalQuote = '(\'|")?';
   var wildCardMiddle = '(' + optionalQuote + '(\\w*)' + optionalQuote + '|[a-zA-Z]\\.([a-zA-Z]\\.)?)';
   var upToTwoWildCardMiddles = '\\s*' + wildCardMiddle + '\\s*' + wildCardMiddle + '\\s*';
-  var firstLast = '\\b' + critter.firstName + '\\b' + upToTwoWildCardMiddles + '\\b' + critter.lastName + '\\b';
-  var lastFirst = '\\b' + critter.lastName + ',\\s*' + critter.firstName + '\\b';
-  var titleLast = '\\b' + title + '\\s*' + critter.lastName + '\\b';
+  var firstLast = '\\b' + firstName + wordEndBoundary + upToTwoWildCardMiddles + wordEndBoundary + lastName + wordEndBoundary;
+  var lastFirst = '\\b' + lastName + ',\\s*' + firstName + wordEndBoundary;
+  var titleLast = '\\b' + title + '\\s*' + lastName + wordEndBoundary;
   var nicknames = '';
   var regExpString = '';
 
   function getNicknameString (nickname, lastName) {
-    return '|\\b' + nickname + '\\b' + upToTwoWildCardMiddles + '\\b' + lastName + '\\b|\\b' + lastName + ',\\s*' + nickname + '\\b';
+    return '|\\b' + nickname + wordEndBoundary + upToTwoWildCardMiddles + wordEndBoundary + lastName + wordEndBoundary + '|\\b' + lastName + ',\\s*' + nickname + wordEndBoundary;
   }
 
   if (critter.nicknames) {
     if (Array.isArray(critter.nicknames)) {
       for (var i = 0; i < critter.nicknames.length; i++) {
-        nicknames += getNicknameString(critter.nicknames[i], critter.lastName);
+        var nickname = critter.nicknames[i].replace(' ', '\\s*');
+        nicknames += getNicknameString(nickname, lastName);
       }
     } else if (typeof critter.nicknames === 'string') {
-      nicknames += getNicknameString(critter.nicknames[i], critter.lastName);
+      var nickname = critter.nicknames[i].replace(' ', '\\s*');
+      nicknames += getNicknameString(nickname, lastName);
     }
   }
+
+  console.log(lastFirst);
 
   regExpString += title + '?' + '(' + firstLast + nicknames + ')|' + titleLast + '|' + lastFirst;
 
