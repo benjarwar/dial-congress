@@ -139,6 +139,12 @@ describe('getRegExpString', function() {
     expect('Bernard Not-Sanders'.match(re)).to.be.null;
   });
 
+  it('rejects punction unless for initials in wildcard middle names', function() {
+    expect('Bernie Saunders. But Sanders'.match(re)).to.be.null;
+    expect('Bernie S. But Sanders'.match(re).length).to.equal(1);
+    expect('Bernie B.K. Sanders'.match(re).length).to.equal(1);
+  });
+
   it('enforces word boundaries around names', function() {
     expect('Notbernard Sanders'.match(re)).to.be.null;
     expect('Notbernie Sanders'.match(re)).to.be.null;
