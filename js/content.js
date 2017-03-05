@@ -34,7 +34,7 @@ function getRegExpString(critter) {
   }
 
   var optionalQuote = '(\'|")?';
-  var wildCardMiddle = optionalQuote + '(\\w*)(\\.)?' + optionalQuote;
+  var wildCardMiddle = '(' + optionalQuote + '(\\w*)' + optionalQuote + '|[a-zA-Z]\\.([a-zA-Z]\\.)?)';
   var upToTwoWildCardMiddles = '\\s*' + wildCardMiddle + '\\s*' + wildCardMiddle + '\\s*';
   var firstLast = '\\b' + critter.firstName + '\\b' + upToTwoWildCardMiddles + '\\b' + critter.lastName + '\\b';
   var lastFirst = '\\b' + critter.lastName + ',\\s*' + critter.firstName + '\\b';
