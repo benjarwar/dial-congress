@@ -211,8 +211,9 @@
     "state": "UT"
   },
   {
-    "lastName": "Bishop Jr.",
+    "lastName": "Bishop",
     "firstName": "Sanford",
+    "junior": true,
     "party": "D",
     "phone": "(202) 225-3631",
     "state": "GA"
@@ -413,8 +414,8 @@
     "firstName": "George",
     "nicknames": [
       "George Kenneth",
-      "G.K.",
-      "G.\\sK.\\s"
+      "G. K",
+      "G.K"
     ],
     "party": "D",
     "phone": "(202) 225-3101",
@@ -578,11 +579,12 @@
     "state": "NY"
   },
   {
-    "lastName": "Clay Jr.",
+    "lastName": "Clay",
     "firstName": "William",
     "nicknames": [
       "Lacy"
     ],
+    "junior": true,
     "party": "D",
     "phone": "(202) 225-2406",
     "state": "MO"
@@ -672,7 +674,7 @@
     "lastName": "Conaway",
     "firstName": "Kenneth",
     "nicknames": [
-      "K. Michael",
+      "K",
       "Mike",
       "Michael"
     ],
@@ -691,8 +693,9 @@
     "state": "VA"
   },
   {
-    "lastName": "Conyers Jr.",
+    "lastName": "Conyers",
     "firstName": "John",
+    "junior": true,
     "party": "D",
     "phone": "(202) 225-5126",
     "state": "MI"
@@ -719,15 +722,9 @@
     "firstName": "Luis",
     "nicknames": [
       "Jose",
-      "Lou"
+      "Lou",
+      "J\\. Luis"
     ],
-    "party": "D",
-    "phone": "(202) 225-2965",
-    "state": "CA"
-  },
-  {
-    "lastName": "Correa",
-    "firstName": "J. Luis",
     "party": "D",
     "phone": "(202) 225-2965",
     "state": "CA"
@@ -778,7 +775,7 @@
   },
   {
     "lastName": "Crist",
-    "firstName": "Charles  ",
+    "firstName": "Charles",
     "nicknames": [
       "Charlie"
     ],
@@ -1010,7 +1007,7 @@
     "lastName": "Duffy",
     "firstName": "Sean",
     "nicknames": [
-      "Sean P."
+      "Sean P"
     ],
     "party": "R",
     "phone": "(202) 225-3365",
@@ -1027,12 +1024,13 @@
     "state": "SC"
   },
   {
-    "lastName": "Duncan Jr.",
+    "lastName": "Duncan",
     "firstName": "John",
     "nicknames": [
       "Jimmy",
       "John"
     ],
+    "junior": true,
     "party": "R",
     "phone": "(202) 225-5435",
     "state": "TN"
@@ -1205,9 +1203,6 @@
   {
     "lastName": "Fudge",
     "firstName": "Marcia",
-    "nicknames": [
-      "Marcia L."
-    ],
     "party": "D",
     "phone": "(202) 225-7032",
     "state": "OH"
@@ -1254,11 +1249,12 @@
     "state": "CA"
   },
   {
-    "lastName": "Garrett Jr.",
+    "lastName": "Garrett",
     "firstName": "Thomas",
     "nicknames": [
       "Tom"
     ],
+    "junior": true,
     "party": "R",
     "phone": "(202) 225-4711",
     "state": "VA"
@@ -1334,9 +1330,6 @@
   {
     "lastName": "Gosar",
     "firstName": "Paul",
-    "nicknames": [
-      "Paul A"
-    ],
     "party": "R",
     "phone": "(202) 225-2315",
     "state": "AZ"
@@ -1592,7 +1585,7 @@
   },
   {
     "lastName": "Hoyer",
-    "firstName": "Steny ",
+    "firstName": "Steny",
     "party": "D",
     "phone": "(202) 225-4131",
     "state": "MD"
@@ -1745,8 +1738,9 @@
     "state": "NC"
   },
   {
-    "lastName": "Jones Jr.",
+    "lastName": "Jones",
     "firstName": "Walter",
+    "junior": true,
     "party": "R",
     "phone": "(202) 225-3415",
     "state": "NC"
@@ -1773,7 +1767,7 @@
   },
   {
     "lastName": "Kaptur",
-    "firstName": "Marcia  ",
+    "firstName": "Marcia",
     "nicknames": [
       "Marcy"
     ],
@@ -2477,7 +2471,7 @@
   },
   {
     "lastName": "Murphy",
-    "firstName": "Timothy  ",
+    "firstName": "Timothy",
     "nicknames": [
       "Tim"
     ],
@@ -2615,8 +2609,9 @@
     "state": "MS"
   },
   {
-    "lastName": "Pallone Jr.",
+    "lastName": "Pallone",
     "firstName": "Frank",
+    "junior": true,
     "party": "D",
     "phone": "(202) 225-4671",
     "state": "NJ"
@@ -2639,11 +2634,12 @@
     "state": "CA"
   },
   {
-    "lastName": "Pascrell Jr.",
+    "lastName": "Pascrell",
     "firstName": "William",
     "nicknames": [
       "Bill"
     ],
+    "junior": true,
     "party": "D",
     "phone": "(202) 225-5751",
     "state": "NJ"
@@ -2656,8 +2652,9 @@
     "state": "MN"
   },
   {
-    "lastName": "Payne Jr.",
+    "lastName": "Payne",
     "firstName": "Donald",
+    "junior": true,
     "party": "D",
     "phone": "(202) 225-3436",
     "state": "NJ"
@@ -3046,7 +3043,7 @@
   },
   {
     "lastName": "Rush",
-    "firstName": "Bobby ",
+    "firstName": "Bobby",
     "party": "D",
     "phone": "(202) 225-4372",
     "state": "IL"
@@ -3448,8 +3445,8 @@
     "lastName": "Thompson",
     "firstName": "Glenn",
     "nicknames": [
-      "G. T.",
-      "G.T."
+      "G. T",
+      "G.T"
     ],
     "party": "R",
     "phone": "(202) 225-5121",
