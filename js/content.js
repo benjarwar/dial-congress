@@ -27,49 +27,82 @@ var observerConfig = {
  * @return {string} A regex to match the congressperson's name permutations.
  */
 function getRegExpString(critter) {
+  var title = getTitle(critter);
+  var quotedNicknames = getQuotedNicknames(critter);
+  var firstNames = _.union([prepName(critter.firstName)], quotedNicknames);
+  var middleNames = _.map(critter.middleNames, function(middleName) {
+    return prepName(middleName);
+  });
+
+  var combinedMiddleNames = quotedNicknames ? _.union(critter.middleNames, quotedNicknames) : critter.middleNames;
+
+  var namePermutations = '(' + title + '\\s+)?';
+  namePermutations += '(' + firstNames.join('|') + ')\\s+';
+
+  if (combinedMiddleNames && combinedMiddleNames.length) {
+    var middleNameCombos = '((' + middleNames.join('|') + ')\\s+)?';
+    namePermutations += middleNameCombos;
+  }
+
+  var lastName = prepName(critter.lastName);
+  namePermutations += lastName;
+
+  var titleLast = title + '\\s+' + lastName;
+
+  var optionalJr = critter.junior ? ',?\\s+Jr\\.?' : '';
+  var lastFirst = lastName + optionalJr + ',\\s+(' + firstNames.join('|') + ')';
+
+  return '\\b(' + namePermutations + ')\\b|\\b(' + titleLast + ')\\b|\\b(' + lastFirst + ')\\b';
+}
+
+
+/**
+ * Returns the title according which house the critter belongs to.
+ * @param {Object} critter - Contains data on a congressperson.
+ * @return {string} A regex string containing different titles.
+ */
+function getTitle(critter) {
   var title = '(Senator|Sen\\.|Congressman|Congresswoman)';
 
   if (critter.house === 'house') {
     title = '(Representative|Rep\\.|Congressman|Congresswoman)';
   }
 
-  var firstName = critter.firstName.replace(' ', '\\s*');
-  var lastName = critter.lastName.replace(' ', '\\s*');
+  return title;
+}
 
-  if (critter.junior) {
-    lastName += '\\s*(Jr|Jr\\.)?';
-  }
 
-  var wordEndBoundary = '(\\.|\\b)';
-  var optionalQuote = '(\'|")?';
-  var wildCardMiddle = '(' + optionalQuote + '(\\w*)' + optionalQuote + '|[a-zA-Z]\\.([a-zA-Z]\\.)?)';
-  var upToTwoWildCardMiddles = '\\s*' + wildCardMiddle + '\\s*' + wildCardMiddle + '\\s*';
-  var firstLast = '\\b' + firstName + wordEndBoundary + upToTwoWildCardMiddles + wordEndBoundary + lastName + wordEndBoundary;
-  var lastFirst = '\\b' + lastName + ',\\s*' + firstName + wordEndBoundary;
-  var titleLast = '\\b' + title + '\\s*' + lastName + wordEndBoundary;
-  var nicknames = '';
-  var regExpString = '';
-
-  function getNicknameString (nickname, lastName) {
-    return '|\\b' + nickname + wordEndBoundary + upToTwoWildCardMiddles + wordEndBoundary + lastName + wordEndBoundary + '|\\b' + lastName + ',\\s*' + nickname + wordEndBoundary;
-  }
+/**
+ * Returns a regex string of nicknames wrapped in optional quotes.
+ * @param {Object} critter - Contains data on a congressperson.
+ * @return {string} A regex string of possibly quoted nicknames.
+ */
+function getQuotedNicknames(critter) {
+  var quotedNicknames = [];
+  var optOpenQuote = '[\'"‘“]?';
+  var optCloseQuote = '[\'"’”]?';
 
   if (critter.nicknames) {
-    if (Array.isArray(critter.nicknames)) {
-      for (var i = 0; i < critter.nicknames.length; i++) {
-        var nickname = critter.nicknames[i].replace(' ', '\\s*');
-        nicknames += getNicknameString(nickname, lastName);
-      }
-    } else if (typeof critter.nicknames === 'string') {
-      var nickname = critter.nicknames[i].replace(' ', '\\s*');
-      nicknames += getNicknameString(nickname, lastName);
-    }
+    quotedNicknames = _.map(critter.nicknames, function(nickname) {
+      return optOpenQuote + prepName(nickname) + optCloseQuote;
+    });
   }
 
-  regExpString += title + '?' + '(' + firstLast + nicknames + ')|' + titleLast + '|' + lastFirst;
-
-  return regExpString;
+  return quotedNicknames;
 }
+
+
+/**
+ * Performs substitutions on various characters in a name string.
+ * @param {string} name A name.
+ * @return {string} The name with substitutions performed.
+ */
+function prepName(name) {
+  name.replace('.','\\.');
+  name.replace(' ','\\s+');
+  return name;
+}
+
 
 /**
  * Builds a regex of all congressperson's last names, to provide an initial
