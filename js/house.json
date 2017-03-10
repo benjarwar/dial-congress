@@ -3,7 +3,9 @@
     "lastName": "Abraham",
     "firstName": "Ralph",
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Lee"
+      ],
     "phone": "(202) 225-8490",
     "state": "LA"
   },
@@ -11,7 +13,9 @@
     "lastName": "Adams",
     "firstName": "Alma",
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Shealey"
+    ],
     "phone": "(202) 225-1510",
     "state": "NC"
   },
@@ -19,7 +23,9 @@
     "lastName": "Aderholt",
     "firstName": "Robert",
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Brown"
+      ],
     "phone": "(202) 225-4876",
     "state": "AL"
   },
@@ -30,7 +36,9 @@
       "Pete"
     ],
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Rey"
+    ],
     "phone": "(202) 225-3201",
     "state": "CA"
   },
@@ -41,7 +49,9 @@
       "Rick"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Wayne"
+    ],
     "phone": "(202) 225-2823",
     "state": "GA"
   },
