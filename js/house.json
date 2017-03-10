@@ -59,7 +59,9 @@
     "lastName": "Amash",
     "firstName": "Justin",
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "A"
+    ],
     "phone": "(202) 225-3831",
     "state": "MI"
   },
@@ -67,7 +69,9 @@
     "lastName": "Amodei",
     "firstName": "Mark",
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Eugene"
+    ],
     "phone": "(202) 225-6155",
     "state": "NV"
   },
@@ -75,7 +79,9 @@
     "lastName": "Arrington",
     "firstName": "Jodey",
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Cook"
+    ],
     "phone": "(202) 225-4005",
     "state": "TX"
   },
@@ -94,7 +100,9 @@
       "Don"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "John"
+    ],
     "phone": "(202) 225-4155",
     "state": "NE"
   },
@@ -105,7 +113,9 @@
       "Jim"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Edward"
+    ],
     "phone": "(202) 225-4436",
     "state": "IN"
   },
@@ -116,7 +126,9 @@
       "Lou"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "James"
+    ],
     "phone": "(202) 225-6511",
     "state": "PA"
   },
@@ -127,7 +139,7 @@
       "Andy"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": ["Hale"],
     "phone": "(202) 225-4706",
     "state": "KY"
   },
@@ -135,7 +147,7 @@
     "lastName": "Barragán",
     "firstName": "Nanette",
     "party": "D",
-    "middleNames": [],
+    "middleNames": ["Diaz"],
     "phone": "(202) 225-8220",
     "state": "CA"
   },
@@ -143,7 +155,9 @@
     "lastName": "Barton",
     "firstName": "Joe",
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Linus"
+    ],
     "phone": "(202) 225-2002",
     "state": "TX"
   },
@@ -151,7 +165,9 @@
     "lastName": "Bass",
     "firstName": "Karen",
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Ruth"
+    ],
     "phone": "(202) 225-7084",
     "state": "CA"
   },
@@ -159,7 +175,9 @@
     "lastName": "Beatty",
     "firstName": "Joyce",
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Birdson"
+    ],
     "phone": "(202) 225-4324",
     "state": "OH"
   },
@@ -178,7 +196,9 @@
       "Ami"
     ],
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Babulal"
+    ],
     "phone": "(202) 225-5716",
     "state": "CA"
   },
@@ -189,7 +209,9 @@
       "Jack"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "W"
+    ],
     "phone": "(202) 225-4735",
     "state": "MI"
   },
@@ -200,7 +222,9 @@
       "Don"
     ],
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Sternoff"
+    ],
     "phone": "(202) 225-4376",
     "state": "VA"
   },
@@ -211,7 +235,9 @@
       "Andy"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Steven"
+    ],
     "phone": "(202) 225-2635",
     "state": "AZ"
   },
@@ -219,7 +245,9 @@
     "lastName": "Bilirakis",
     "firstName": "Gus",
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Michael"
+    ],
     "phone": "(202) 225-5755",
     "state": "FL"
   },
@@ -230,7 +258,9 @@
       "Mike"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Dean"
+    ],
     "phone": "(202) 225-4872",
     "state": "MI"
   },
@@ -241,7 +271,9 @@
       "Rob"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "William"
+    ],
     "phone": "(202) 225-0453",
     "state": "UT"
   },
@@ -250,7 +282,9 @@
     "firstName": "Sanford",
     "junior": true,
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Dixon"
+    ],
     "phone": "(202) 225-3631",
     "state": "GA"
   },
@@ -258,7 +292,9 @@
     "lastName": "Black",
     "firstName": "Diane",
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Lynn"
+    ],
     "phone": "(202) 225-4231",
     "state": "TN"
   },
@@ -277,7 +313,9 @@
       "Rod"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Leland"
+    ],
     "phone": "(202) 225-2911",
     "state": "IA"
   },
@@ -301,7 +339,9 @@
     "lastName": "Bonamici",
     "firstName": "Suzanne",
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Marie"
+    ],
     "phone": "(202) 225-0855",
     "state": "OR"
   },
@@ -309,7 +349,10 @@
     "lastName": "Bordallo",
     "firstName": "Madeleine",
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Mary",
+      "Zeien"
+    ],
     "phone": "(202) 225-1188",
     "state": "OR"
   },
@@ -320,7 +363,9 @@
       "Mike"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "J"
+    ],
     "phone": "(202) 225-5661",
     "state": "IL"
   },
@@ -328,7 +373,9 @@
     "lastName": "Boyle",
     "firstName": "Brendan",
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Francis"
+    ],
     "phone": "(202) 225-6111",
     "state": "PA"
   },
@@ -336,7 +383,9 @@
     "lastName": "Brady",
     "firstName": "Kevin",
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Patrick"
+    ],
     "phone": "(202) 225-4901",
     "state": "TX"
   },
@@ -347,7 +396,9 @@
       "Bob"
     ],
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "A"
+    ],
     "phone": "(202) 225-4731",
     "state": "PA"
   },
@@ -358,7 +409,9 @@
       "Dave"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Alan"
+    ],
     "phone": "(202) 225-2815",
     "state": "VA"
   },
@@ -369,7 +422,9 @@
       "Jim"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Frederick"
+    ],
     "phone": "(202) 225-2211",
     "state": "OK"
   },
@@ -380,7 +435,9 @@
       "Mo"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Jackson"
+    ],
     "phone": "(202) 225-4801",
     "state": "AL"
   },
@@ -388,7 +445,9 @@
     "lastName": "Brooks",
     "firstName": "Susan",
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Wiant"
+    ],
     "phone": "(202) 225-2276",
     "state": "IN"
   },
@@ -396,7 +455,9 @@
     "lastName": "Brown",
     "firstName": "Anthony",
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Gregory"
+    ],
     "phone": "(202) 225-8699",
     "state": "MD"
   },
@@ -404,7 +465,9 @@
     "lastName": "Brownley",
     "firstName": "Julia",
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Andrews"
+    ],
     "phone": "(202) 225-5811",
     "state": "CA"
   },
@@ -415,7 +478,9 @@
       "Vern"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Gale"
+    ],
     "phone": "(202) 225-5015",
     "state": "FL"
   },
@@ -426,7 +491,9 @@
       "Ken"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Robert"
+    ],
     "phone": "(202) 225-4676",
     "state": "CO"
   },
@@ -434,7 +501,9 @@
     "lastName": "Bucshon",
     "firstName": "Larry",
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Dean"
+    ],
     "phone": "(202) 225-4636",
     "state": "IN"
   },
@@ -445,7 +514,9 @@
       "Ted"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Paul"
+    ],
     "phone": "(202) 225-4531",
     "state": "NC"
   },
@@ -453,7 +524,9 @@
     "lastName": "Burgess",
     "firstName": "Michael",
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Clifton"
+    ],
     "phone": "(202) 225-7772",
     "state": "TX"
   },
@@ -464,7 +537,9 @@
       "Cheri"
     ],
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Lea"
+    ],
     "phone": "(202) 225-5905",
     "state": "IL"
   },
@@ -472,12 +547,13 @@
     "lastName": "Butterfield",
     "firstName": "George",
     "nicknames": [
-      "George Kenneth",
       "G. K",
       "G.K"
     ],
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Kenneth"
+    ],
     "phone": "(202) 225-3101",
     "state": "NC"
   },
@@ -485,7 +561,9 @@
     "lastName": "Byrne",
     "firstName": "Bradley",
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Roberts"
+    ],
     "phone": "(202) 225-4931",
     "state": "AL"
   },
@@ -496,7 +574,9 @@
       "Ken"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Stanton"
+    ],
     "phone": "(202) 225-1986",
     "state": "CA"
   },
@@ -507,7 +587,9 @@
       "Mike"
     ],
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Everett"
+    ],
     "phone": "(202) 225-5111",
     "state": "MA"
   },
@@ -534,7 +616,9 @@
     "lastName": "Carson",
     "firstName": "André",
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "D"
+    ],
     "phone": "(202) 225-4011",
     "state": "IN"
   },
@@ -542,7 +626,9 @@
     "lastName": "Carson",
     "firstName": "Andre",
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "D"
+    ],
     "phone": "(202) 225-4011",
     "state": "IN"
   },
@@ -553,7 +639,9 @@
       "Buddy"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Leroy"
+    ],
     "phone": "(202) 225-5831",
     "state": "GA"
   },
@@ -561,7 +649,9 @@
     "lastName": "Carter",
     "firstName": "John",
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Rice"
+    ],
     "phone": "(202) 225-3864",
     "state": "TX"
   },
@@ -572,7 +662,9 @@
       "Matt"
     ],
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Alton"
+    ],
     "phone": "(202) 225-5546",
     "state": "PA"
   },
@@ -583,7 +675,9 @@
       "Kathy"
     ],
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Anne"
+    ],
     "phone": "(202) 225-3376",
     "state": "FL"
   },
@@ -602,7 +696,9 @@
       "Steve"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Joseph"
+    ],
     "phone": "(202) 225-2216",
     "state": "OH"
   },
@@ -610,7 +706,9 @@
     "lastName": "Chaffetz",
     "firstName": "Jason",
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "E"
+    ],
     "phone": "(202) 225-7751",
     "state": "UT"
   },
@@ -621,7 +719,9 @@
       "Liz"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Lynne"
+    ],
     "phone": "(202) 225-2311",
     "state": "WY"
   },
@@ -629,7 +729,9 @@
     "lastName": "Chu",
     "firstName": "Judy",
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "May"
+    ],
     "phone": "(202) 225-5464",
     "state": "CA"
   },
@@ -637,7 +739,9 @@
     "lastName": "Cicilline",
     "firstName": "David",
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Nicola"
+    ],
     "phone": "(202) 225-4911",
     "state": "RI"
   },
@@ -645,7 +749,9 @@
     "lastName": "Clark",
     "firstName": "Katherine",
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Marlea"
+    ],
     "phone": "(202) 225-2836",
     "state": "MA"
   },
@@ -653,7 +759,9 @@
     "lastName": "Clarke",
     "firstName": "Yvette",
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Diane"
+    ],
     "phone": "(202) 225-6231",
     "state": "NY"
   },
@@ -665,7 +773,9 @@
     ],
     "junior": true,
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Lacy"
+    ],
     "phone": "(202) 225-2406",
     "state": "MO"
   },
@@ -684,7 +794,7 @@
       "Jim"
     ],
     "party": "D",
-    "middleNames": [],
+    "middleNames": ["Enos"],
     "phone": "(202) 225-3315",
     "state": "SC"
   },
@@ -695,7 +805,9 @@
       "Mike"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Howard"
+    ],
     "phone": "(202) 225-7882",
     "state": "CO"
   },
@@ -706,7 +818,9 @@
       "Steve"
     ],
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Ira"
+    ],
     "phone": "(202) 225-3265",
     "state": "TN"
   },
@@ -717,7 +831,9 @@
       "Tom"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Jeffery"
+    ],
     "phone": "(202) 225-6165",
     "state": "OK"
   },
@@ -728,7 +844,9 @@
       "Chris"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Carl"
+    ],
     "phone": "(202) 225-5265",
     "state": "NY"
   },
@@ -739,7 +857,9 @@
       "Doug"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Allen"
+    ],
     "phone": "(202) 225-9893",
     "state": "GA"
   },
@@ -747,7 +867,9 @@
     "lastName": "Comer",
     "firstName": "James",
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Richard"
+    ],
     "phone": "(202) 225-3115",
     "state": "KY"
   },
@@ -755,7 +877,10 @@
     "lastName": "Comstock",
     "firstName": "Barbara",
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Jean",
+      "Burns"
+    ],
     "phone": "(202) 225-5136",
     "state": "VA"
   },
@@ -763,12 +888,13 @@
     "lastName": "Conaway",
     "firstName": "Kenneth",
     "nicknames": [
-      "K",
       "Mike",
       "Michael"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Michael"
+    ],
     "phone": "(202) 225-3605",
     "state": "TX"
   },
@@ -779,7 +905,9 @@
       "Gerry"
     ],
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Edward"
+    ],
     "phone": "(202) 225-1492",
     "state": "VA"
   },
@@ -788,7 +916,9 @@
     "firstName": "John",
     "junior": true,
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "James"
+    ],
     "phone": "(202) 225-5126",
     "state": "MI"
   },
@@ -796,7 +926,9 @@
     "lastName": "Cook",
     "firstName": "Paul",
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Joseph"
+    ],
     "phone": "(202) 225-5861",
     "state": "CA"
   },
@@ -807,17 +939,19 @@
       "Jim"
     ],
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Hayes",
+      "Shofner"
+    ],
     "phone": "(202) 225-4311",
     "state": "TN"
   },
   {
     "lastName": "Correa",
-    "firstName": "Luis",
+    "firstName": "Jose",
     "nicknames": [
-      "Jose",
-      "Lou",
-      "J\\. Luis"
+      "Luis",
+      "Lou"
     ],
     "party": "D",
     "middleNames": [],
@@ -831,7 +965,9 @@
       "Jim"
     ],
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Manuel"
+    ],
     "phone": "(202) 225-3341",
     "state": "CA"
   },
@@ -839,7 +975,9 @@
     "lastName": "Costello",
     "firstName": "Ryan",
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "A"
+    ],
     "phone": "(202) 225-4315",
     "state": "PA"
   },
@@ -858,7 +996,9 @@
     "lastName": "Cramer",
     "firstName": "Kevin",
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "John"
+    ],
     "phone": "(202) 225-2611",
     "state": "ND"
   },
@@ -869,7 +1009,9 @@
       "Rick"
     ],
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Alan"
+    ],
     "phone": "(202) 225-4076",
     "state": "AR"
   },
@@ -880,7 +1022,9 @@
       "Charlie"
     ],
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Joseph"
+    ],
     "phone": "(202) 225-5961",
     "state": "FL"
   },
@@ -899,7 +1043,9 @@
     "lastName": "Cuellar",
     "firstName": "Henry",
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Roberto"
+    ],
     "phone": "(202) 225-1640",
     "state": "TX"
   },
@@ -907,7 +1053,9 @@
     "lastName": "Culberson",
     "firstName": "John",
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Abney"
+    ],
     "phone": "(202) 225-2571",
     "state": "TX"
   },
@@ -915,7 +1063,9 @@
     "lastName": "Cummings",
     "firstName": "Elijah",
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "Eugene"
+    ],
     "phone": "(202) 225-4741",
     "state": "MD"
   },
@@ -923,7 +1073,9 @@
     "lastName": "Curbelo",
     "firstName": "Carlos",
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Luis"
+    ],
     "phone": "(202) 225-2778",
     "state": "FL"
   },
@@ -931,7 +1083,9 @@
     "lastName": "Davidson",
     "firstName": "Warren",
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Earl"
+    ],
     "phone": "(202) 225-6205",
     "state": "OH"
   },
@@ -940,10 +1094,11 @@
     "firstName": "Daniel",
     "nicknames": [
       "Danny",
-      "Daniel"
     ],
     "party": "D",
-    "middleNames": [],
+    "middleNames": [
+      "K"
+    ],
     "phone": "(202) 225-5006",
     "state": "IL"
   },
@@ -951,7 +1106,9 @@
     "lastName": "Davis",
     "firstName": "Rodney",
     "party": "R",
-    "middleNames": [],
+    "middleNames": [
+      "Lee"
+    ],
     "phone": "(202) 225-2371",
     "state": "IL"
   },
