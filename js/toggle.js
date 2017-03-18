@@ -20,6 +20,17 @@ var icons = {
 }
 
 
+// Get the stored active state.
+chrome.storage.local.get('dialCongressActiveState', function (result) {
+  if (typeof result.dialCongressActiveState === 'undefined') {
+    chrome.storage.local.set({'dialCongressActiveState': active});
+  } else {
+    active = result.dialCongressActiveState;
+    setActiveIcon();
+  }
+});
+
+
 // Listen for state request.
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   switch(request.eventName) {
@@ -42,6 +53,8 @@ chrome.tabs.onActivated.addListener(function(activeInfo) {
 // Toggle active state.
 chrome.browserAction.onClicked.addListener(function (e) {
   active = !active;
+
+  chrome.storage.local.set({'dialCongressActiveState': active});
 
   // Send message with active state to all tabs.
   chrome.tabs.query({}, function(tabs) {
