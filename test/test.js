@@ -28,6 +28,11 @@ describe('getRegExpString', function() {
     'nicknames': ['Mitch', 'Mitchy']
   };
 
+  var mockAccentCritter = {
+    'firstName': 'André',
+    'lastName': 'Cárdenas'
+  };
+
 
   it('matches first, middle, nickname, and last name permutations', function() {
     var re = new RegExp(getRegExpString(mockCritter), 'ig');
@@ -168,6 +173,21 @@ describe('getRegExpString', function() {
     });
 
     _.uniq(permutations).forEach(function(string) {
+      expect(string.match(re).length).to.equal(1);
+    });
+  });
+
+
+  it('matches non-accented variations', function() {
+    var re = new RegExp(getRegExpString(mockAccentCritter), 'ig');
+    var permutations = [
+      'André Cárdenas',
+      'André Cardenas',
+      'Andre Cárdenas',
+      'Andre Cardenas'
+    ];
+
+    permutations.forEach(function(string) {
       expect(string.match(re).length).to.equal(1);
     });
   });
