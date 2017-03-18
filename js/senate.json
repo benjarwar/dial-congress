@@ -297,6 +297,9 @@
     "party": "R",
     "firstName": "Addison",
     "lastName": "McConnell",
+    "middleNames": [
+      "Mitchell"
+    ],
     "nicknames": [
       "Mitch"
     ],

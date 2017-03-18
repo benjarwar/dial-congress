@@ -1,6 +1,7 @@
 var expect = require('chai').expect;
 var fs = require('fs');
 var path = require('path');
+var _ = require('../bower_components/lodash/lodash.js');
 
 var document = {};
 var $ = function(context) {
@@ -21,153 +22,259 @@ eval(contentJavascript);
 
 describe('getRegExpString', function() {
   var mockCritter = {
-    'firstName': 'Bernard',
-    'lastName': 'Sanders',
-    'nicknames': [
-      'Bernie',
-      'Barnie'
-    ]
+    'firstName': 'Addison',
+    'lastName': 'McConnell',
+    'middleNames': ['Mitchell'],
+    'nicknames': ['Mitch', 'Mitchy']
   };
 
-  var re = new RegExp(getRegExpString(mockCritter), 'ig');
 
-  var abbreviationName = {
-    'firstName': 'Sanford',
-    'lastName': 'Bishop Jr',
-    'nicknames': [
-      'G.K'
-    ]
-  };
+  it('matches first, middle, nickname, and last name permutations', function() {
+    var re = new RegExp(getRegExpString(mockCritter), 'ig');
+    var permutations = [];
 
-  var abbreviationRe = new RegExp(getRegExpString(abbreviationName), 'ig');
+    var firstName = mockCritter.firstName;
+    var middleNames = mockCritter.middleNames;
+    var lastName = mockCritter.lastName;
+    var nicknames = mockCritter.nicknames;
 
-  it('matches first, middle, and last name permutations', function() {
-    expect('Bernard Sanders'.match(re).length).to.equal(1);
-    expect('Bernard Birdie Sanders'.match(re).length).to.equal(1);
-    expect('Bernard Birdie Bird Sanders'.match(re).length).to.equal(1);
-    expect('Bernard B. Sanders'.match(re).length).to.equal(1);
+    permutations.push(`${firstName} ${lastName}`);
+
+    nicknames.forEach(function(nickname) {
+      permutations.push(`${nickname} ${lastName}`);
+      permutations.push(`${firstName} ${nickname} ${lastName}`);
+
+      middleNames.forEach(function(middleName) {
+        permutations.push(`${firstName} ${middleName} ${lastName}`);
+        permutations.push(`${firstName} ${middleName} ${nickname} ${lastName}`);
+        permutations.push(`${firstName} ${nickname} ${middleName} ${lastName}`);
+        permutations.push(`${nickname} ${middleName} ${lastName}`);
+      });
+    });
+
+    _.uniq(permutations).forEach(function(string) {
+      expect(string.match(re).length).to.equal(1);
+    });
   });
 
-  it('matches "last name, first name" format', function() {
-    expect('Sanders, Bernard'.match(re).length).to.equal(1);
-    expect('Sanders, Bernie'.match(re).length).to.equal(1);
+
+  it('matches name permutations with quoted nicknames', function() {
+    var re = new RegExp(getRegExpString(mockCritter), 'ig');
+    var permutations = [];
+
+    var firstName = mockCritter.firstName;
+    var middleNames = mockCritter.middleNames;
+    var lastName = mockCritter.lastName;
+    var nicknames = mockCritter.nicknames;
+
+    nicknames.forEach(function(nickname) {
+      middleNames.forEach(function(middleName) {
+        var middleInitial = middleName.charAt(0);
+        permutations.push(`${firstName} ${middleInitial} ${lastName}`);
+        permutations.push(`${firstName} ${middleInitial} ${nickname} ${lastName}`);
+        permutations.push(`${firstName} ${nickname} ${middleInitial} ${lastName}`);
+        permutations.push(`${nickname} ${middleInitial} ${lastName}`);
+        permutations.push(`${firstName} ${middleInitial}. ${lastName}`);
+        permutations.push(`${firstName} ${middleInitial}. ${nickname} ${lastName}`);
+        permutations.push(`${firstName} ${nickname} ${middleInitial}. ${lastName}`);
+        permutations.push(`${nickname} ${middleInitial}. ${lastName}`);
+      });
+    });
+
+    _.uniq(permutations).forEach(function(string) {
+      expect(string.match(re).length).to.equal(1);
+    });
   });
 
-  it('matches varius nickname permutations', function() {
-    expect('Bernie Sanders'.match(re).length).to.equal(1);
-    expect('Bernie Birdie Sanders'.match(re).length).to.equal(1);
-    expect('Bernie Birdie Bird Sanders'.match(re).length).to.equal(1);
-    expect('Bernie B. Sanders'.match(re).length).to.equal(1);
-    expect('Barnie Sanders'.match(re).length).to.equal(1);
-    expect('Barnie Birdie Sanders'.match(re).length).to.equal(1);
-    expect('Barnie Birdie Bird Sanders'.match(re).length).to.equal(1);
-    expect('Barnie B. Sanders'.match(re).length).to.equal(1);
+
+  it('matches middle initials', function() {
+    var re = new RegExp(getRegExpString(mockCritter), 'ig');
+    var permutations = [];
+
+    var firstName = mockCritter.firstName;
+    var middleNames = mockCritter.middleNames;
+    var lastName = mockCritter.lastName;
+    var quotedNicknames = _.map(mockCritter.nicknames, function(nickname) {
+      return `"${nickname}"`;
+    });
+
+    quotedNicknames.forEach(function(nickname) {
+      permutations.push(`${nickname} ${lastName}`);
+      permutations.push(`${firstName} ${nickname} ${lastName}`);
+
+      middleNames.forEach(function(middleName) {
+        permutations.push(`${firstName} ${middleName} ${nickname} ${lastName}`);
+        permutations.push(`${firstName} ${nickname} ${middleName} ${lastName}`);
+        permutations.push(`${nickname} ${middleName} ${lastName}`);
+      });
+    });
+
+    _.uniq(permutations).forEach(function(string) {
+      expect(string.match(re).length).to.equal(1);
+    });
   });
 
-  it('matches quoted nicknames', function() {
-    expect('Bernard "Birdie" Sanders'.match(re).length).to.equal(1);
-    expect('Bernard \'Birdie\' Sanders'.match(re).length).to.equal(1);
-    expect('Bernie "Birdie" Sanders'.match(re).length).to.equal(1);
-    expect('Bernie \'Birdie\' Sanders'.match(re).length).to.equal(1);
-    expect('Barnie "Birdie" Sanders'.match(re).length).to.equal(1);
-    expect('Barnie \'Birdie\' Sanders'.match(re).length).to.equal(1);
-    expect('Bernard \'Birdie Bee\' Sanders'.match(re).length).to.equal(1);
-    expect('Bernard \'Birdie Bee\' Sanders'.match(re).length).to.equal(1);
-    expect('Bernie \'Birdie Bee\' Sanders'.match(re).length).to.equal(1);
-    expect('Bernie \'Birdie Bee\' Sanders'.match(re).length).to.equal(1);
-  });
 
   it('matches various title permutations', function() {
-    expect('Senator Bernard Sanders'.match(re).length).to.equal(1);
-    expect('Sen. Bernard Sanders'.match(re).length).to.equal(1);
-    expect('Congressman Bernard Sanders'.match(re).length).to.equal(1);
-    expect('Congresswoman Bernard Sanders'.match(re).length).to.equal(1);
-    expect('Senator Sanders'.match(re).length).to.equal(1);
-    expect('Sen. Sanders'.match(re).length).to.equal(1);
-    expect('Congressman Sanders'.match(re).length).to.equal(1);
-    expect('Congresswoman Sanders'.match(re).length).to.equal(1);
+    var mockSenator = _.cloneDeep(mockCritter);
+    mockSenator.house = 'senate';
+
+    var re = new RegExp(getRegExpString(mockSenator), 'ig');
+    var permutations = [];
+    var titles = ['Senator','Sen.','Congressman','Congresswoman'];
+
+    var firstName = mockSenator.firstName;
+    var middleNames = mockSenator.middleNames;
+    var lastName = mockSenator.lastName;
+    var nicknames = mockSenator.nicknames;
+
+    titles.forEach(function(title) {
+      nicknames.forEach(function(nickname) {
+        permutations.push(`${title} ${nickname} ${lastName}`);
+        permutations.push(`${title} ${firstName} ${nickname} ${lastName}`);
+
+        middleNames.forEach(function(middleName) {
+          permutations.push(`${title} ${firstName} ${middleName} ${lastName}`);
+          permutations.push(`${title} ${firstName} ${middleName} ${nickname} ${lastName}`);
+          permutations.push(`${title} ${firstName} ${nickname} ${middleName} ${lastName}`);
+          permutations.push(`${title} ${nickname} ${middleName} ${lastName}`);
+        });
+      });
+    });
+
+    _.uniq(permutations).forEach(function(string) {
+      expect(string.match(re).length).to.equal(1);
+    });
+
+    var mockRep = _.cloneDeep(mockCritter);
+    mockRep.house = 'house';
+
+    re = new RegExp(getRegExpString(mockRep), 'ig');
+    permutations = [];
+    titles = ['Representative','Rep.','Congressman','Congresswoman'];
+
+    titles.forEach(function(title) {
+      nicknames.forEach(function(nickname) {
+        permutations.push(`${title} ${nickname} ${lastName}`);
+        permutations.push(`${title} ${firstName} ${nickname} ${lastName}`);
+
+        middleNames.forEach(function(middleName) {
+          permutations.push(`${title} ${firstName} ${middleName} ${lastName}`);
+          permutations.push(`${title} ${firstName} ${middleName} ${nickname} ${lastName}`);
+          permutations.push(`${title} ${firstName} ${nickname} ${middleName} ${lastName}`);
+          permutations.push(`${title} ${nickname} ${middleName} ${lastName}`);
+        });
+      });
+    });
+
+    _.uniq(permutations).forEach(function(string) {
+      expect(string.match(re).length).to.equal(1);
+    });
   });
 
-  it('matches various title and nickname permutations', function() {
-    expect('Senator Bernie Sanders'.match(re).length).to.equal(1);
-    expect('Sen. Bernie Sanders'.match(re).length).to.equal(1);
-    expect('Congressman Bernie Sanders'.match(re).length).to.equal(1);
-    expect('Congresswoman Bernie Sanders'.match(re).length).to.equal(1);
-    expect('Senator Barnie Sanders'.match(re).length).to.equal(1);
-    expect('Sen. Barnie Sanders'.match(re).length).to.equal(1);
-    expect('Congressman Barnie Sanders'.match(re).length).to.equal(1);
-    expect('Congresswoman Barnie Sanders'.match(re).length).to.equal(1);
-    expect('Senator Bernie "Birdie" Sanders'.match(re).length).to.equal(1);
-    expect('Sen. Bernie "Birdie" Sanders'.match(re).length).to.equal(1);
-    expect('Congressman Bernie "Birdie" Sanders'.match(re).length).to.equal(1);
-    expect('Congresswoman Bernie "Birdie" Sanders'.match(re).length).to.equal(1);
-    expect('Senator Bernie "Birdie" B. Sanders'.match(re).length).to.equal(1);
-    expect('Sen. Bernie "Birdie" B. Sanders'.match(re).length).to.equal(1);
-    expect('Congressman Bernie "Birdie" B. Sanders'.match(re).length).to.equal(1);
-    expect('Congresswoman Bernie "Birdie" B. Sanders'.match(re).length).to.equal(1);
-    expect('Senator Bernie \'Birdie\' Sanders'.match(re).length).to.equal(1);
-    expect('Sen. Bernie \'Birdie\' Sanders'.match(re).length).to.equal(1);
-    expect('Congressman Bernie \'Birdie\' Sanders'.match(re).length).to.equal(1);
-    expect('Congresswoman Bernie \'Birdie\' Sanders'.match(re).length).to.equal(1);
-    expect('Senator Bernie \'Birdie\' B. Sanders'.match(re).length).to.equal(1);
-    expect('Sen. Bernie \'Birdie\' B. Sanders'.match(re).length).to.equal(1);
-    expect('Congressman Bernie \'Birdie\' B. Sanders'.match(re).length).to.equal(1);
-    expect('Congresswoman Bernie \'Birdie\' B. Sanders'.match(re).length).to.equal(1);
+
+  it('matches non-accented variations', function() {
+    var mockAccentCritter = {
+      'firstName': 'André',
+      'lastName': 'Cárdenas'
+    };
+
+    var re = new RegExp(getRegExpString(mockAccentCritter), 'ig');
+    var permutations = [
+      'André Cárdenas',
+      'André Cardenas',
+      'Andre Cárdenas',
+      'Andre Cardenas'
+    ];
+
+    permutations.forEach(function(string) {
+      expect(string.match(re).length).to.equal(1);
+    });
   });
+
+
+  it('matches smart apostrophes', function() {
+    var mockApostropheCritter = {
+      'firstName': 'Jim',
+      'lastName': 'O\'Rourke'
+    };
+
+    var re = new RegExp(getRegExpString(mockApostropheCritter), 'ig');
+    var permutations = [
+      'Jim O\'Rourke',
+      'Jim O’Rourke'
+    ];
+
+    permutations.forEach(function(string) {
+      expect(string.match(re).length).to.equal(1);
+    });
+  });
+
 
   it('matches multiple occurences', function() {
-    var string = 'Let me be as clear as Bernard Sanders can be. This election is not about and has never been about Hillary Clinton or Donald Trump or Bernie Sanders or Senator Sanders or Bernie "Birdie" Sanders or any of the other candidates who sought the presidency. This election is not about political gossip, it\'s not about polls, it\'s not about campaign strategy, it is not about Sen. Barnie, it is not about Congressman Bernard, it is not about all the things that the media spends so much time discussing.';
+    var string = 'In one of the oddest protests ever conceived, feminist women everywhere are getting tattoos of a phrase uttered by Sen. Mitch McConnell (R-KY) in order to show their disdain for President Trump. “Every single women has had a Mitch McConnell or 10 or 20 in her life trying to tell her how to be and what to do,” said Nora McInerny, a 34-year-old author and blogger who triggered the tattoo trend with an accidental public Facebook post. Addison Mitchell "Mitch" McConnell, Jr. (born February 20, 1942) is an American politician and the senior United States Senator from Kentucky.';
+    var re = new RegExp(getRegExpString(mockCritter), 'ig');
 
-    expect(string.match(re).length).to.eql(4);
+    expect(string.match(re).length).to.equal(3);
   });
+
 
   it('does not match single names on their own', function() {
-    expect('Bernard'.match(re)).to.be.null;
-    expect('Sanders'.match(re)).to.be.null;
-    expect('Bernie'.match(re)).to.be.null;
-    expect('Barnie'.match(re)).to.be.null;
-    expect('I love Bernie'.match(re)).to.be.null;
-    expect('Colonel Sanders'.match(re)).to.be.null;
-    expect('Bernie would have won.'.match(re)).to.be.null;
-    expect('But Barnie wouldn\'t have won.'.match(re)).to.be.null;
+    var re = new RegExp(getRegExpString(mockCritter), 'ig');
+
+    expect('Addison'.match(re)).to.be.null;
+    expect('McConnell'.match(re)).to.be.null;
+    expect('Mitchell'.match(re)).to.be.null;
+    expect('Mitch'.match(re)).to.be.null;
+    expect('Mitchy'.match(re)).to.be.null;
+    expect('There is no Mitch but McConnell.'.match(re)).to.be.null;
   });
+
 
   it('does not match misspellings', function() {
-    expect('Bernerd Sanders'.match(re)).to.be.null;
-    expect('Bernie Sunders'.match(re)).to.be.null;
+    var re = new RegExp(getRegExpString(mockCritter), 'ig');
+
+    expect('Match McConnell'.match(re)).to.be.null;
+    expect('Addison McCornell'.match(re)).to.be.null;
   });
 
-  it('does not match more than two middle words', function() {
-    expect('Bernard Might Have Won Sanders'.match(re)).to.be.null;
-  });
 
   it('does not match abbreviated "sen." at end of previous sentence', function() {
-    expect('He wore the nicest lederhosen. Sanders is a nice guy.'.match(re)).to.be.null;
+    var re = new RegExp(getRegExpString(mockCritter), 'ig');
+
+    expect('He wore the nicest lederhosen. McConnell said some things.'.match(re)).to.be.null;
   });
 
-  it('enforces spaces between wildcard middle names', function() {
-    expect('Bernard Not-Sanders'.match(re)).to.be.null;
+
+  it('enforces spaces between names', function() {
+    var re = new RegExp(getRegExpString(mockCritter), 'ig');
+
+    expect('Notmitch McConnell'.match(re)).to.be.null;
+    expect('Addison McConnellnot'.match(re)).to.be.null;
   });
 
-  it('rejects punction unless for initials in wildcard middle names', function() {
-    expect('Bernie Saunders. But Sanders'.match(re)).to.be.null;
-    expect('Bernie S. But Sanders'.match(re).length).to.equal(1);
-    expect('Bernie B.K. Sanders'.match(re).length).to.equal(1);
+
+  it('rejects punctuation unless included in a name', function() {
+    var punctuatedCritter =   {
+      'lastName': 'Butterfield',
+      'firstName': 'George',
+      'nicknames': [
+        'George Kenneth',
+        'G. K.',
+        'G.K.'
+      ]
+    };
+    var re = new RegExp(getRegExpString(punctuatedCritter), 'ig');
+
+    expect('G.K. Butterfield'.match(re).length).to.equal(1);
+    expect('G. K. Butterfield'.match(re).length).to.equal(1);
   });
 
-  it('enforces word boundaries around names', function() {
-    expect('Notbernard Sanders'.match(re)).to.be.null;
-    expect('Notbernie Sanders'.match(re)).to.be.null;
-    expect('Bernardy Sanders'.match(re)).to.be.null;
-    expect('Bernied Sanders'.match(re)).to.be.null;
-    expect('Bernard Sanderses'.match(re)).to.be.null;
-    expect('Bernie Sandersing'.match(re)).to.be.null;
-    expect('Bernard Uhsanders'.match(re)).to.be.null;
-    expect('Bernie Shasanders'.match(re)).to.be.null;
-  });
 
-  it('captures names with abbreviations', function() {
-    expect('Sanford Bishop Jr.'.match(abbreviationRe).length).to.equal(1);
-    expect('G.K. Bishop Jr'.match(abbreviationRe).length).to.equal(1);
+  it('matches if there is excessive white space between names', function() {
+    var re = new RegExp(getRegExpString(mockCritter), 'ig');
+
+    expect('Mitch     McConnell'.match(re).length).to.equal(1);
+    expect('  Addison  Mitchy     McConnell'.match(re).length).to.equal(1);
   });
 });
