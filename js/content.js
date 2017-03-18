@@ -108,6 +108,7 @@ function prepName(name) {
   name = name.replace('í', '[íi]');
   name = name.replace('ó', '[óo]');
   name = name.replace('ú', '[úu]');
+  name = name.replace('\'', '[\'’]');
   return name;
 }
 

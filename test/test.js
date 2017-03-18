@@ -28,11 +28,6 @@ describe('getRegExpString', function() {
     'nicknames': ['Mitch', 'Mitchy']
   };
 
-  var mockAccentCritter = {
-    'firstName': 'André',
-    'lastName': 'Cárdenas'
-  };
-
 
   it('matches first, middle, nickname, and last name permutations', function() {
     var re = new RegExp(getRegExpString(mockCritter), 'ig');
@@ -179,12 +174,35 @@ describe('getRegExpString', function() {
 
 
   it('matches non-accented variations', function() {
+    var mockAccentCritter = {
+      'firstName': 'André',
+      'lastName': 'Cárdenas'
+    };
+
     var re = new RegExp(getRegExpString(mockAccentCritter), 'ig');
     var permutations = [
       'André Cárdenas',
       'André Cardenas',
       'Andre Cárdenas',
       'Andre Cardenas'
+    ];
+
+    permutations.forEach(function(string) {
+      expect(string.match(re).length).to.equal(1);
+    });
+  });
+
+
+  it('matches smart apostrophes', function() {
+    var mockApostropheCritter = {
+      'firstName': 'Jim',
+      'lastName': 'O\'Rourke'
+    };
+
+    var re = new RegExp(getRegExpString(mockApostropheCritter), 'ig');
+    var permutations = [
+      'Jim O\'Rourke',
+      'Jim O’Rourke'
     ];
 
     permutations.forEach(function(string) {
