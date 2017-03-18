@@ -27,10 +27,15 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       sendResponse(active);
       break;
     case 'set-processing-state':
-      processing = request.processing;
-      setProcessingIcon();
+      setProcessing(request.processing);
       break;
   }
+});
+
+
+// Listen for new tab to be activated.
+chrome.tabs.onActivated.addListener(function(activeInfo) {
+  setProcessing(false);
 });
 
 
@@ -66,9 +71,12 @@ function setActiveIcon() {
 
 
 /**
- * Sets the icon to processing or active/inactive state.
+ * Sets the processing state and icon.
+ * @param {boolean} isProcessing Whether or not the extension is processing.
  */
-function setProcessingIcon() {
+function setProcessing(isProcessing) {
+  processing = isProcessing;
+
   if (processing && !processingInterval) {
     // If we're in a processing state, start animation the icon.
     processingInterval = setInterval(processAnimation, 100);
