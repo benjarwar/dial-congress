@@ -1,4 +1,4 @@
-var debug = false;
+var debug = true;
 var isActive;
 var senateData;
 var houseData;
@@ -128,12 +128,43 @@ function getLastNamesRegExp() {
   var lastNamesRegExpArr = [];
 
   for (var i = 0; i < congressData.length; i++) {
-    lastNamesRegExpArr.push(congressData[i].lastName);
+    lastNamesRegExpArr.push(prepName(congressData[i].lastName));
   }
 
   var lastNamesRegExpString = stringifyRegExpStrings(_.uniq(lastNamesRegExpArr));
 
   return new RegExp(lastNamesRegExpString, 'ig');
+}
+
+
+/**
+ * Returns the original last names stored in the congress data based upon
+ * matching for prepped last name variations. Fixes issues for matching strings
+ * with unicode variations.
+ *
+ * Example: the word "Diaz" is found in the DOM. This corresponds with "Díaz" as
+ * per our prepName() substitutions. But we need to store "Díaz" (the string in
+ * congressData) rather than "Diaz" (the string found in the DOM) in our chunked
+ * lastNames array for easier lookups later during markPermutations().
+ *
+ * @param {Array<string>} lastNames An array of last name strings found in DOM.
+ * @return {Array<string>} An array of original last names.
+ */
+function getOriginalLastNames(lastNames) {
+  var originalLastNames = [];
+
+  lastNames.forEach(function(lastName) {
+    for (var i = 0; i < congressData.length; i++) {
+      var regExpString = prepName(congressData[i].lastName);
+      var re = new RegExp(regExpString, 'ig');
+
+      if (lastName.match(re)) {
+        originalLastNames.push(congressData[i].lastName);
+      }
+    }
+  });
+
+  return originalLastNames;
 }
 
 
@@ -206,7 +237,10 @@ function scan(node) {
 
     // If last names are found, chunk/queue them for further MarkJS processing.
     if (lastNames) {
-      chunk(_.uniq(lastNames), node);
+      // Store the original last names for faster/correct matching during
+      // markPermutations().
+      var originalLastNames = getOriginalLastNames(_.uniq(lastNames));
+      chunk(originalLastNames, node);
     }
 
     // Disable processing state.
@@ -280,6 +314,9 @@ function markPermutations(lastNames, node) {
 
   // For each found last name, build a full RegExp to find all permutations.
   congressData.forEach(function(critter) {
+    // We've stored the original last names here, not those found in the DOM,
+    // so that we can quickly pluck the congressData items needed for the full
+    // reg expression.
     if (lastNames.indexOf(critter.lastName) > -1) {
       lastNamesRegExpArr = lastNamesRegExpArr.concat(critter.regExpStrings);
     }
