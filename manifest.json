@@ -45,7 +45,8 @@
   },
 
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "storage"
   ],
 
   "web_accessible_resources": [
