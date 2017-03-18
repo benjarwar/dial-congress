@@ -33,14 +33,17 @@ function getRegExpString(critter) {
   var middleNames = _.map(critter.middleNames, function(middleName) {
     return prepName(middleName);
   });
+  var middleInitials = _.map(middleNames, function(middleName) {
+    return middleName.charAt(0) + '\\.?';
+  });
 
-  var combinedMiddleNames = quotedNicknames ? _.union(critter.middleNames, quotedNicknames) : critter.middleNames;
+  var combinedMiddleNames = _.union(middleNames, middleInitials, quotedNicknames);
 
   var namePermutations = '(' + title + '\\s+)?';
   namePermutations += '(' + firstNames.join('|') + ')\\s+';
 
   if (combinedMiddleNames && combinedMiddleNames.length) {
-    var middleNameCombos = '((' + middleNames.join('|') + ')\\s+)?';
+    var middleNameCombos = '((' + combinedMiddleNames.join('|') + ')\\s+)?';
     namePermutations += middleNameCombos;
   }
 

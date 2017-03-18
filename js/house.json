@@ -1330,6 +1330,9 @@
   {
     "lastName": "Gosar",
     "firstName": "Paul",
+    "middleNames": [
+      "Anthony"
+    ],
     "party": "R",
     "phone": "(202) 225-2315",
     "state": "AZ"

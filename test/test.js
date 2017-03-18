@@ -65,6 +65,35 @@ describe('getRegExpString', function() {
     var firstName = mockCritter.firstName;
     var middleNames = mockCritter.middleNames;
     var lastName = mockCritter.lastName;
+    var nicknames = mockCritter.nicknames;
+
+    nicknames.forEach(function(nickname) {
+      middleNames.forEach(function(middleName) {
+        var middleInitial = middleName.charAt(0);
+        permutations.push(`${firstName} ${middleInitial} ${lastName}`);
+        permutations.push(`${firstName} ${middleInitial} ${nickname} ${lastName}`);
+        permutations.push(`${firstName} ${nickname} ${middleInitial} ${lastName}`);
+        permutations.push(`${nickname} ${middleInitial} ${lastName}`);
+        permutations.push(`${firstName} ${middleInitial}. ${lastName}`);
+        permutations.push(`${firstName} ${middleInitial}. ${nickname} ${lastName}`);
+        permutations.push(`${firstName} ${nickname} ${middleInitial}. ${lastName}`);
+        permutations.push(`${nickname} ${middleInitial}. ${lastName}`);
+      });
+    });
+
+    _.uniq(permutations).forEach(function(string) {
+      expect(string.match(re).length).to.equal(1);
+    });
+  });
+
+
+  it('matches middle initials', function() {
+    var re = new RegExp(getRegExpString(mockCritter), 'ig');
+    var permutations = [];
+
+    var firstName = mockCritter.firstName;
+    var middleNames = mockCritter.middleNames;
+    var lastName = mockCritter.lastName;
     var quotedNicknames = _.map(mockCritter.nicknames, function(nickname) {
       return `"${nickname}"`;
     });
