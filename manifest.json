@@ -50,6 +50,7 @@
   ],
 
   "web_accessible_resources": [
+    "img/icon-38.png",
     "js/house.json",
     "js/senate.json"
   ]

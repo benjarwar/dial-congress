@@ -443,6 +443,7 @@ function buildTooltip($el, critter) {
  * @return {Object} A jQuery element instance containing the tooltip content.
  */
 function getTooltipContent(critter) {
+  var iconUrl = chrome.extension.getURL("img/icon-38.png");
   var partyClass = 'dial-congress-tooltipster-party-ind';
 
   switch (critter.party) {
@@ -455,6 +456,8 @@ function getTooltipContent(critter) {
   }
 
   var contentString = '<div class="dial-congress-tooltipster-content">';
+  contentString += '<div class="dial-congress-tooltipster-img" ';
+  contentString += 'style="background-image: url(' + iconUrl + ');"></div>';
   contentString += '<div class="dial-congress-tooltipster-head">';
   contentString += '<span class="dial-congress-tooltipster-affiliation">';
   contentString += '<span class="' + partyClass + '">' + critter.party;

@@ -4,7 +4,22 @@
   cursor: pointer;
 }
 
-.dial-congress-tooltipster-head:after {
+.dial-congress-tooltipster-content {
+  position: relative;
+}
+
+.dial-congress-tooltipster-img {
+  background-size: cover;
+  height: 18px;
+  left: 50%;
+  margin-left: -7px;
+  opacity: .25;
+  position: absolute;
+  top: 0;
+  width: 18px;
+}
+
+.dial-congress-tooltipster-head::after {
   content: "";
   display: table;
   clear: both;
