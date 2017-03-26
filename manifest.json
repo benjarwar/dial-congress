@@ -32,6 +32,8 @@
       "bower_components/mark.js/dist/mark.min.js",
       "bower_components/tooltipster/dist/js/tooltipster.bundle.min.js",
       "bower_components/lodash/lodash.js",
+      "js/house.js",
+      "js/senate.js",
       "js/content.js"
     ]
   }],

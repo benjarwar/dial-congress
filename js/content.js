@@ -1,7 +1,5 @@
 var debug = false;
 var isActive;
-var senateData;
-var houseData;
 var congressData;
 var critterRegExpStrings = [];
 var lastNameChunkSize = 20;
@@ -719,26 +717,21 @@ function initListeners() {
 
 
 /**
- * Gets the Senate and House JSON data.
+ * Initializes the data.
  */
-function getData() {
-  $.when(
-    // Gather and parse Senate data.
-    $.get(chrome.extension.getURL('js/senate.json'), function(data) {
-      senateData = JSON.parse(data);
-      senateData.forEach(function(senator) {
-        senator.house = 'senate';
-      });
-    }),
+function initData() {
+  // Ready Senate data.
+  senateData.forEach(function(senator) {
+    senator.house = 'senate';
+  });
 
-    // Gather and parse House of Representatives data.
-    $.get(chrome.extension.getURL('js/house.json'), function(data) {
-      houseData = JSON.parse(data);
-      houseData.forEach(function(rep) {
-        rep.house = 'house';
-      });
-    })
-  ).then(init);
+  // Ready House data.
+  houseData.forEach(function(rep) {
+    rep.house = 'house';
+  });
+
+  // Combine Senate and House data.
+  congressData = _.union(senateData, houseData);
 }
 
 
@@ -746,8 +739,8 @@ function getData() {
  * Initialize Dial Congress.
  */
 function init() {
-  // Combine Senate and House data.
-  congressData = _.union(senateData, houseData);
+  // Ready the data.
+  initData();
 
   // Build array of all possible regExp strings from all critters.
   buildRegExpStrings(congressData);
@@ -778,4 +771,4 @@ function init() {
 /**
  * On DOM ready.
  */
-$(document).ready(getData);
+$(document).ready(init);
