@@ -1,8 +1,7 @@
 var debug = false;
 var isActive;
-var senateData;
-var houseData;
 var congressData;
+var critterRegExpStrings = [];
 var lastNameChunkSize = 20;
 var foundLastNamesQueue = [];
 var innerTextMin = 0;
@@ -21,55 +20,101 @@ var observerConfig = {
 
 
 /**
- * Builds a regex string that matches for various permutations of a
+ * Builds regex strings that match for various permutations of a
  * congressperson's name and potential titles.
  * @param {Object} critter - Contains data on a congressperson.
- * @return {string} A regex to match the congressperson's name permutations.
+ * @return {Array<string>} Reg exp strings for the critter's name permutations.
  */
-function getRegExpString(critter) {
+function getRegExpStrings(critter) {
+  var regExStrings = []
+  var title = getTitle(critter);
+  var quotedNicknames = getQuotedNicknames(critter);
+  var firstNames = _.union([prepName(critter.firstName)], quotedNicknames);
+  var middleNames = _.map(critter.middleNames, function(middleName) {
+    return prepName(middleName);
+  });
+  var middleInitials = _.map(middleNames, function(middleName) {
+    return middleName.charAt(0) + '\\.?';
+  });
+
+  var combinedMiddleNames = _.union(middleNames, middleInitials, quotedNicknames);
+
+  var namePermutations = '(' + title + '\\s+)?';
+  namePermutations += '(' + firstNames.join('|') + ')\\s+';
+
+  if (combinedMiddleNames && combinedMiddleNames.length) {
+    var middleNameCombos = '((' + combinedMiddleNames.join('|') + ')\\s+)?';
+    namePermutations += middleNameCombos;
+  }
+
+  var lastName = prepName(critter.lastName);
+  namePermutations += lastName;
+  regExStrings.push('\\b(' + namePermutations + ')\\b');
+
+  var titleLast = title + '\\s+' + lastName;
+  regExStrings.push('\\b(' + titleLast + ')\\b');
+
+  var optionalJr = critter.junior ? ',?\\s+Jr\\.?' : '';
+  var lastFirst = lastName + optionalJr + ',\\s+(' + firstNames.join('|') + ')';
+  regExStrings.push('\\b(' + lastFirst + ')\\b');
+
+  return regExStrings;
+}
+
+
+/**
+ * Returns the title according which house the critter belongs to.
+ * @param {Object} critter - Contains data on a congressperson.
+ * @return {string} A regex string containing different titles.
+ */
+function getTitle(critter) {
   var title = '(Senator|Sen\\.|Congressman|Congresswoman)';
 
   if (critter.house === 'house') {
     title = '(Representative|Rep\\.|Congressman|Congresswoman)';
   }
 
-  var firstName = critter.firstName.replace(' ', '\\s*');
-  var lastName = critter.lastName.replace(' ', '\\s*');
+  return title;
+}
 
-  if (critter.junior) {
-    lastName += '\\s*(Jr|Jr\\.)?';
-  }
 
-  var wordEndBoundary = '(\\.|\\b)';
-  var optionalQuote = '(\'|")?';
-  var wildCardMiddle = '(' + optionalQuote + '(\\w*)' + optionalQuote + '|[a-zA-Z]\\.([a-zA-Z]\\.)?)';
-  var upToTwoWildCardMiddles = '\\s*' + wildCardMiddle + '\\s*' + wildCardMiddle + '\\s*';
-  var firstLast = '\\b' + firstName + wordEndBoundary + upToTwoWildCardMiddles + wordEndBoundary + lastName + wordEndBoundary;
-  var lastFirst = '\\b' + lastName + ',\\s*' + firstName + wordEndBoundary;
-  var titleLast = '\\b' + title + '\\s*' + lastName + wordEndBoundary;
-  var nicknames = '';
-  var regExpString = '';
-
-  function getNicknameString (nickname, lastName) {
-    return '|\\b' + nickname + wordEndBoundary + upToTwoWildCardMiddles + wordEndBoundary + lastName + wordEndBoundary + '|\\b' + lastName + ',\\s*' + nickname + wordEndBoundary;
-  }
+/**
+ * Returns a regex string of nicknames wrapped in optional quotes.
+ * @param {Object} critter - Contains data on a congressperson.
+ * @return {string} A regex string of possibly quoted nicknames.
+ */
+function getQuotedNicknames(critter) {
+  var quotedNicknames = [];
+  var optOpenQuote = '[\'"‘“]?';
+  var optCloseQuote = '[\'"’”]?';
 
   if (critter.nicknames) {
-    if (Array.isArray(critter.nicknames)) {
-      for (var i = 0; i < critter.nicknames.length; i++) {
-        var nickname = critter.nicknames[i].replace(' ', '\\s*');
-        nicknames += getNicknameString(nickname, lastName);
-      }
-    } else if (typeof critter.nicknames === 'string') {
-      var nickname = critter.nicknames[i].replace(' ', '\\s*');
-      nicknames += getNicknameString(nickname, lastName);
-    }
+    quotedNicknames = _.map(critter.nicknames, function(nickname) {
+      return optOpenQuote + prepName(nickname) + optCloseQuote;
+    });
   }
 
-  regExpString += title + '?' + '(' + firstLast + nicknames + ')|' + titleLast + '|' + lastFirst;
-
-  return regExpString;
+  return quotedNicknames;
 }
+
+
+/**
+ * Performs substitutions on various characters in a name string.
+ * @param {string} name A name.
+ * @return {string} The name with substitutions performed.
+ */
+function prepName(name) {
+  name = name.replace('.', '\\.');
+  name = name.replace(' ', '\\s+');
+  name = name.replace('á', '[áa]');
+  name = name.replace('é', '[ée]');
+  name = name.replace('í', '[íi]');
+  name = name.replace('ó', '[óo]');
+  name = name.replace('ú', '[úu]');
+  name = name.replace('\'', '[\'’]');
+  return name;
+}
+
 
 /**
  * Builds a regex of all congressperson's last names, to provide an initial
@@ -81,17 +126,88 @@ function getLastNamesRegExp() {
   var lastNamesRegExpArr = [];
 
   for (var i = 0; i < congressData.length; i++) {
-    lastNamesRegExpArr.push(congressData[i].lastName);
+    lastNamesRegExpArr.push(prepName(congressData[i].lastName));
   }
 
-  // Sort by longer names first, to catch the "Blunt" issue. The last name
-  // "Blunt Rochester" was not properly matched, because there's also a last
-  // name of "Blunt" that appeared earlier in the array.
-  lastNamesRegExpArr.sort(function(a, b) {
+  var lastNamesRegExpString = stringifyRegExpStrings(_.uniq(lastNamesRegExpArr));
+
+  return new RegExp(lastNamesRegExpString, 'ig');
+}
+
+
+/**
+ * Returns the original last names stored in the congress data based upon
+ * matching for prepped last name variations. Fixes issues for matching strings
+ * with unicode variations.
+ *
+ * Example: the word "Diaz" is found in the DOM. This corresponds with "Díaz" as
+ * per our prepName() substitutions. But we need to store "Díaz" (the string in
+ * congressData) rather than "Diaz" (the string found in the DOM) in our chunked
+ * lastNames array for easier lookups later during markPermutations().
+ *
+ * @param {Array<string>} lastNames An array of last name strings found in DOM.
+ * @return {Array<string>} An array of original last names.
+ */
+function getOriginalLastNames(lastNames) {
+  var originalLastNames = [];
+
+  lastNames.forEach(function(lastName) {
+    for (var i = 0; i < congressData.length; i++) {
+      var regExpString = prepName(congressData[i].lastName);
+      var re = new RegExp(regExpString, 'ig');
+
+      if (lastName.match(re)) {
+        originalLastNames.push(congressData[i].lastName);
+      }
+    }
+  });
+
+  return originalLastNames;
+}
+
+
+/**
+ * Combines an array of regex strings into a single large regex string of "or"
+ * conditions.
+ * @param {Array<string>} regExStrings An array of regex strings.
+ * @return {string} Single large regex string of "or" conditions.
+ */
+function stringifyRegExpStrings(regExStrings) {
+  // Sort by longer names first, so that more specific matches occur before less
+  // specific matches. Ensures that "Blunt Rochester" is matched before "Blunt".
+  regExStrings.sort(function(a, b) {
     return b.length - a.length;
   });
 
-  return new RegExp(lastNamesRegExpArr.join('|'), 'ig');
+  return regExStrings.join('|');
+}
+
+
+/**
+ * Populates an array storing all possible critter reg exp strings and adds the
+ * array of reg exp strings to the critter object in the congress data.
+ * @param {Array<Object>} data An array of congress data.
+ */
+function buildRegExpStrings(data, i) {
+  data.forEach(function(critter, congressDataIndex) {
+    // Get the regex strings for the critter's name permutations.
+    critter.regExpStrings = getRegExpStrings(critter);
+
+    critter.regExpStrings.forEach(function(regExpString, regExpStringIndex) {
+      // Push a new object containing each string and a reference back to the
+      // critter's index in the congressData array, for future lookups during
+      // tooltip building.
+      critterRegExpStrings.push({
+        congressDataIndex: congressDataIndex,
+        regExpString: regExpString
+      });
+    });
+  });
+
+  // Sort descending.
+  critterRegExpStrings.sort(function(a, b) {
+    return b.regExpString.length - a.regExpString.length;
+  });
 }
 
 
@@ -119,7 +235,10 @@ function scan(node) {
 
     // If last names are found, chunk/queue them for further MarkJS processing.
     if (lastNames) {
-      chunk(_.uniq(lastNames), node);
+      // Store the original last names for faster/correct matching during
+      // markPermutations().
+      var originalLastNames = getOriginalLastNames(_.uniq(lastNames));
+      chunk(originalLastNames, node);
     }
 
     // Disable processing state.
@@ -192,12 +311,14 @@ function markPermutations(lastNames, node) {
   setProcessingState(true);
 
   // For each found last name, build a full RegExp to find all permutations.
-  for (var i = 0; i < congressData.length; i++) {
-    if (lastNames.indexOf(congressData[i].lastName) > -1) {
-      var senatorRegEx = '(' + getRegExpString(congressData[i]) + ')';
-      lastNamesRegExpArr.push(senatorRegEx);
+  congressData.forEach(function(critter) {
+    // We've stored the original last names here, not those found in the DOM,
+    // so that we can quickly pluck the congressData items needed for the full
+    // reg expression.
+    if (lastNames.indexOf(critter.lastName) > -1) {
+      lastNamesRegExpArr = lastNamesRegExpArr.concat(critter.regExpStrings);
     }
-  }
+  });
 
   debouncedProcessingStop();
 
@@ -205,7 +326,7 @@ function markPermutations(lastNames, node) {
     setProcessingState(true);
 
     // Create a single, massive RegExp for all found last names in the node.
-    lastNamesRegExp = new RegExp(lastNamesRegExpArr.join('|'), 'ig');
+    lastNamesRegExp = new RegExp(stringifyRegExpStrings(lastNamesRegExpArr), 'ig');
 
     // Create a context for MarkJS.
     markContext = new Mark(node);
@@ -259,13 +380,14 @@ function matchSenatorToMark(e) {
   var $el = $(e.target);
   var text = $el.text();
 
-  // Iterate through all congresspersons until a match is found.
-  for(var i = 0; i < congressData.length; i++) {
-    var regExp = new RegExp(getRegExpString(congressData[i]), 'ig');
+  // Iterate through all critter regExp strings until a match is found.
+  for(var i = 0; i < critterRegExpStrings.length; i++) {
+    var regExp = new RegExp(critterRegExpStrings[i].regExpString, 'ig');
 
     if (text.match(regExp)) {
-      // Build the tooltipster.
-      buildTooltip($el, congressData[i]);
+      // Build the tooltipster, using the stored congressDataIndex to look up
+      // the critter data.
+      buildTooltip($el, congressData[critterRegExpStrings[i].congressDataIndex]);
 
       // Remove the mouseenter event.
       $el.off('mouseenter', matchSenatorToMark);
@@ -319,6 +441,7 @@ function buildTooltip($el, critter) {
  * @return {Object} A jQuery element instance containing the tooltip content.
  */
 function getTooltipContent(critter) {
+  var iconUrl = chrome.extension.getURL("img/icon-38.png");
   var partyClass = 'dial-congress-tooltipster-party-ind';
 
   switch (critter.party) {
@@ -331,6 +454,8 @@ function getTooltipContent(critter) {
   }
 
   var contentString = '<div class="dial-congress-tooltipster-content">';
+  contentString += '<div class="dial-congress-tooltipster-img" ';
+  contentString += 'style="background-image: url(' + iconUrl + ');"></div>';
   contentString += '<div class="dial-congress-tooltipster-head">';
   contentString += '<span class="dial-congress-tooltipster-affiliation">';
   contentString += '<span class="' + partyClass + '">' + critter.party;
@@ -592,26 +717,21 @@ function initListeners() {
 
 
 /**
- * Gets the Senate and House JSON data.
+ * Initializes the data.
  */
-function getData() {
-  $.when(
-    // Gather and parse Senate data.
-    $.get(chrome.extension.getURL('js/senate.json'), function(data) {
-      senateData = JSON.parse(data);
-      senateData.forEach(function(senator) {
-        senator.house = 'senate';
-      });
-    }),
+function initData() {
+  // Ready Senate data.
+  senateData.forEach(function(senator) {
+    senator.house = 'senate';
+  });
 
-    // Gather and parse House of Representatives data.
-    $.get(chrome.extension.getURL('js/house.json'), function(data) {
-      houseData = JSON.parse(data);
-      houseData.forEach(function(rep) {
-        rep.house = 'house';
-      });
-    })
-  ).then(init);
+  // Ready House data.
+  houseData.forEach(function(rep) {
+    rep.house = 'house';
+  });
+
+  // Combine Senate and House data.
+  congressData = _.union(senateData, houseData);
 }
 
 
@@ -619,8 +739,11 @@ function getData() {
  * Initialize Dial Congress.
  */
 function init() {
-  // Combine Senate and House data.
-  congressData = _.union(senateData, houseData);
+  // Ready the data.
+  initData();
+
+  // Build array of all possible regExp strings from all critters.
+  buildRegExpStrings(congressData);
 
   // Set the minimum text threshold for scanning a node.
   setInnerTextMin();
@@ -648,4 +771,4 @@ function init() {
 /**
  * On DOM ready.
  */
-$(document).ready(getData);
+$(document).ready(init);

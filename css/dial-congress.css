@@ -1,53 +1,68 @@
 .dial-congress {
-  background: #ffffce;
-  color: #222233;
-  cursor: pointer;
+  background: #ffffce !important;
+  color: #222233 !important;
+  cursor: pointer !important;
 }
 
-.dial-congress-tooltipster-head:after {
+.dial-congress-tooltipster-content {
+  position: relative;
+}
+
+.dial-congress-tooltipster-img {
+  background-size: cover !important;
+  height: 18px !important;
+  left: 50% !important;
+  margin-left: -7px !important;
+  opacity: .25 !important;
+  position: absolute !important;
+  top: 0 !important;
+  width: 18px !important;
+}
+
+.dial-congress-tooltipster-head::after {
   content: "";
   display: table;
   clear: both;
 }
 
 .dial-congress-tooltipster-head {
-  color: #666;
-  font-size: 11px;
-  padding: 2px 2px 0;
-  text-transform: uppercase;
+  color: #666 !important;
+  font-size: 11px !important;
+  padding: 2px 2px 0 !important;
+  text-transform: uppercase !important;
 }
 
 .dial-congress-tooltipster-affiliation,
 .dial-congress-tooltipster-house {
-  display: block;
+  display: block !important;
 }
 
 .dial-congress-tooltipster-house {
-  float: left;
+  float: left !important;
 }
 
 .dial-congress-tooltipster-affiliation {
-  float: right;
+  float: right !important;
 }
 
 .dial-congress-tooltipster-party-dem {
-  color: #3366ff;
+  color: #3366ff !important;
 }
 
 .dial-congress-tooltipster-party-rep {
-  color: #ff4e41;
+  color: #ff4e41 !important;
 }
 
 .dial-congress-tooltipster-divider {
-  color: #ccc;
+  color: #ccc !important;
 }
 
 .dial-congress-tooltipster-body {
-  font-size: 14px;
-  font-weight: bold;
-  margin: 2px 0 5px;
+  font-size: 14px !important;
+  font-weight: bold !important;
+  margin: 2px 0 5px !important;
 }
 
 .tooltipster-sidetip.tooltipster-noir.tooltipster-noir-customized .tooltipster-content {
-  font-family: Verdana, Arial, sans-serif;
+  font-family: Verdana, Arial, sans-serif !important;
 }

@@ -1,4 +1,4 @@
-[
+senateData = [
   {
     "party": "R",
     "firstName": "Daniel",
@@ -7,6 +7,7 @@
       "Dan"
     ],
     "state": "AK",
+    "middleNames": [],
     "phone": "(202) 224-3004"
   },
   {
@@ -14,6 +15,7 @@
     "firstName": "Lisa",
     "lastName": "Murkowski",
     "state": "AK",
+    "middleNames": [],
     "phone": "(202) 224-6665"
   },
   {
@@ -21,6 +23,7 @@
     "firstName": "Luther",
     "lastName": "Strange",
     "state": "AL",
+    "middleNames": [],
     "phone": "(202) 224-4124"
   },
   {
@@ -31,6 +34,7 @@
       "Dick"
     ],
     "state": "AL",
+    "middleNames": [],
     "phone": "(202) 224-5744"
   },
   {
@@ -41,6 +45,7 @@
       "Tom"
     ],
     "state": "AR",
+    "middleNames": [],
     "phone": "(202) 224-2353"
   },
   {
@@ -48,6 +53,7 @@
     "firstName": "John",
     "lastName": "Boozman",
     "state": "AR",
+    "middleNames": [],
     "phone": "(202) 224-4843"
   },
   {
@@ -58,6 +64,7 @@
       "Jeff"
     ],
     "state": "AZ",
+    "middleNames": [],
     "phone": "(202) 224-4521"
   },
   {
@@ -65,6 +72,7 @@
     "firstName": "John",
     "lastName": "McCain",
     "state": "AZ",
+    "middleNames": [],
     "phone": "(202) 224-2235"
   },
   {
@@ -72,6 +80,7 @@
     "firstName": "Dianne",
     "lastName": "Feinstein",
     "state": "CA",
+    "middleNames": [],
     "phone": "(202) 224-3841"
   },
   {
@@ -79,6 +88,7 @@
     "firstName": "Kamala",
     "lastName": "Harris",
     "state": "CA",
+    "middleNames": [],
     "phone": "(202) 224-3553"
   },
   {
@@ -86,6 +96,7 @@
     "firstName": "Cory",
     "lastName": "Gardner",
     "state": "CO",
+    "middleNames": [],
     "phone": "(202) 224-5941"
   },
   {
@@ -93,6 +104,7 @@
     "firstName": "Michael",
     "lastName": "Bennet",
     "state": "CO",
+    "middleNames": [],
     "phone": "(202) 224-5852"
   },
   {
@@ -103,6 +115,7 @@
       "Chris"
     ],
     "state": "CT",
+    "middleNames": [],
     "phone": "(202) 224-4041"
   },
   {
@@ -113,6 +126,7 @@
       "Dick"
     ],
     "state": "CT",
+    "middleNames": [],
     "phone": "(202) 224-2823"
   },
   {
@@ -123,6 +137,7 @@
       "Tom"
     ],
     "state": "DE",
+    "middleNames": [],
     "phone": "(202) 224-2441"
   },
   {
@@ -133,6 +148,7 @@
       "Chris"
     ],
     "state": "DE",
+    "middleNames": [],
     "phone": "(202) 224-5042"
   },
   {
@@ -144,6 +160,7 @@
       "Bill"
     ],
     "state": "FL",
+    "middleNames": [],
     "phone": "(202) 224-5274"
   },
   {
@@ -151,6 +168,7 @@
     "firstName": "Marco",
     "lastName": "Rubio",
     "state": "FL",
+    "middleNames": [],
     "phone": "(202) 224-3041"
   },
   {
@@ -161,6 +179,7 @@
       "Dave"
     ],
     "state": "GA",
+    "middleNames": [],
     "phone": "(202) 224-3521"
   },
   {
@@ -171,6 +190,7 @@
       "Johnny"
     ],
     "state": "GA",
+    "middleNames": [],
     "phone": "(202) 224-3643"
   },
   {
@@ -178,6 +198,7 @@
     "firstName": "Mazie",
     "lastName": "Hirono",
     "state": "HI",
+    "middleNames": [],
     "phone": "(202) 224-6361"
   },
   {
@@ -185,6 +206,7 @@
     "firstName": "Brian",
     "lastName": "Schatz",
     "state": "HI",
+    "middleNames": [],
     "phone": "(202) 224-3934"
   },
   {
@@ -192,6 +214,7 @@
     "firstName": "Joni",
     "lastName": "Ernst",
     "state": "IA",
+    "middleNames": [],
     "phone": "(202) 224-3254"
   },
   {
@@ -203,6 +226,7 @@
       "Chuck"
     ],
     "state": "IA",
+    "middleNames": [],
     "phone": "(202) 224-3744"
   },
   {
@@ -213,6 +237,7 @@
       "Jim"
     ],
     "state": "ID",
+    "middleNames": [],
     "phone": "(202) 224-2752"
   },
   {
@@ -223,6 +248,7 @@
       "Mike"
     ],
     "state": "ID",
+    "middleNames": [],
     "phone": "(202) 224-6142"
   },
   {
@@ -233,6 +259,7 @@
       "Dick"
     ],
     "state": "IL",
+    "middleNames": [],
     "phone": "(202) 224-2152"
   },
   {
@@ -243,6 +270,7 @@
       "Tammy"
     ],
     "state": "IL",
+    "middleNames": [],
     "phone": "(202) 224-2854"
   },
   {
@@ -253,6 +281,7 @@
       "Joe"
     ],
     "state": "IN",
+    "middleNames": [],
     "phone": "(202) 224-4814"
   },
   {
@@ -260,6 +289,7 @@
     "firstName": "Todd",
     "lastName": "Young",
     "state": "IN",
+    "middleNames": [],
     "phone": "(202) 224-5623"
   },
   {
@@ -270,6 +300,7 @@
       "Jerry"
     ],
     "state": "KS",
+    "middleNames": [],
     "phone": "(202) 224-6521"
   },
   {
@@ -281,6 +312,7 @@
       "Pat"
     ],
     "state": "KS",
+    "middleNames": [],
     "phone": "(202) 224-4774"
   },
   {
@@ -291,16 +323,21 @@
       "Rand"
     ],
     "state": "KY",
+    "middleNames": [],
     "phone": "(202) 224-4343"
   },
   {
     "party": "R",
     "firstName": "Addison",
     "lastName": "McConnell",
+    "middleNames": [
+      "Mitchell"
+    ],
     "nicknames": [
       "Mitch"
     ],
     "state": "KY",
+    "middleNames": [],
     "phone": "(202) 224-2541"
   },
   {
@@ -311,6 +348,7 @@
       "Bill"
     ],
     "state": "LA",
+    "middleNames": [],
     "phone": "(202) 224-5824"
   },
   {
@@ -318,6 +356,7 @@
     "firstName": "John",
     "lastName": "Kennedy",
     "state": "LA",
+    "middleNames": [],
     "phone": "(202) 224-4623"
   },
   {
@@ -325,6 +364,7 @@
     "firstName": "Elizabeth",
     "lastName": "Warren",
     "state": "MA",
+    "middleNames": [],
     "phone": "(202) 224-4543"
   },
   {
@@ -335,6 +375,7 @@
       "Ed"
     ],
     "state": "MA",
+    "middleNames": [],
     "phone": "(202) 224-2742"
   },
   {
@@ -345,6 +386,7 @@
       "Ben"
     ],
     "state": "MD",
+    "middleNames": [],
     "phone": "(202) 224-4524"
   },
   {
@@ -355,6 +397,7 @@
       "Chris"
     ],
     "state": "MD",
+    "middleNames": [],
     "phone": "(202) 224-4654"
   },
   {
@@ -362,6 +405,7 @@
     "firstName": "Angus",
     "lastName": "King",
     "state": "ME",
+    "middleNames": [],
     "phone": "(202) 224-5344"
   },
   {
@@ -369,6 +413,7 @@
     "firstName": "Susan",
     "lastName": "Collins",
     "state": "ME",
+    "middleNames": [],
     "phone": "(202) 224-2523"
   },
   {
@@ -379,6 +424,7 @@
       "Debbie"
     ],
     "state": "MI",
+    "middleNames": [],
     "phone": "(202) 224-4822"
   },
   {
@@ -386,6 +432,7 @@
     "firstName": "Gary",
     "lastName": "Peters",
     "state": "MI",
+    "middleNames": [],
     "phone": "(202) 224-6221"
   },
   {
@@ -393,6 +440,7 @@
     "firstName": "Amy",
     "lastName": "Klobuchar",
     "state": "MN",
+    "middleNames": [],
     "phone": "(202) 224-3244"
   },
   {
@@ -403,6 +451,7 @@
       "Al"
     ],
     "state": "MN",
+    "middleNames": [],
     "phone": "(202) 224-5641"
   },
   {
@@ -410,6 +459,7 @@
     "firstName": "Roy",
     "lastName": "Blunt",
     "state": "MO",
+    "middleNames": [],
     "phone": "(202) 224-5721"
   },
   {
@@ -417,6 +467,7 @@
     "firstName": "Claire",
     "lastName": "McCaskill",
     "state": "MO",
+    "middleNames": [],
     "phone": "(202) 224-6154"
   },
   {
@@ -424,6 +475,7 @@
     "firstName": "Roger",
     "lastName": "Wicker",
     "state": "MS",
+    "middleNames": [],
     "phone": "(202) 224-6253"
   },
   {
@@ -431,6 +483,7 @@
     "firstName": "Thad",
     "lastName": "Cochran",
     "state": "MS",
+    "middleNames": [],
     "phone": "(202) 224-5054"
   },
   {
@@ -438,6 +491,7 @@
     "firstName": "Jon",
     "lastName": "Tester",
     "state": "MT",
+    "middleNames": [],
     "phone": "(202) 224-2644"
   },
   {
@@ -448,6 +502,7 @@
       "Steve"
     ],
     "state": "MT",
+    "middleNames": [],
     "phone": "(202) 224-2651"
   },
   {
@@ -458,6 +513,7 @@
       "Dick"
     ],
     "state": "NC",
+    "middleNames": [],
     "phone": "(202) 224-3154"
   },
   {
@@ -468,6 +524,7 @@
       "Thom"
     ],
     "state": "NC",
+    "middleNames": [],
     "phone": "(202) 224-6342"
   },
   {
@@ -475,6 +532,7 @@
     "firstName": "John",
     "lastName": "Hoeven",
     "state": "ND",
+    "middleNames": [],
     "phone": "(202) 224-2551"
   },
   {
@@ -485,6 +543,7 @@
       "Heidi"
     ],
     "state": "ND",
+    "middleNames": [],
     "phone": "(202) 224-2043"
   },
   {
@@ -495,6 +554,7 @@
       "Deb"
     ],
     "state": "NE",
+    "middleNames": [],
     "phone": "(202) 224-6551"
   },
   {
@@ -505,6 +565,7 @@
       "Ben"
     ],
     "state": "NE",
+    "middleNames": [],
     "phone": "(202) 224-4224"
   },
   {
@@ -515,6 +576,7 @@
       "Jeanne"
     ],
     "state": "NH",
+    "middleNames": [],
     "phone": "(202) 224-2841"
   },
   {
@@ -525,6 +587,7 @@
       "Maggie"
     ],
     "state": "NH",
+    "middleNames": [],
     "phone": "(202) 224-3324"
   },
   {
@@ -535,6 +598,7 @@
       "Bob"
     ],
     "state": "NJ",
+    "middleNames": [],
     "phone": "(202) 224-4744"
   },
   {
@@ -542,6 +606,7 @@
     "firstName": "Cory",
     "lastName": "Booker",
     "state": "NJ",
+    "middleNames": [],
     "phone": "(202) 224-3224"
   },
   {
@@ -549,6 +614,7 @@
     "firstName": "Martin",
     "lastName": "Heinrich",
     "state": "NM",
+    "middleNames": [],
     "phone": "(202) 224-5521"
   },
   {
@@ -559,6 +625,7 @@
       "Tom"
     ],
     "state": "NM",
+    "middleNames": [],
     "phone": "(202) 224-6621"
   },
   {
@@ -566,6 +633,7 @@
     "firstName": "Dean",
     "lastName": "Heller",
     "state": "NV",
+    "middleNames": [],
     "phone": "(202) 224-6244"
   },
   {
@@ -573,6 +641,7 @@
     "firstName": "Catherine",
     "lastName": "Cortez Masto",
     "state": "NV",
+    "middleNames": [],
     "phone": "(202) 224-3542"
   },
   {
@@ -583,6 +652,7 @@
       "Chuck"
     ],
     "state": "NY",
+    "middleNames": [],
     "phone": "(202) 224-6542"
   },
   {
@@ -590,6 +660,7 @@
     "firstName": "Kirsten",
     "lastName": "Gillibrand",
     "state": "NY",
+    "middleNames": [],
     "phone": "(202) 224-4451"
   },
   {
@@ -600,6 +671,7 @@
       "Rob"
     ],
     "state": "OH",
+    "middleNames": [],
     "phone": "(202) 224-3353"
   },
   {
@@ -607,6 +679,7 @@
     "firstName": "Sherrod",
     "lastName": "Brown",
     "state": "OH",
+    "middleNames": [],
     "phone": "(202) 224-2315"
   },
   {
@@ -617,6 +690,7 @@
       "Jim"
     ],
     "state": "OK",
+    "middleNames": [],
     "phone": "(202) 224-5754"
   },
   {
@@ -627,6 +701,7 @@
       "Jim"
     ],
     "state": "OK",
+    "middleNames": [],
     "phone": "(202) 224-4721"
   },
   {
@@ -637,6 +712,7 @@
       "Ron"
     ],
     "state": "OR",
+    "middleNames": [],
     "phone": "(202) 224-5244"
   },
   {
@@ -647,6 +723,7 @@
       "Jeff"
     ],
     "state": "OR",
+    "middleNames": [],
     "phone": "(202) 224-3753"
   },
   {
@@ -657,6 +734,7 @@
       "Pat"
     ],
     "state": "PA",
+    "middleNames": [],
     "phone": "(202) 224-4254"
   },
   {
@@ -667,6 +745,7 @@
       "Bob"
     ],
     "state": "PA",
+    "middleNames": [],
     "phone": "(202) 224-6324"
   },
   {
@@ -674,6 +753,7 @@
     "firstName": "Sheldon",
     "lastName": "Whitehouse",
     "state": "RI",
+    "middleNames": [],
     "phone": "(202) 224-2921"
   },
   {
@@ -684,6 +764,7 @@
       "John"
     ],
     "state": "RI",
+    "middleNames": [],
     "phone": "(202) 224-4642"
   },
   {
@@ -694,6 +775,7 @@
       "Tim"
     ],
     "state": "SC",
+    "middleNames": [],
     "phone": "(202) 224-6121"
   },
   {
@@ -701,6 +783,7 @@
     "firstName": "Lindsey",
     "lastName": "Graham",
     "state": "SC",
+    "middleNames": [],
     "phone": "(202) 224-5972"
   },
   {
@@ -708,6 +791,7 @@
     "firstName": "John",
     "lastName": "Thune",
     "state": "SD",
+    "middleNames": [],
     "phone": "(202) 224-2321"
   },
   {
@@ -718,6 +802,7 @@
       "Mike"
     ],
     "state": "SD",
+    "middleNames": [],
     "phone": "(202) 224-5842"
   },
   {
@@ -728,6 +813,7 @@
       "Bob"
     ],
     "state": "TN",
+    "middleNames": [],
     "phone": "(202) 224-3344"
   },
   {
@@ -738,6 +824,7 @@
       "Lamar"
     ],
     "state": "TN",
+    "middleNames": [],
     "phone": "(202) 224-4944"
   },
   {
@@ -748,6 +835,7 @@
       "Ted"
     ],
     "state": "TX",
+    "middleNames": [],
     "phone": "(202) 224-5922"
   },
   {
@@ -755,6 +843,7 @@
     "firstName": "John",
     "lastName": "Cornyn",
     "state": "TX",
+    "middleNames": [],
     "phone": "(202) 224-2934"
   },
   {
@@ -765,6 +854,7 @@
       "Mike"
     ],
     "state": "UT",
+    "middleNames": [],
     "phone": "(202) 224-5444"
   },
   {
@@ -772,6 +862,7 @@
     "firstName": "Orrin",
     "lastName": "Hatch",
     "state": "UT",
+    "middleNames": [],
     "phone": "(202) 224-5251"
   },
   {
@@ -782,6 +873,7 @@
       "Tim"
     ],
     "state": "VA",
+    "middleNames": [],
     "phone": "(202) 224-4024"
   },
   {
@@ -789,6 +881,7 @@
     "firstName": "Mark",
     "lastName": "Warner",
     "state": "VA",
+    "middleNames": [],
     "phone": "(202) 224-2023"
   },
   {
@@ -799,6 +892,7 @@
       "Pat"
     ],
     "state": "VT",
+    "middleNames": [],
     "phone": "(202) 224-4242"
   },
   {
@@ -809,6 +903,7 @@
       "Bernie"
     ],
     "state": "VT",
+    "middleNames": [],
     "phone": "(202) 224-5141"
   },
   {
@@ -819,6 +914,7 @@
       "Patty"
     ],
     "state": "WA",
+    "middleNames": [],
     "phone": "(202) 224-2621"
   },
   {
@@ -826,6 +922,7 @@
     "firstName": "Maria",
     "lastName": "Cantwell",
     "state": "WA",
+    "middleNames": [],
     "phone": "(202) 224-3441"
   },
   {
@@ -836,6 +933,7 @@
       "Ron"
     ],
     "state": "WI",
+    "middleNames": [],
     "phone": "(202) 224-5323"
   },
   {
@@ -843,6 +941,7 @@
     "firstName": "Tammy",
     "lastName": "Baldwin",
     "state": "WI",
+    "middleNames": [],
     "phone": "(202) 224-5653"
   },
   {
@@ -853,6 +952,7 @@
       "Joe"
     ],
     "state": "WV",
+    "middleNames": [],
     "phone": "(202) 224-3954"
   },
   {
@@ -860,6 +960,7 @@
     "firstName": "Shelley",
     "lastName": "Capito",
     "state": "WV",
+    "middleNames": [],
     "phone": "(202) 224-6472"
   },
   {
@@ -867,6 +968,7 @@
     "firstName": "John",
     "lastName": "Barrasso",
     "state": "WY",
+    "middleNames": [],
     "phone": "(202) 224-6441"
   },
   {
@@ -877,6 +979,7 @@
       "Mike"
     ],
     "state": "WY",
+    "middleNames": [],
     "phone": "(202) 224-3424"
   }
-]
+];

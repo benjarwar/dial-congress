@@ -3,7 +3,7 @@
 
   "name": "Dial Congress",
   "description": "Displays the phone number of a member of the U.S. Congress when hovering over their name.",
-  "version": "0.2.2",
+  "version": "0.3.0",
 
   "browser_action": {
     "default_icon": {
@@ -32,6 +32,8 @@
       "bower_components/mark.js/dist/mark.min.js",
       "bower_components/tooltipster/dist/js/tooltipster.bundle.min.js",
       "bower_components/lodash/lodash.js",
+      "js/house.js",
+      "js/senate.js",
       "js/content.js"
     ]
   }],
@@ -45,10 +47,12 @@
   },
 
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "storage"
   ],
 
   "web_accessible_resources": [
+    "img/icon-38.png",
     "js/house.json",
     "js/senate.json"
   ]
