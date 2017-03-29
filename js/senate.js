@@ -7,6 +7,7 @@ senateData = [
       "Dan"
     ],
     "state": "AK",
+    "middleNames": [],
     "phone": "(202) 224-3004"
   },
   {
@@ -14,6 +15,7 @@ senateData = [
     "firstName": "Lisa",
     "lastName": "Murkowski",
     "state": "AK",
+    "middleNames": [],
     "phone": "(202) 224-6665"
   },
   {
@@ -21,6 +23,7 @@ senateData = [
     "firstName": "Luther",
     "lastName": "Strange",
     "state": "AL",
+    "middleNames": [],
     "phone": "(202) 224-4124"
   },
   {
@@ -31,6 +34,7 @@ senateData = [
       "Dick"
     ],
     "state": "AL",
+    "middleNames": [],
     "phone": "(202) 224-5744"
   },
   {
@@ -41,6 +45,7 @@ senateData = [
       "Tom"
     ],
     "state": "AR",
+    "middleNames": [],
     "phone": "(202) 224-2353"
   },
   {
@@ -48,6 +53,7 @@ senateData = [
     "firstName": "John",
     "lastName": "Boozman",
     "state": "AR",
+    "middleNames": [],
     "phone": "(202) 224-4843"
   },
   {
@@ -58,6 +64,7 @@ senateData = [
       "Jeff"
     ],
     "state": "AZ",
+    "middleNames": [],
     "phone": "(202) 224-4521"
   },
   {
@@ -65,6 +72,7 @@ senateData = [
     "firstName": "John",
     "lastName": "McCain",
     "state": "AZ",
+    "middleNames": [],
     "phone": "(202) 224-2235"
   },
   {
@@ -72,6 +80,7 @@ senateData = [
     "firstName": "Dianne",
     "lastName": "Feinstein",
     "state": "CA",
+    "middleNames": [],
     "phone": "(202) 224-3841"
   },
   {
@@ -79,6 +88,7 @@ senateData = [
     "firstName": "Kamala",
     "lastName": "Harris",
     "state": "CA",
+    "middleNames": [],
     "phone": "(202) 224-3553"
   },
   {
@@ -86,6 +96,7 @@ senateData = [
     "firstName": "Cory",
     "lastName": "Gardner",
     "state": "CO",
+    "middleNames": [],
     "phone": "(202) 224-5941"
   },
   {
@@ -93,6 +104,7 @@ senateData = [
     "firstName": "Michael",
     "lastName": "Bennet",
     "state": "CO",
+    "middleNames": [],
     "phone": "(202) 224-5852"
   },
   {
@@ -103,6 +115,7 @@ senateData = [
       "Chris"
     ],
     "state": "CT",
+    "middleNames": [],
     "phone": "(202) 224-4041"
   },
   {
@@ -113,6 +126,7 @@ senateData = [
       "Dick"
     ],
     "state": "CT",
+    "middleNames": [],
     "phone": "(202) 224-2823"
   },
   {
@@ -123,6 +137,7 @@ senateData = [
       "Tom"
     ],
     "state": "DE",
+    "middleNames": [],
     "phone": "(202) 224-2441"
   },
   {
@@ -133,6 +148,7 @@ senateData = [
       "Chris"
     ],
     "state": "DE",
+    "middleNames": [],
     "phone": "(202) 224-5042"
   },
   {
@@ -144,6 +160,7 @@ senateData = [
       "Bill"
     ],
     "state": "FL",
+    "middleNames": [],
     "phone": "(202) 224-5274"
   },
   {
@@ -151,6 +168,7 @@ senateData = [
     "firstName": "Marco",
     "lastName": "Rubio",
     "state": "FL",
+    "middleNames": [],
     "phone": "(202) 224-3041"
   },
   {
@@ -161,6 +179,7 @@ senateData = [
       "Dave"
     ],
     "state": "GA",
+    "middleNames": [],
     "phone": "(202) 224-3521"
   },
   {
@@ -171,6 +190,7 @@ senateData = [
       "Johnny"
     ],
     "state": "GA",
+    "middleNames": [],
     "phone": "(202) 224-3643"
   },
   {
@@ -178,6 +198,7 @@ senateData = [
     "firstName": "Mazie",
     "lastName": "Hirono",
     "state": "HI",
+    "middleNames": [],
     "phone": "(202) 224-6361"
   },
   {
@@ -185,6 +206,7 @@ senateData = [
     "firstName": "Brian",
     "lastName": "Schatz",
     "state": "HI",
+    "middleNames": [],
     "phone": "(202) 224-3934"
   },
   {
@@ -192,6 +214,7 @@ senateData = [
     "firstName": "Joni",
     "lastName": "Ernst",
     "state": "IA",
+    "middleNames": [],
     "phone": "(202) 224-3254"
   },
   {
@@ -203,6 +226,7 @@ senateData = [
       "Chuck"
     ],
     "state": "IA",
+    "middleNames": [],
     "phone": "(202) 224-3744"
   },
   {
@@ -213,6 +237,7 @@ senateData = [
       "Jim"
     ],
     "state": "ID",
+    "middleNames": [],
     "phone": "(202) 224-2752"
   },
   {
@@ -223,6 +248,7 @@ senateData = [
       "Mike"
     ],
     "state": "ID",
+    "middleNames": [],
     "phone": "(202) 224-6142"
   },
   {
@@ -233,6 +259,7 @@ senateData = [
       "Dick"
     ],
     "state": "IL",
+    "middleNames": [],
     "phone": "(202) 224-2152"
   },
   {
@@ -243,6 +270,7 @@ senateData = [
       "Tammy"
     ],
     "state": "IL",
+    "middleNames": [],
     "phone": "(202) 224-2854"
   },
   {
@@ -253,6 +281,7 @@ senateData = [
       "Joe"
     ],
     "state": "IN",
+    "middleNames": [],
     "phone": "(202) 224-4814"
   },
   {
@@ -260,6 +289,7 @@ senateData = [
     "firstName": "Todd",
     "lastName": "Young",
     "state": "IN",
+    "middleNames": [],
     "phone": "(202) 224-5623"
   },
   {
@@ -270,6 +300,7 @@ senateData = [
       "Jerry"
     ],
     "state": "KS",
+    "middleNames": [],
     "phone": "(202) 224-6521"
   },
   {
@@ -281,6 +312,7 @@ senateData = [
       "Pat"
     ],
     "state": "KS",
+    "middleNames": [],
     "phone": "(202) 224-4774"
   },
   {
@@ -291,6 +323,7 @@ senateData = [
       "Rand"
     ],
     "state": "KY",
+    "middleNames": [],
     "phone": "(202) 224-4343"
   },
   {
@@ -304,6 +337,7 @@ senateData = [
       "Mitch"
     ],
     "state": "KY",
+    "middleNames": [],
     "phone": "(202) 224-2541"
   },
   {
@@ -314,6 +348,7 @@ senateData = [
       "Bill"
     ],
     "state": "LA",
+    "middleNames": [],
     "phone": "(202) 224-5824"
   },
   {
@@ -321,6 +356,7 @@ senateData = [
     "firstName": "John",
     "lastName": "Kennedy",
     "state": "LA",
+    "middleNames": [],
     "phone": "(202) 224-4623"
   },
   {
@@ -328,6 +364,7 @@ senateData = [
     "firstName": "Elizabeth",
     "lastName": "Warren",
     "state": "MA",
+    "middleNames": [],
     "phone": "(202) 224-4543"
   },
   {
@@ -338,6 +375,7 @@ senateData = [
       "Ed"
     ],
     "state": "MA",
+    "middleNames": [],
     "phone": "(202) 224-2742"
   },
   {
@@ -348,6 +386,7 @@ senateData = [
       "Ben"
     ],
     "state": "MD",
+    "middleNames": [],
     "phone": "(202) 224-4524"
   },
   {
@@ -358,6 +397,7 @@ senateData = [
       "Chris"
     ],
     "state": "MD",
+    "middleNames": [],
     "phone": "(202) 224-4654"
   },
   {
@@ -365,6 +405,7 @@ senateData = [
     "firstName": "Angus",
     "lastName": "King",
     "state": "ME",
+    "middleNames": [],
     "phone": "(202) 224-5344"
   },
   {
@@ -372,6 +413,7 @@ senateData = [
     "firstName": "Susan",
     "lastName": "Collins",
     "state": "ME",
+    "middleNames": [],
     "phone": "(202) 224-2523"
   },
   {
@@ -382,6 +424,7 @@ senateData = [
       "Debbie"
     ],
     "state": "MI",
+    "middleNames": [],
     "phone": "(202) 224-4822"
   },
   {
@@ -389,6 +432,7 @@ senateData = [
     "firstName": "Gary",
     "lastName": "Peters",
     "state": "MI",
+    "middleNames": [],
     "phone": "(202) 224-6221"
   },
   {
@@ -396,6 +440,7 @@ senateData = [
     "firstName": "Amy",
     "lastName": "Klobuchar",
     "state": "MN",
+    "middleNames": [],
     "phone": "(202) 224-3244"
   },
   {
@@ -406,6 +451,7 @@ senateData = [
       "Al"
     ],
     "state": "MN",
+    "middleNames": [],
     "phone": "(202) 224-5641"
   },
   {
@@ -413,6 +459,7 @@ senateData = [
     "firstName": "Roy",
     "lastName": "Blunt",
     "state": "MO",
+    "middleNames": [],
     "phone": "(202) 224-5721"
   },
   {
@@ -420,6 +467,7 @@ senateData = [
     "firstName": "Claire",
     "lastName": "McCaskill",
     "state": "MO",
+    "middleNames": [],
     "phone": "(202) 224-6154"
   },
   {
@@ -427,6 +475,7 @@ senateData = [
     "firstName": "Roger",
     "lastName": "Wicker",
     "state": "MS",
+    "middleNames": [],
     "phone": "(202) 224-6253"
   },
   {
@@ -434,6 +483,7 @@ senateData = [
     "firstName": "Thad",
     "lastName": "Cochran",
     "state": "MS",
+    "middleNames": [],
     "phone": "(202) 224-5054"
   },
   {
@@ -441,6 +491,7 @@ senateData = [
     "firstName": "Jon",
     "lastName": "Tester",
     "state": "MT",
+    "middleNames": [],
     "phone": "(202) 224-2644"
   },
   {
@@ -451,6 +502,7 @@ senateData = [
       "Steve"
     ],
     "state": "MT",
+    "middleNames": [],
     "phone": "(202) 224-2651"
   },
   {
@@ -461,6 +513,7 @@ senateData = [
       "Dick"
     ],
     "state": "NC",
+    "middleNames": [],
     "phone": "(202) 224-3154"
   },
   {
@@ -471,6 +524,7 @@ senateData = [
       "Thom"
     ],
     "state": "NC",
+    "middleNames": [],
     "phone": "(202) 224-6342"
   },
   {
@@ -478,6 +532,7 @@ senateData = [
     "firstName": "John",
     "lastName": "Hoeven",
     "state": "ND",
+    "middleNames": [],
     "phone": "(202) 224-2551"
   },
   {
@@ -488,6 +543,7 @@ senateData = [
       "Heidi"
     ],
     "state": "ND",
+    "middleNames": [],
     "phone": "(202) 224-2043"
   },
   {
@@ -498,6 +554,7 @@ senateData = [
       "Deb"
     ],
     "state": "NE",
+    "middleNames": [],
     "phone": "(202) 224-6551"
   },
   {
@@ -508,6 +565,7 @@ senateData = [
       "Ben"
     ],
     "state": "NE",
+    "middleNames": [],
     "phone": "(202) 224-4224"
   },
   {
@@ -518,6 +576,7 @@ senateData = [
       "Jeanne"
     ],
     "state": "NH",
+    "middleNames": [],
     "phone": "(202) 224-2841"
   },
   {
@@ -528,6 +587,7 @@ senateData = [
       "Maggie"
     ],
     "state": "NH",
+    "middleNames": [],
     "phone": "(202) 224-3324"
   },
   {
@@ -538,6 +598,7 @@ senateData = [
       "Bob"
     ],
     "state": "NJ",
+    "middleNames": [],
     "phone": "(202) 224-4744"
   },
   {
@@ -545,6 +606,7 @@ senateData = [
     "firstName": "Cory",
     "lastName": "Booker",
     "state": "NJ",
+    "middleNames": [],
     "phone": "(202) 224-3224"
   },
   {
@@ -552,6 +614,7 @@ senateData = [
     "firstName": "Martin",
     "lastName": "Heinrich",
     "state": "NM",
+    "middleNames": [],
     "phone": "(202) 224-5521"
   },
   {
@@ -562,6 +625,7 @@ senateData = [
       "Tom"
     ],
     "state": "NM",
+    "middleNames": [],
     "phone": "(202) 224-6621"
   },
   {
@@ -569,6 +633,7 @@ senateData = [
     "firstName": "Dean",
     "lastName": "Heller",
     "state": "NV",
+    "middleNames": [],
     "phone": "(202) 224-6244"
   },
   {
@@ -576,6 +641,7 @@ senateData = [
     "firstName": "Catherine",
     "lastName": "Cortez Masto",
     "state": "NV",
+    "middleNames": [],
     "phone": "(202) 224-3542"
   },
   {
@@ -586,6 +652,7 @@ senateData = [
       "Chuck"
     ],
     "state": "NY",
+    "middleNames": [],
     "phone": "(202) 224-6542"
   },
   {
@@ -593,6 +660,7 @@ senateData = [
     "firstName": "Kirsten",
     "lastName": "Gillibrand",
     "state": "NY",
+    "middleNames": [],
     "phone": "(202) 224-4451"
   },
   {
@@ -603,6 +671,7 @@ senateData = [
       "Rob"
     ],
     "state": "OH",
+    "middleNames": [],
     "phone": "(202) 224-3353"
   },
   {
@@ -610,6 +679,7 @@ senateData = [
     "firstName": "Sherrod",
     "lastName": "Brown",
     "state": "OH",
+    "middleNames": [],
     "phone": "(202) 224-2315"
   },
   {
@@ -620,6 +690,7 @@ senateData = [
       "Jim"
     ],
     "state": "OK",
+    "middleNames": [],
     "phone": "(202) 224-5754"
   },
   {
@@ -630,6 +701,7 @@ senateData = [
       "Jim"
     ],
     "state": "OK",
+    "middleNames": [],
     "phone": "(202) 224-4721"
   },
   {
@@ -640,6 +712,7 @@ senateData = [
       "Ron"
     ],
     "state": "OR",
+    "middleNames": [],
     "phone": "(202) 224-5244"
   },
   {
@@ -650,6 +723,7 @@ senateData = [
       "Jeff"
     ],
     "state": "OR",
+    "middleNames": [],
     "phone": "(202) 224-3753"
   },
   {
@@ -660,6 +734,7 @@ senateData = [
       "Pat"
     ],
     "state": "PA",
+    "middleNames": [],
     "phone": "(202) 224-4254"
   },
   {
@@ -670,6 +745,7 @@ senateData = [
       "Bob"
     ],
     "state": "PA",
+    "middleNames": [],
     "phone": "(202) 224-6324"
   },
   {
@@ -677,6 +753,7 @@ senateData = [
     "firstName": "Sheldon",
     "lastName": "Whitehouse",
     "state": "RI",
+    "middleNames": [],
     "phone": "(202) 224-2921"
   },
   {
@@ -687,6 +764,7 @@ senateData = [
       "John"
     ],
     "state": "RI",
+    "middleNames": [],
     "phone": "(202) 224-4642"
   },
   {
@@ -697,6 +775,7 @@ senateData = [
       "Tim"
     ],
     "state": "SC",
+    "middleNames": [],
     "phone": "(202) 224-6121"
   },
   {
@@ -704,6 +783,7 @@ senateData = [
     "firstName": "Lindsey",
     "lastName": "Graham",
     "state": "SC",
+    "middleNames": [],
     "phone": "(202) 224-5972"
   },
   {
@@ -711,6 +791,7 @@ senateData = [
     "firstName": "John",
     "lastName": "Thune",
     "state": "SD",
+    "middleNames": [],
     "phone": "(202) 224-2321"
   },
   {
@@ -721,6 +802,7 @@ senateData = [
       "Mike"
     ],
     "state": "SD",
+    "middleNames": [],
     "phone": "(202) 224-5842"
   },
   {
@@ -731,6 +813,7 @@ senateData = [
       "Bob"
     ],
     "state": "TN",
+    "middleNames": [],
     "phone": "(202) 224-3344"
   },
   {
@@ -741,6 +824,7 @@ senateData = [
       "Lamar"
     ],
     "state": "TN",
+    "middleNames": [],
     "phone": "(202) 224-4944"
   },
   {
@@ -751,6 +835,7 @@ senateData = [
       "Ted"
     ],
     "state": "TX",
+    "middleNames": [],
     "phone": "(202) 224-5922"
   },
   {
@@ -758,6 +843,7 @@ senateData = [
     "firstName": "John",
     "lastName": "Cornyn",
     "state": "TX",
+    "middleNames": [],
     "phone": "(202) 224-2934"
   },
   {
@@ -768,6 +854,7 @@ senateData = [
       "Mike"
     ],
     "state": "UT",
+    "middleNames": [],
     "phone": "(202) 224-5444"
   },
   {
@@ -775,6 +862,7 @@ senateData = [
     "firstName": "Orrin",
     "lastName": "Hatch",
     "state": "UT",
+    "middleNames": [],
     "phone": "(202) 224-5251"
   },
   {
@@ -785,6 +873,7 @@ senateData = [
       "Tim"
     ],
     "state": "VA",
+    "middleNames": [],
     "phone": "(202) 224-4024"
   },
   {
@@ -792,6 +881,7 @@ senateData = [
     "firstName": "Mark",
     "lastName": "Warner",
     "state": "VA",
+    "middleNames": [],
     "phone": "(202) 224-2023"
   },
   {
@@ -802,6 +892,7 @@ senateData = [
       "Pat"
     ],
     "state": "VT",
+    "middleNames": [],
     "phone": "(202) 224-4242"
   },
   {
@@ -812,6 +903,7 @@ senateData = [
       "Bernie"
     ],
     "state": "VT",
+    "middleNames": [],
     "phone": "(202) 224-5141"
   },
   {
@@ -822,6 +914,7 @@ senateData = [
       "Patty"
     ],
     "state": "WA",
+    "middleNames": [],
     "phone": "(202) 224-2621"
   },
   {
@@ -829,6 +922,7 @@ senateData = [
     "firstName": "Maria",
     "lastName": "Cantwell",
     "state": "WA",
+    "middleNames": [],
     "phone": "(202) 224-3441"
   },
   {
@@ -839,6 +933,7 @@ senateData = [
       "Ron"
     ],
     "state": "WI",
+    "middleNames": [],
     "phone": "(202) 224-5323"
   },
   {
@@ -846,6 +941,7 @@ senateData = [
     "firstName": "Tammy",
     "lastName": "Baldwin",
     "state": "WI",
+    "middleNames": [],
     "phone": "(202) 224-5653"
   },
   {
@@ -856,6 +952,7 @@ senateData = [
       "Joe"
     ],
     "state": "WV",
+    "middleNames": [],
     "phone": "(202) 224-3954"
   },
   {
@@ -863,6 +960,7 @@ senateData = [
     "firstName": "Shelley",
     "lastName": "Capito",
     "state": "WV",
+    "middleNames": [],
     "phone": "(202) 224-6472"
   },
   {
@@ -870,6 +968,7 @@ senateData = [
     "firstName": "John",
     "lastName": "Barrasso",
     "state": "WY",
+    "middleNames": [],
     "phone": "(202) 224-6441"
   },
   {
@@ -880,7 +979,7 @@ senateData = [
       "Mike"
     ],
     "state": "WY",
+    "middleNames": [],
     "phone": "(202) 224-3424"
   }
 ];
-
