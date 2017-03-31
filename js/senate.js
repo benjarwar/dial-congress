@@ -72,7 +72,9 @@ senateData = [
     "firstName": "John",
     "lastName": "McCain",
     "state": "AZ",
-    "middleNames": [],
+    "middleNames": [
+      "Sidney"
+    ],
     "phone": "(202) 224-2235"
   },
   {
