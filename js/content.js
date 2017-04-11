@@ -43,12 +43,12 @@ function getRegExpStrings(critter) {
   namePermutations += '(' + firstNames.join('|') + ')\\s+';
 
   if (combinedMiddleNames && combinedMiddleNames.length) {
-    var middleNameCombos = '((' + combinedMiddleNames.join('|') + ')\\s+)?';
+    var middleNameCombos = '((' + combinedMiddleNames.join('\\s+|') + '\\s+){0,2})?';
     namePermutations += middleNameCombos;
   }
 
   var lastName = prepName(critter.lastName);
-  var optionalSuffix = critter.suffix ? ',?\\s+' + critter.suffix + '\\.?' : '';
+  var optionalSuffix = critter.suffix ? '(,?\\s+' + critter.suffix + '\\.?)?' : '';
 
   namePermutations += lastName + optionalSuffix;
   regExStrings.push('\\b(' + namePermutations + ')\\b');
