@@ -322,9 +322,6 @@ senateData = [
       "Tammy"
     ],
     "state": "IL",
-    "middleNames": [
-      "Tammy"
-    ],
     "phone": "(202) 224-2854"
   },
   {
@@ -980,9 +977,6 @@ senateData = [
       "Lamar"
     ],
     "state": "TN",
-    "middleNames": [
-      "Lamar"
-    ],
     "phone": "(202) 224-4944"
   },
   {
