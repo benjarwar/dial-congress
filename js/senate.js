@@ -394,13 +394,11 @@ senateData = [
     "party": "R",
     "firstName": "Addison",
     "lastName": "McConnell",
-    "suffix": "Jr",
-    "middleNames": [
-      "Mitchell"
-    ],
     "nicknames": [
+      "Mitchell",
       "Mitch"
     ],
+    "suffix": "Jr",
     "state": "KY",
     "middleNames": [],
     "phone": "(202) 224-2541"
@@ -585,10 +583,12 @@ senateData = [
   },
   {
     "party": "D",
-    "firstName": "Jon",
+    "firstName": "Jonathan",
     "lastName": "Tester",
     "state": "MT",
-    "middleNames": [],
+    "nicknames": [
+      "Jon"
+    ],
     "phone": "(202) 224-2644"
   },
   {
