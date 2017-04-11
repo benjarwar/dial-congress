@@ -280,7 +280,7 @@ var houseData = [
   {
     "lastName": "Bishop",
     "firstName": "Sanford",
-    "junior": true,
+    "suffix": "Jr",
     "party": "D",
     "middleNames": [
       "Dixon"
@@ -761,7 +761,7 @@ var houseData = [
     "nicknames": [
       "Lacy"
     ],
-    "junior": true,
+    "suffix": "Jr",
     "party": "D",
     "middleNames": [
       "Lacy"
@@ -904,7 +904,7 @@ var houseData = [
   {
     "lastName": "Conyers",
     "firstName": "John",
-    "junior": true,
+    "suffix": "Jr",
     "party": "D",
     "middleNames": [
       "James"
@@ -1336,7 +1336,7 @@ var houseData = [
     "nicknames": [
       "Jimmy",
     ],
-    "junior": true,
+    "suffix": "Jr",
     "party": "R",
     "middleNames": [
       "James"
@@ -1632,7 +1632,7 @@ var houseData = [
     "nicknames": [
       "Tom"
     ],
-    "junior": true,
+    "suffix": "Jr",
     "party": "R",
     "middleNames": [
       "Alexander"
@@ -2255,7 +2255,7 @@ var houseData = [
   {
     "lastName": "Jones",
     "firstName": "Walter",
-    "junior": true,
+    "suffix": "Jr",
     "party": "R",
     "middleNames": [
       "Beaman"
@@ -3397,7 +3397,7 @@ var houseData = [
   {
     "lastName": "Pallone",
     "firstName": "Frank",
-    "junior": true,
+    "suffix": "Jr",
     "party": "D",
     "middleNames": [
       "Joseph"
@@ -3434,7 +3434,7 @@ var houseData = [
     "nicknames": [
       "Bill"
     ],
-    "junior": true,
+    "suffix": "Jr",
     "party": "D",
     "middleNames": [
       "James"
@@ -3455,7 +3455,7 @@ var houseData = [
   {
     "lastName": "Payne",
     "firstName": "Donald",
-    "junior": true,
+    "suffix": "Jr",
     "party": "D",
     "middleNames": [
       "Milford"

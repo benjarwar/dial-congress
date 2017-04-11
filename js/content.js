@@ -48,14 +48,15 @@ function getRegExpStrings(critter) {
   }
 
   var lastName = prepName(critter.lastName);
-  namePermutations += lastName;
+  var optionalSuffix = critter.suffix ? ',?\\s+' + critter.suffix + '\\.?' : '';
+
+  namePermutations += lastName + optionalSuffix;
   regExStrings.push('\\b(' + namePermutations + ')\\b');
 
   var titleLast = title + '\\s+' + lastName;
   regExStrings.push('\\b(' + titleLast + ')\\b');
 
-  var optionalJr = critter.junior ? ',?\\s+Jr\\.?' : '';
-  var lastFirst = lastName + optionalJr + ',\\s+(' + firstNames.join('|') + ')';
+  var lastFirst = lastName + optionalSuffix + ',\\s+(' + firstNames.join('|') + ')';
   regExStrings.push('\\b(' + lastFirst + ')\\b');
 
   return regExStrings;

@@ -26,6 +26,7 @@ senateData = [
     "party": "R",
     "firstName": "Luther",
     "lastName": "Strange",
+    "suffix": "III",
     "state": "AL",
     "middleNames": [
       "Johnson"
@@ -85,6 +86,7 @@ senateData = [
     "party": "R",
     "firstName": "John",
     "lastName": "McCain",
+    "suffix": "III",
     "state": "AZ",
     "middleNames": [
       "Sidney"
@@ -186,6 +188,7 @@ senateData = [
     "party": "D",
     "firstName": "Clarence",
     "lastName": "Nelson",
+    "suffix": "II",
     "nicknames": [
       "Bill"
     ],
@@ -209,6 +212,7 @@ senateData = [
     "party": "R",
     "firstName": "David",
     "lastName": "Perdue",
+    "suffix": "Jr",
     "nicknames": [
       "Dave"
     ],
@@ -390,6 +394,7 @@ senateData = [
     "party": "R",
     "firstName": "Addison",
     "lastName": "McConnell",
+    "suffix": "Jr",
     "middleNames": [
       "Mitchell"
     ],
@@ -463,6 +468,7 @@ senateData = [
     "party": "D",
     "firstName": "Christopher",
     "lastName": "Van Hollen",
+    "suffix": "Jr",
     "nicknames": [
       "Chris"
     ],
@@ -628,6 +634,7 @@ senateData = [
     "party": "R",
     "firstName": "John",
     "lastName": "Hoeven",
+    "suffix": "III",
     "state": "ND",
     "middleNames": [
       "Henry"
@@ -960,6 +967,7 @@ senateData = [
     "party": "R",
     "firstName": "Robert",
     "lastName": "Corker",
+    "suffix": "Jr",
     "nicknames": [
       "Bob"
     ],
@@ -973,6 +981,7 @@ senateData = [
     "party": "R",
     "firstName": "Andrew",
     "lastName": "Alexander",
+    "suffix": "Jr",
     "nicknames": [
       "Lamar"
     ],
@@ -996,6 +1005,7 @@ senateData = [
     "party": "R",
     "firstName": "John",
     "lastName": "Cornyn",
+    "suffix": "III",
     "state": "TX",
     "middleNames": [],
     "phone": "(202) 224-2934"
@@ -1121,6 +1131,7 @@ senateData = [
     "party": "D",
     "firstName": "Joseph",
     "lastName": "Manchin",
+    "suffix": "III",
     "nicknames": [
       "Joe"
     ],
@@ -1142,6 +1153,7 @@ senateData = [
     "party": "R",
     "firstName": "John",
     "lastName": "Barrasso",
+    "suffix": "III",
     "state": "WY",
     "middleNames": [
       "Anthony"
