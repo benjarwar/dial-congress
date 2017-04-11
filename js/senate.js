@@ -502,7 +502,7 @@ senateData = [
     ],
     "state": "MI",
     "middleNames": [
-      "Ann"
+      "Ann",
       "Greer"
     ],
     "phone": "(202) 224-4822"
@@ -576,11 +576,8 @@ senateData = [
     "lastName": "Cochran",
     "nicknames": [
       "Thad"
-    ]
-    "state": "MS",
-    "middleNames": [
-      "Thad"
     ],
+    "state": "MS",
     "phone": "(202) 224-5054"
   },
   {
@@ -765,8 +762,8 @@ senateData = [
     "lastName": "Cortez Masto",
     "state": "NV",
     "middleNames": [
-    "Marie",
-  ]
+      "Marie"
+    ],
     "phone": "(202) 224-3542"
   },
   {
