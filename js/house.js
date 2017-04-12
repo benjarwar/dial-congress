@@ -3166,19 +3166,6 @@ var houseData = [
     "state": "OK"
   },
   {
-    "lastName": "Mulvaney",
-    "firstName": "John",
-    "nicknames": [
-      "Mick"
-    ],
-    "party": "R",
-    "middleNames": [
-      "Michael"
-    ],
-    "phone": "(202) 225-5501",
-    "state": "SC"
-  },
-  {
     "lastName": "Murphy",
     "firstName": "Stephanie",
     "party": "D",
@@ -3560,19 +3547,6 @@ var houseData = [
     "state": "CO"
   },
   {
-    "lastName": "Pompeo",
-    "firstName": "Michael",
-    "nicknames": [
-      "Mike"
-    ],
-    "party": "R",
-    "middleNames": [
-      "Richard"
-    ],
-    "phone": "(202) 225-6216",
-    "state": "KS"
-  },
-  {
     "lastName": "Posey",
     "firstName": "William",
     "nicknames": [
@@ -3594,19 +3568,6 @@ var houseData = [
     ],
     "phone": "(202) 225-1784",
     "state": "NC"
-  },
-  {
-    "lastName": "Price",
-    "firstName": "Thomas",
-    "nicknames": [
-      "Tom"
-    ],
-    "party": "R",
-    "middleNames": [
-      "Edmunds"
-    ],
-    "phone": "(202) 225-4501",
-    "state": "GA"
   },
   {
     "lastName": "Quigley",
@@ -4966,15 +4927,5 @@ var houseData = [
     "middleNames": [],
     "phone": "(202) 225-3826",
     "state": "NY"
-  },
-  {
-    "lastName": "Zinke",
-    "firstName": "Ryan",
-    "party": "R",
-    "middleNames": [
-      "Keith"
-    ],
-    "phone": "(202) 225-3211",
-    "state": "MT"
   }
 ];
