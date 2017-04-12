@@ -547,8 +547,7 @@ var houseData = [
     "lastName": "Butterfield",
     "firstName": "George",
     "nicknames": [
-      "G. K",
-      "G.K"
+      "G.K."
     ],
     "party": "D",
     "middleNames": [
@@ -673,7 +672,7 @@ var houseData = [
   },
   {
     "lastName": "Castro",
-    "firstName": "Joaquin",
+    "firstName": "Joaquín",
     "party": "D",
     "middleNames": [],
     "phone": "(202) 225-3236",
@@ -763,9 +762,6 @@ var houseData = [
     ],
     "suffix": "Jr",
     "party": "D",
-    "middleNames": [
-      "Lacy"
-    ],
     "phone": "(202) 225-2406",
     "state": "MO"
   },
@@ -878,13 +874,12 @@ var houseData = [
     "lastName": "Conaway",
     "firstName": "Kenneth",
     "nicknames": [
+      "K. Michael",
+      "K. Mike",
       "Mike",
       "Michael"
     ],
     "party": "R",
-    "middleNames": [
-      "Michael"
-    ],
     "phone": "(202) 225-3605",
     "state": "TX"
   },
@@ -940,11 +935,11 @@ var houseData = [
     "lastName": "Correa",
     "firstName": "Jose",
     "nicknames": [
+      "J. Luis",
       "Luis",
       "Lou"
     ],
     "party": "D",
-    "middleNames": [],
     "phone": "(202) 225-2965",
     "state": "CA"
   },
@@ -1249,7 +1244,7 @@ var houseData = [
     "state": "FL"
   },
   {
-    "lastName": "Díaz-Balart",
+    "lastName": "Díaz Balart",
     "firstName": "Mario",
     "party": "R",
     "middleNames": [
@@ -1398,7 +1393,7 @@ var houseData = [
     "state": "CA"
   },
   {
-    "lastName": "Espaillat",
+    "lastName": "Espaillat Cabral",
     "firstName": "Adriano",
     "party": "D",
     "middleNames": [
@@ -1432,9 +1427,6 @@ var houseData = [
       "Blake"
     ],
     "party": "R",
-    "middleNames": [
-      "Blake"
-    ],
     "phone": "(202) 225-7742",
     "state": "TX"
   },
@@ -1451,7 +1443,9 @@ var houseData = [
   {
     "lastName": "Ferguson",
     "firstName": "Anderson",
+    "suffix": "IV",
     "nicknames": [
+      "A. Drew",
       "Drew"
     ],
     "party": "R",
@@ -1548,9 +1542,6 @@ var houseData = [
       "Trent"
     ],
     "party": "R",
-    "middleNames": [
-      "Trent"
-    ],
     "phone": "(202) 225-4576",
     "state": "AZ"
   },
@@ -1688,7 +1679,7 @@ var houseData = [
     "state": "TX"
   },
   {
-    "lastName": "González-Colón",
+    "lastName": "González Colón",
     "firstName": "Jenniffer",
     "party": "R",
     "middleNames": [
@@ -1756,9 +1747,6 @@ var houseData = [
       "Kay"
     ],
     "party": "R",
-    "middleNames": [
-      "Kay"
-    ],
     "phone": "(202) 225-5071",
     "state": "TX"
   },
@@ -1826,9 +1814,6 @@ var houseData = [
       "Morgan"
     ],
     "party": "R",
-    "middleNames": [
-      "Morgan"
-    ],
     "phone": "(202) 225-3861",
     "state": "VA"
   },
@@ -1856,6 +1841,7 @@ var houseData = [
     "lastName": "Guthrie",
     "firstName": "Steven",
     "nicknames": [
+      "S. Brett",
       "Brett"
     ],
     "party": "R",
@@ -1951,9 +1937,6 @@ var houseData = [
       "Jeb"
     ],
     "party": "R",
-    "middleNames": [
-      "Jeb"
-    ],
     "phone": "(202) 225-3484",
     "state": "TX"
   },
@@ -1989,7 +1972,7 @@ var houseData = [
     "lastName": "Higgins",
     "firstName": "Glen",
     "party": "R",
-    "middleNames": [
+    "nicknames": [
       "Clay"
     ],
     "phone": "(202) 225-2031",
@@ -2002,9 +1985,6 @@ var houseData = [
       "French"
     ],
     "party": "R",
-    "middleNames": [
-      "French"
-    ],
     "phone": "(202) 225-2506",
     "state": "AR"
   },
@@ -2364,6 +2344,7 @@ var houseData = [
   {
     "lastName": "Kennedy",
     "firstName": "Joseph",
+    "suffix": "III",
     "nicknames": [
       "Joe"
     ],
@@ -2386,11 +2367,11 @@ var houseData = [
     "state": "CA"
   },
   {
-    "lastName": "Kihuen",
-    "firstName": "Ruben",
+    "lastName": "Kihuen Bernal",
+    "firstName": "Rubén",
     "party": "D",
     "middleNames": [
-      "Jesus"
+      "Jesús"
     ],
     "phone": "(202) 225-9894",
     "state": "NV"
@@ -2487,9 +2468,6 @@ var houseData = [
       "Raja"
     ],
     "party": "D",
-    "middleNames": [
-      "Raja"
-    ],
     "phone": "(202) 225-3711",
     "state": "IL"
   },
@@ -2819,9 +2797,6 @@ var houseData = [
       "Blaine"
     ],
     "party": "R",
-    "middleNames": [
-      "Blaine"
-    ],
     "phone": "(202) 225-2956",
     "state": "MO"
   },
@@ -3001,12 +2976,10 @@ var houseData = [
     "lastName": "McEachin",
     "firstName": "Aston",
     "nicknames": [
+      "A. Donald",
       "Donald"
     ],
     "party": "D",
-    "middleNames": [
-      "Donald"
-    ],
     "phone": "(202) 225-6365",
     "state": "VA"
   },
@@ -3313,22 +3286,6 @@ var houseData = [
   },
   {
     "lastName": "Holmes Norton",
-    "firstName": "Eleanor",
-    "party": "D",
-    "middleNames": [],
-    "phone": "(202) 225-8050",
-    "state": "NJ"
-  },
-  {
-    "lastName": "Holmes",
-    "firstName": "Eleanor",
-    "party": "D",
-    "middleNames": [],
-    "phone": "(202) 225-8050",
-    "state": "NJ"
-  },
-  {
-    "lastName": "Norton",
     "firstName": "Eleanor",
     "party": "D",
     "middleNames": [],
@@ -3849,9 +3806,6 @@ var houseData = [
       "Francis"
     ],
     "party": "R",
-    "middleNames": [
-      "Francis"
-    ],
     "phone": "(202) 225-2536",
     "state": "FL"
   },
@@ -3930,7 +3884,7 @@ var houseData = [
     "state": "NC"
   },
   {
-    "lastName": "Roybal-Allard",
+    "lastName": "Roybal Allard",
     "firstName": "Lucille",
     "party": "D",
     "middleNames": [
@@ -3964,6 +3918,7 @@ var houseData = [
     "lastName": "Ruppersberger",
     "firstName": "Charles",
     "nicknames": [
+      "C.A.",
       "Dutch",
     ],
     "party": "D",
@@ -4130,9 +4085,6 @@ var houseData = [
       "Kurt"
     ],
     "party": "D",
-    "middleNames": [
-      "Kurt"
-    ],
     "phone": "(202) 225-5711",
     "state": "OR"
   },
@@ -4153,9 +4105,6 @@ var houseData = [
       "Austin"
     ],
     "party": "R",
-    "middleNames": [
-      "Austin"
-    ],
     "phone": "(202) 225-6531",
     "state": "GA"
   },
@@ -4186,12 +4135,12 @@ var houseData = [
     "lastName": "Sensenbrenner",
     "firstName": "Frank",
     "nicknames": [
+      "F. James",
+      "F. Jim",
+      "James",
       "Jim"
     ],
     "party": "R",
-    "middleNames": [
-      "James"
-    ],
     "phone": "(202) 225-5101",
     "state": "WI"
   },
@@ -4513,8 +4462,7 @@ var houseData = [
     "lastName": "Thompson",
     "firstName": "Glenn",
     "nicknames": [
-      "G. T",
-      "G.T"
+      "G.T."
     ],
     "party": "R",
     "middleNames": [],
@@ -4761,9 +4709,6 @@ var houseData = [
       "Mark"
     ],
     "party": "R",
-    "middleNames": [
-      "Mark"
-    ],
     "phone": "(202) 225-3065",
     "state": "NC"
   },
@@ -4895,9 +4840,6 @@ var houseData = [
       "Roger"
     ],
     "party": "R",
-    "middleNames": [
-      "Roger"
-    ],
     "phone": "(202) 225-9896",
     "state": "TX"
   },
@@ -4955,11 +4897,9 @@ var houseData = [
     "firstName": "William",
     "nicknames": [
       "Rob",
-    ],
-    "party": "R",
-    "middleNames": [
       "Robert"
     ],
+    "party": "R",
     "phone": "(202) 225-4272",
     "state": "GA"
   },
