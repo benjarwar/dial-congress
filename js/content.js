@@ -47,7 +47,7 @@ function getRegExpStrings(critter) {
     namePermutations += middleNameCombos;
   }
 
-  var lastName = prepName(critter.lastName);
+  var lastName = prepLastName(critter.lastName);
   var optionalSuffix = critter.suffix ? '(,?\\s+' + critter.suffix + '\\.?)?' : '';
 
   namePermutations += lastName + optionalSuffix;
@@ -118,6 +118,31 @@ function prepName(name) {
 
 
 /**
+ * Preps the last name for permutations due to multiple words. Logic is set to
+ * first look for the full last name with a space or a hyphen, or  alternatively
+ * for each last name alone.
+ * @param {string} name The last name.
+ * @return {string} A regex string containing potential last name permutations.
+ */
+function prepLastName(name) {
+  var preppedName = prepName(name.replace(' ', '(\\s+|-)'));
+  var splitNames = name.split(' ');
+
+  if (splitNames.length == 1) {
+    return preppedName;
+  } else {
+    var preppedSplitNames = _.map(splitNames, function(splitName) {
+      return prepName(splitName);
+    });
+
+    var finalPreppedLastName =  '(' + preppedName + '|(' + preppedSplitNames.join('|') + '))';
+
+    return finalPreppedLastName;
+  };
+}
+
+
+/**
  * Builds a regex of all congressperson's last names, to provide an initial
  * searching mechanism that is less processor intensive than searching for all
  * name permutations of each congressperson.
@@ -127,7 +152,11 @@ function getLastNamesRegExp() {
   var lastNamesRegExpArr = [];
 
   for (var i = 0; i < congressData.length; i++) {
-    lastNamesRegExpArr.push(prepName(congressData[i].lastName));
+    var splitLastNames = congressData[i].lastName.split(' ');
+
+    splitLastNames.forEach(function(lastName) {
+      lastNamesRegExpArr.push(prepName(lastName));
+    });
   }
 
   var lastNamesRegExpString = stringifyRegExpStrings(_.uniq(lastNamesRegExpArr));
@@ -154,7 +183,7 @@ function getOriginalLastNames(lastNames) {
 
   lastNames.forEach(function(lastName) {
     for (var i = 0; i < congressData.length; i++) {
-      var regExpString = prepName(congressData[i].lastName);
+      var regExpString = prepLastName(congressData[i].lastName);
       var re = new RegExp(regExpString, 'ig');
 
       if (lastName.match(re)) {

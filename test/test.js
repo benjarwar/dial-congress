@@ -178,6 +178,27 @@ describe('getRegExpString', function() {
   });
 
 
+  it('matches permutations of multiple last names', function() {
+    var mockMultiLastNameCritter = {
+      'firstName': 'Deborah',
+      'lastName': 'Greer Stabenow'
+    };
+
+    var regExpString = getRegExpStrings(mockMultiLastNameCritter);
+    var re = new RegExp(stringifyRegExpStrings(regExpString), 'ig');
+    var permutations = [
+      'Deborah Greer Stabenow',
+      'Deborah Greer-Stabenow',
+      'Deborah Greer',
+      'Deborah Stabenow'
+    ];
+
+    permutations.forEach(function(string) {
+      expect(string.match(re).length).to.equal(1);
+    });
+  });
+
+
   it('matches non-accented variations', function() {
     var mockAccentCritter = {
       'firstName': 'André',

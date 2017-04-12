@@ -497,14 +497,13 @@ senateData = [
   {
     "party": "D",
     "firstName": "Deborah",
-    "lastName": "Stabenow",
+    "lastName": "Greer Stabenow",
     "nicknames": [
       "Debbie"
     ],
     "state": "MI",
     "middleNames": [
-      "Ann",
-      "Greer"
+      "Ann"
     ],
     "phone": "(202) 224-4822"
   },
@@ -696,14 +695,11 @@ senateData = [
   {
     "party": "D",
     "firstName": "Margaret",
-    "lastName": "Hassan",
+    "lastName": "Wood Hassan",
     "nicknames": [
       "Maggie"
     ],
     "state": "NH",
-    "middleNames": [
-      "Wood"
-    ],
     "phone": "(202) 224-3324"
   },
   {
@@ -1142,7 +1138,7 @@ senateData = [
   {
     "party": "R",
     "firstName": "Shelley",
-    "lastName": "Capito",
+    "lastName": "Moore Capito",
     "state": "WV",
     "middleNames": [
       "Wellons"
