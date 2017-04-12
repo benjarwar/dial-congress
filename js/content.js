@@ -365,6 +365,7 @@ function markPermutations(lastNames, node) {
     markContext.markRegExp(lastNamesRegExp, {
       element: 'span',
       className: 'dial-congress',
+      exclude: ['.dial-congress'],
       done: function(x) {
         var perfEnd = performance.now();
         var perfTime = Math.round(perfEnd - perfStart) / 1000;
