@@ -56,7 +56,7 @@ function getRegExpStrings(critter) {
   var titleLast = title + '\\s+' + lastName;
   regExStrings.push('\\b(' + titleLast + ')\\b');
 
-  var lastFirst = lastName + optionalSuffix + ',\\s+(' + firstNames.join('|') + ')';
+  var lastFirst = lastName + optionalSuffix + ',(\\s+)?(' + firstNames.join('|') + ')';
   regExStrings.push('\\b(' + lastFirst + ')\\b');
 
   return regExStrings;
