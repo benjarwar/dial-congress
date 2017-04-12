@@ -230,7 +230,7 @@ describe('getRegExpString', function() {
   it('matches non-accented variations', function() {
     var mockAccentCritter = {
       'firstName': 'André',
-      'lastName': 'Cárdenas'
+      'lastName': 'Cárdénas'
     };
 
     var regExpString = getRegExpStrings(mockAccentCritter);
@@ -239,7 +239,11 @@ describe('getRegExpString', function() {
       'André Cárdenas',
       'André Cardenas',
       'Andre Cárdenas',
-      'Andre Cardenas'
+      'Andre Cardenas',
+      'André Cárdénas',
+      'André Cardénas',
+      'Andre Cárdénas',
+      'Andre Cardénas'
     ];
 
     permutations.forEach(function(string) {

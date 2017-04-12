@@ -874,6 +874,8 @@ var houseData = [
     "lastName": "Conaway",
     "firstName": "Kenneth",
     "nicknames": [
+      "K. Michael",
+      "K. Mike",
       "Mike",
       "Michael"
     ],
@@ -933,6 +935,7 @@ var houseData = [
     "lastName": "Correa",
     "firstName": "Jose",
     "nicknames": [
+      "J. Luis",
       "Luis",
       "Lou"
     ],
@@ -1440,7 +1443,9 @@ var houseData = [
   {
     "lastName": "Ferguson",
     "firstName": "Anderson",
+    "suffix": "IV",
     "nicknames": [
+      "A. Drew",
       "Drew"
     ],
     "party": "R",
@@ -1836,6 +1841,7 @@ var houseData = [
     "lastName": "Guthrie",
     "firstName": "Steven",
     "nicknames": [
+      "S. Brett",
       "Brett"
     ],
     "party": "R",
@@ -2970,6 +2976,7 @@ var houseData = [
     "lastName": "McEachin",
     "firstName": "Aston",
     "nicknames": [
+      "A. Donald",
       "Donald"
     ],
     "party": "D",
@@ -3911,6 +3918,7 @@ var houseData = [
     "lastName": "Ruppersberger",
     "firstName": "Charles",
     "nicknames": [
+      "C.A.",
       "Dutch",
     ],
     "party": "D",
@@ -4127,12 +4135,12 @@ var houseData = [
     "lastName": "Sensenbrenner",
     "firstName": "Frank",
     "nicknames": [
+      "F. James",
+      "F. Jim",
+      "James",
       "Jim"
     ],
     "party": "R",
-    "middleNames": [
-      "James"
-    ],
     "phone": "(202) 225-5101",
     "state": "WI"
   },
