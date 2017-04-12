@@ -672,7 +672,7 @@ var houseData = [
   },
   {
     "lastName": "Castro",
-    "firstName": "Joaquin",
+    "firstName": "Joaquín",
     "party": "D",
     "middleNames": [],
     "phone": "(202) 225-3236",
@@ -1966,7 +1966,7 @@ var houseData = [
     "lastName": "Higgins",
     "firstName": "Glen",
     "party": "R",
-    "middleNames": [
+    "nicknames": [
       "Clay"
     ],
     "phone": "(202) 225-2031",
