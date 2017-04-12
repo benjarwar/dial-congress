@@ -1397,7 +1397,7 @@ var houseData = [
     "state": "CA"
   },
   {
-    "lastName": "Espaillat",
+    "lastName": "Espaillat Cabral",
     "firstName": "Adriano",
     "party": "D",
     "middleNames": [
@@ -1687,7 +1687,7 @@ var houseData = [
     "state": "TX"
   },
   {
-    "lastName": "González-Colón",
+    "lastName": "González Colón",
     "firstName": "Jenniffer",
     "party": "R",
     "middleNames": [
@@ -2385,11 +2385,11 @@ var houseData = [
     "state": "CA"
   },
   {
-    "lastName": "Kihuen",
-    "firstName": "Ruben",
+    "lastName": "Kihuen Bernal",
+    "firstName": "Rubén",
     "party": "D",
     "middleNames": [
-      "Jesus"
+      "Jesús"
     ],
     "phone": "(202) 225-9894",
     "state": "NV"
