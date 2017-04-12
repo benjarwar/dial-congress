@@ -4897,11 +4897,9 @@ var houseData = [
     "firstName": "William",
     "nicknames": [
       "Rob",
-    ],
-    "party": "R",
-    "middleNames": [
       "Robert"
     ],
+    "party": "R",
     "phone": "(202) 225-4272",
     "state": "GA"
   },
