@@ -178,6 +178,55 @@ describe('getRegExpString', function() {
   });
 
 
+  it('matches permutations of multiple last names', function() {
+    var mockMultiLastNameCritter = {
+      'firstName': 'Deborah',
+      'lastName': 'Greer Stabenow'
+    };
+
+    var regExpString = getRegExpStrings(mockMultiLastNameCritter);
+    var re = new RegExp(stringifyRegExpStrings(regExpString), 'ig');
+    var permutations = [
+      'Deborah Greer Stabenow',
+      'Deborah Greer-Stabenow',
+      'Deborah Greer',
+      'Deborah Stabenow'
+    ];
+
+    permutations.forEach(function(string) {
+      expect(string.match(re).length).to.equal(1);
+    });
+  });
+
+
+  it('optionally matches suffixes', function() {
+    var mockSuffixedCritter = {
+      'firstName': 'Robert',
+      'lastName': 'Corker',
+      'suffix': 'Jr'
+    };
+
+    var regExpString = getRegExpStrings(mockSuffixedCritter);
+    var re = new RegExp(stringifyRegExpStrings(regExpString), 'ig');
+    var permutations = [
+      'Robert Corker',
+      'Robert Corker, Jr',
+      'Robert Corker, Jr.',
+      'Robert Corker Jr',
+      'Robert Corker Jr.',
+      'Corker, Robert',
+      'Corker Jr, Robert',
+      'Corker Jr., Robert',
+      'Corker, Jr, Robert',
+      'Corker, Jr., Robert'
+    ];
+
+    permutations.forEach(function(string) {
+      expect(string.match(re).length).to.equal(1);
+    });
+  });
+
+
   it('matches non-accented variations', function() {
     var mockAccentCritter = {
       'firstName': 'André',
