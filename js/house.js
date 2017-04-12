@@ -2363,6 +2363,7 @@ var houseData = [
   {
     "lastName": "Kennedy",
     "firstName": "Joseph",
+    "suffix": "III",
     "nicknames": [
       "Joe"
     ],
