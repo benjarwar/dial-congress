@@ -199,6 +199,34 @@ describe('getRegExpString', function() {
   });
 
 
+  it('optionally matches suffixes', function() {
+    var mockSuffixedCritter = {
+      'firstName': 'Robert',
+      'lastName': 'Corker',
+      'suffix': 'Jr'
+    };
+
+    var regExpString = getRegExpStrings(mockSuffixedCritter);
+    var re = new RegExp(stringifyRegExpStrings(regExpString), 'ig');
+    var permutations = [
+      'Robert Corker',
+      'Robert Corker, Jr',
+      'Robert Corker, Jr.',
+      'Robert Corker Jr',
+      'Robert Corker Jr.',
+      'Corker, Robert',
+      'Corker Jr, Robert',
+      'Corker Jr., Robert',
+      'Corker, Jr, Robert',
+      'Corker, Jr., Robert'
+    ];
+
+    permutations.forEach(function(string) {
+      expect(string.match(re).length).to.equal(1);
+    });
+  });
+
+
   it('matches non-accented variations', function() {
     var mockAccentCritter = {
       'firstName': 'André',
