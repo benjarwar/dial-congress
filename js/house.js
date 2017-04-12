@@ -547,8 +547,7 @@ var houseData = [
     "lastName": "Butterfield",
     "firstName": "George",
     "nicknames": [
-      "G. K",
-      "G.K"
+      "G.K."
     ],
     "party": "D",
     "middleNames": [
@@ -4513,8 +4512,7 @@ var houseData = [
     "lastName": "Thompson",
     "firstName": "Glenn",
     "nicknames": [
-      "G. T",
-      "G.T"
+      "G.T."
     ],
     "party": "R",
     "middleNames": [],

@@ -320,7 +320,6 @@ describe('getRegExpString', function() {
       'lastName': 'Butterfield',
       'firstName': 'George',
       'nicknames': [
-        'George Kenneth',
         'G. K.',
         'G.K.'
       ]

@@ -105,7 +105,7 @@ function getQuotedNicknames(critter) {
  * @return {string} The name with substitutions performed.
  */
 function prepName(name) {
-  name = name.replace('.', '\\.');
+  name = name.replace('.', '\\.(\\s+)?');
   name = name.replace(' ', '\\s+');
   name = name.replace('á', '[áa]');
   name = name.replace('é', '[ée]');
