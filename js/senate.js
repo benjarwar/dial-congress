@@ -881,6 +881,7 @@ senateData = [
     "party": "D",
     "firstName": "Robert",
     "lastName": "Casey",
+    "suffix": "Jr",
     "nicknames": [
       "Bob"
     ],
