@@ -1241,7 +1241,7 @@ var houseData = [
     "state": "FL"
   },
   {
-    "lastName": "Díaz-Balart",
+    "lastName": "Díaz Balart",
     "firstName": "Mario",
     "party": "R",
     "middleNames": [
@@ -3286,22 +3286,6 @@ var houseData = [
     "state": "NJ"
   },
   {
-    "lastName": "Holmes",
-    "firstName": "Eleanor",
-    "party": "D",
-    "middleNames": [],
-    "phone": "(202) 225-8050",
-    "state": "NJ"
-  },
-  {
-    "lastName": "Norton",
-    "firstName": "Eleanor",
-    "party": "D",
-    "middleNames": [],
-    "phone": "(202) 225-8050",
-    "state": "NJ"
-  },
-  {
     "lastName": "Nunes",
     "firstName": "Devin",
     "party": "R",
@@ -3893,7 +3877,7 @@ var houseData = [
     "state": "NC"
   },
   {
-    "lastName": "Roybal-Allard",
+    "lastName": "Roybal Allard",
     "firstName": "Lucille",
     "party": "D",
     "middleNames": [
