@@ -21,7 +21,7 @@
   },
 
   "content_scripts": [{
-    "matches": ["http://*/*", "https://*/*"],
+    "matches": ["<all_urls>"],
     "css": [
       "bower_components/tooltipster/dist/css/tooltipster.bundle.min.css",
       "bower_components/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min.css",
@@ -52,8 +52,6 @@
   ],
 
   "web_accessible_resources": [
-    "img/icon-38.png",
-    "js/house.json",
-    "js/senate.json"
+    "img/icon-38.png"
   ]
 }
